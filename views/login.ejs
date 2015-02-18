@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>请登录</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script>
+		$(function(){
+			$('#login').click(function() {
+				$.ajax(
+					'/login',
+					{
+						data: {
+							username: $('#username').val(), 
+							password: $('#password').val(),
+						},
+						type: 'POST',
+					}
+				).done(function(data) {
+					alert(data);
+				})
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<div id="login-panel">
+			<div>
+				<span>用户名:</span>
+				<input id="username"></input>
+			</div>
+			<div>
+				<span>密码:</span>
+				<input id="password"></input>
+			</div>
+			<div>
+				<button id="login">登陆</button>
+			</div>
+		</div>
+	</body>
+</html>

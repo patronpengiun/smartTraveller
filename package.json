@@ -1,0 +1,25 @@
+{
+  "name": "testApp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.11.0",
+    "bootstrap": "^3.3.2",
+    "browserify": "^7.0.3",
+    "ejs": "^1.0.0",
+    "express": "^4.10.6",
+    "express-session": "^1.10.2",
+    "jade": "^1.8.2",
+    "less-middleware": "^1.0.4",
+    "mongoose": "^3.8.23",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0"
+  }
+}
