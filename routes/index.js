@@ -67,6 +67,9 @@ module.exports = function(passport) {
 	
 	router.post('/signup/guide', multer({
 				dest: './upload', 
+				rename: function (fieldname, filename, req, res) {	
+    						return req.user.username + '_' + filename + '_' + Date.now();
+  						},
 				onFileUploadStart: function (file) {
   			  		console.log(file.originalname + ' is starting ...')
 				},

@@ -6,7 +6,7 @@
 		<script src="js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<h1>欢迎加入旅橙网</h1>
+		<h1>欢迎加入旅橙大家庭</h1>
 			<form method="post" action="/signup/guide" enctype="multipart/form-data">
 				<span>真实姓名</span><input name="name" type="text"></input>
 				<br />
@@ -70,6 +70,35 @@
 				<input name="occupation" value="学生" type="radio">学生</input>
 				<input name="occupation" value="其他" type="radio">其他</input>
 				<br />
+				<span>联系方式</span>
+				<select name="contact_type">
+					<option value="phone">电话</option>
+					<option value="phone">微信</option>
+					<option value="phone">WhatsApp</option>
+					<option value="phone">E-Mail</option>
+				</select>
+				<input name="contact_value" type="text"></input>
+				<br />
+				<span>是否有车</span>
+				<!--如果有车的话，后续有车型、年份、乘客数等问题-->
+				<input name="car" value="true" type="radio">是</input> 
+				<input name="car" value="false" type="radio">否</input>
+				<br />
+				<span>兴趣爱好</span>
+				<input type=checkbox name="tags" value="摄影">摄影
+				<input type=checkbox name="tags" value="美食">美食
+				<input type=checkbox name="tags" value="历史">历史
+				<input type=checkbox name="tags" value="体育">体育
+				<input type=checkbox name="tags" value="艺术">艺术
+				<br />
+				<span>自我介绍</span>
+				<br />
+				<textarea name="intro1" rows="4" cols="50"></textarea>
+				<br />
+				<span>城市印象</span>
+				<br />
+				<textarea name="intro2" rows="4" cols="50"></textarea>
+				<br />				
 				<span>照片</span><input type="file" name="photos">
 				<br />
 				<button type="submit">提交</button>

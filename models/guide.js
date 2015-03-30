@@ -8,13 +8,20 @@ module.exports = mongoose.model('Guide',{
 	age: String,
 	hometown: String,
 	occupation: String,
-	tags: [String],
-	phone: String,
+
+	//联系方式(电话，微信，WhatsApp，邮箱)，也许分成四个field比较好
+	contact_type: String,
+	contact_value: String,
+
 	car: Boolean,
-	car_type: String,
-	weixin: String,
+	car_model: String,
+	car_year: String,
+	car_passengers: Number,//多少座, driver exculded
+
 	intro1: String,
 	intro2: String,
-	intro3: String,
+	//intro3: String,
+	
+	tags: [String],
 	photos: [String],
 });
