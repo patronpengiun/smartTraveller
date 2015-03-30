@@ -78,6 +78,8 @@ module.exports = function(passport) {
 			console.log(req.files);
 			var temp = req.body;
 			//temp.username = req.user.username;
+			temp.photos = [];
+			temp.photos.push(req.files.photos.name);
 			var newGuide = new Guide(temp);
 			newGuide.save(function(err) {
 				
