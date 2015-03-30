@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
+
+var Guide = require('../models/guide');
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {		
@@ -8,6 +11,11 @@ module.exports = function(passport) {
 		} else {
 			res.render('index', {user: {username: "旅橙网"}});
 		}
+	});
+	
+	router.get('/location/:place', function(req, res) {
+		var place = mongo.find(req.pa)
+		res.render('location', place);
 	});
 	
 	router.get('/login', function(req, res) {
@@ -48,10 +56,34 @@ module.exports = function(passport) {
 		})(req, res, next);
 	});
 	
-	router.post('logout', function(req,res) {
+	router.post('/logout', function(req,res) {
 		req.logout();
 		res.send({message: "logged out"});
-	})
+	});
+	
+	router.get('/signup/guide', function(req, res) {
+		res.render('guide_signup');
+	});
+	
+	router.post('/signup/guide', multer({
+				dest: './upload', 
+				onFileUploadStart: function (file) {
+  			  		console.log(file.originalname + ' is starting ...')
+				},
+			}), function(req, res) {
+		//if (req.isAuthenticated()) {
+			console.log(req.files);
+			var temp = req.body;
+			//temp.username = req.user.username;
+			var newGuide = new Guide(temp);
+			newGuide.save(function(err) {
+				
+			});
+			res.send("save successfully");
+			/*} else {
+			res.send("unauthorized!");
+		}*/
+	});
 	
 	return router;
 }

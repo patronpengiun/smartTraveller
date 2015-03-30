@@ -23,3 +23,85 @@
 		display: none;
 	}
 }
+
+#map {
+	background-image: url("../img/web_background.png");
+	height: 700px;
+	margin-top: -20px;
+	position: relative;
+	
+	.backdrop {
+	    position: relative;
+	    width: 100%;
+	    height: 100%;
+	    background-color: rgb(255,118,0);
+	    opacity: 0.6;
+	}
+	
+	.location {
+		position: absolute;
+		border-radius: 50%;
+		background: transparent;
+		border: rgba(255,255,255,0.7) 3px solid;
+		width: 60px;
+		height: 60px;
+		-webkit-transform: scale(1,1);
+		-webkit-transition-timing-function: ease-out;
+		-webkit-transition-duration: 250ms;
+		cursor: pointer;
+	}
+	
+	.location:hover {
+		-webkit-transform: scale(1.2,1.2);
+		-webkit-transition-timing-function: ease-out;
+		-webkit-transition-duration: 250ms;
+	}
+	
+	#newyork {
+		left: 50%;
+		top: 25%;
+	}
+	
+	#phily {
+		left: 40%;
+		top: 40%;
+	}
+	
+	#boston {
+		left: 63%;
+		top: 13%;
+	}
+	
+	#miami {
+		left: 60%;
+		top: 70%;
+	}
+	
+	#dc {
+		left: 33%;
+		top: 60%;
+	}
+	
+	#pittsburgh {
+		left: 30%;
+		top: 25%;
+	}
+	
+	.city-name{
+		color: white;
+		font-weight: 100;
+		
+		&.big-font {
+			font-size: 15px;
+			margin-top: 15px;
+			margin-left: 13px;
+		}
+		
+		&.mid-font {
+			font-size: 15px;
+			margin-top: 18px;
+			margin-left: 4px;
+		}
+	}
+	
+}

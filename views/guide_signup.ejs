@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<h1>欢迎加入旅橙网</h1>
+			<form method="post" action="/signup/guide" enctype="multipart/form-data">
+				<span>真实姓名</span><input name="name" type="text"></input>
+				<br />
+				<span>性别</span>
+				<input name="sex" value="男" type="radio">男</input>
+				<input name="sex" value="女" type="radio">女</input>
+				<br />
+				<span>年龄</span>
+				<select name="age">
+					<option value="90后">90后</option>
+					<option value="80后">80后</option>
+					<option value="70后">70后</option>
+				</select>
+				<br />
+				<span>所在城市</span>
+				<select name="city">
+					<option value="纽约">纽约</option>
+					<option value="波士顿">波士顿</option>
+					<option value="费城">费城</option>
+				</select>
+				<br />
+				<span>家乡</span>
+				<select name="hometown">
+				    <option value="北京">北京市</option>
+					<option value="浙江省">浙江省</option>
+				    <option value="天津市">天津市</option>
+				    <option value="安徽省">安徽省</option>
+				    <option value="上海市">上海市</option>
+				    <option value="福建省">福建省</option>
+				    <option value="重庆市">重庆市</option>
+				    <option value="江西省">江西省</option>
+				    <option value="山东省">山东省</option>
+				    <option value="河南省">河南省</option>
+				    <option value="湖北省">湖北省</option>
+				    <option value="湖南省">湖南省</option>
+				    <option value="广东省">广东省</option>
+				    <option value="海南省">海南省</option>
+				    <option value="山西省">山西省</option>
+					<option value="青海省">青海省</option>
+					<option value="江苏省">江苏省</option>
+					<option value="辽宁省">辽宁省</option>
+					<option value="吉林省">吉林省</option>
+					<option value="台湾省">台湾省</option>
+					<option value="河北省">河北省</option>
+				 	<option value="贵州省">贵州省</option>
+					<option value="四川省">四川省</option>
+				  	<option value="云南省">云南省</option>
+				    <option value="陕西省">陕西省</option>
+				  	<option value="甘肃省">甘肃省</option>
+				 	<option value="黑龙江省">黑龙江省</option>
+					<option value="香港特别行政区">香港特别行政区</option>
+					<option value="澳门特别行政区">澳门特别行政区</option>
+					<option value="广西壮族自治区">广西壮族自治区</option>
+					<option value="宁夏回族自治区">宁夏回族自治区</option>
+					<option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+				 	<option value="内蒙古自治区">内蒙古自治区</option>
+				 	<option value="西藏自治区">西藏自治区</option>
+				</select>
+				<br />
+				<span>职业</span>
+				<input name="occupation" value="学生" type="radio">学生</input>
+				<input name="occupation" value="其他" type="radio">其他</input>
+				<br />
+				<span>照片</span><input type="file" name="photos">
+				<br />
+				<button type="submit">提交</button>
+			</form>
+	</body>
+</html>
