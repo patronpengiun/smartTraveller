@@ -6,9 +6,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 var dbConfig = require('./db');
+var dbURL;
+if (process.env.MODE == 'dev') {
+	dbURL = dbConfig.dev;
+} else {
+	dbURL = dbConfig.production;
+}
+
 var mongoose = require('mongoose');
 // Connect to DB
-mongoose.connect(dbConfig.url);
+mongoose.connect(dbURL);
 
 // Configuring Passport
 var passport = require('passport');
