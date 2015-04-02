@@ -1,1 +1,1 @@
-web:MODE=production node app.js
+web: MODE=production node app.js
