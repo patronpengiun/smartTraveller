@@ -16,21 +16,21 @@
 			</div>
 			<div class="form-body">
 				<div class="form-nav v-top">
-					<div class="form-step active" id="step-1">
+					<div class="form-step active" id="step-1" data-step='1'>
 						<span class="step-number">1</span>
 						<span class="step-title">基本信息</span>
 					</div>
-					<div class="form-step disable" id="step-2">
+					<div class="form-step disable" id="step-2" data-step='2'>
 						<span class="step-number">2</span>
 						<span class="step-title">详细信息</span>
 					</div>
-					<div class="form-step disable" id="step-3">
+					<div class="form-step disable" id="step-3" data-step='3'>
 						<span class="step-number">3</span>
 						<span class="step-title">自我介绍</span>
 					</div>
 				</div>
 				<div class="form-content v-middle">
-					<form id="signup-form" method="post" action="/signup/guide" enctype="multipart/form-data" data-parsley-required-message="此项为必填项">
+					<form id="signup-form" method="post" action="/signup/guide" enctype="multipart/form-data" data-parsley-required-message="此项为必填项" data-current-step='1'>
 						<div id="form-step1" class="show">
 							<div class="form-record">
 								<div class="form-label">姓名</div>
@@ -159,20 +159,23 @@
 							<div class="form-record">
 								<div class="form-label v-top">自我介绍</div>
 								<div class="input-container">
-									<textarea name="intro1" rows="4" cols="50"></textarea>
+									<textarea name="intro1" rows="4" cols="50" required data-parsley-group="step3"></textarea>
 								</div>
 							</div>
 							<div class="form-record">
 								<div class="form-label v-top">城市印象</div>
 								<div class="input-container">
-									<textarea name="intro2" rows="4" cols="50"></textarea>
+									<textarea name="intro2" rows="4" cols="50" required data-parsley-group="step3"></textarea>
 								</div>
 							</div>
 							<div class="form-record">
 								<div class="form-label">照片</div>
 								<div class="input-container">
-									<input type="file" name="photos">
+									<input type="file" name="photos" required data-parsley-group="step3">
 								</div>
+							</div>
+							<div class="button-container pull-right">
+								<button type="button" class="btn btn-default btn-sm btn-next" data-current-step="3">提交</button>
 							</div>
 						</div>
 					</form>
