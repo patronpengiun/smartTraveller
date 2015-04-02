@@ -1,107 +1,185 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="style/bootstrap.min.css">
+		<link rel="stylesheet" href="/style/bootstrap.min.css">
+		<link rel="stylesheet" href="/style/guide_signup.css">
+		<link rel="stylesheet" href="/style/parsley.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/parsley.min.js"></script>
+		<script src="/js/guide_signup.js"></script>
 	</head>
 	<body>
-		<h1>欢迎加入旅橙大家庭</h1>
-			<form method="post" action="/signup/guide" enctype="multipart/form-data">
-				<span>真实姓名</span><input name="name" type="text"></input>
-				<br />
-				<span>性别</span>
-				<input name="sex" value="男" type="radio">男</input>
-				<input name="sex" value="女" type="radio">女</input>
-				<br />
-				<span>年龄</span>
-				<select name="age">
-					<option value="90后">90后</option>
-					<option value="80后">80后</option>
-					<option value="70后">70后</option>
-				</select>
-				<br />
-				<span>所在城市</span>
-				<select name="city">
-					<option value="纽约">纽约</option>
-					<option value="波士顿">波士顿</option>
-					<option value="费城">费城</option>
-				</select>
-				<br />
-				<span>家乡</span>
-				<select name="hometown">
-				    <option value="北京">北京市</option>
-					<option value="浙江省">浙江省</option>
-				    <option value="天津市">天津市</option>
-				    <option value="安徽省">安徽省</option>
-				    <option value="上海市">上海市</option>
-				    <option value="福建省">福建省</option>
-				    <option value="重庆市">重庆市</option>
-				    <option value="江西省">江西省</option>
-				    <option value="山东省">山东省</option>
-				    <option value="河南省">河南省</option>
-				    <option value="湖北省">湖北省</option>
-				    <option value="湖南省">湖南省</option>
-				    <option value="广东省">广东省</option>
-				    <option value="海南省">海南省</option>
-				    <option value="山西省">山西省</option>
-					<option value="青海省">青海省</option>
-					<option value="江苏省">江苏省</option>
-					<option value="辽宁省">辽宁省</option>
-					<option value="吉林省">吉林省</option>
-					<option value="台湾省">台湾省</option>
-					<option value="河北省">河北省</option>
-				 	<option value="贵州省">贵州省</option>
-					<option value="四川省">四川省</option>
-				  	<option value="云南省">云南省</option>
-				    <option value="陕西省">陕西省</option>
-				  	<option value="甘肃省">甘肃省</option>
-				 	<option value="黑龙江省">黑龙江省</option>
-					<option value="香港特别行政区">香港特别行政区</option>
-					<option value="澳门特别行政区">澳门特别行政区</option>
-					<option value="广西壮族自治区">广西壮族自治区</option>
-					<option value="宁夏回族自治区">宁夏回族自治区</option>
-					<option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
-				 	<option value="内蒙古自治区">内蒙古自治区</option>
-				 	<option value="西藏自治区">西藏自治区</option>
-				</select>
-				<br />
-				<span>职业</span>
-				<input name="occupation" value="学生" type="radio">学生</input>
-				<input name="occupation" value="其他" type="radio">其他</input>
-				<br />
-				<span>联系方式</span>
-				<select name="contact_type">
-					<option value="phone">电话</option>
-					<option value="phone">微信</option>
-					<option value="phone">WhatsApp</option>
-					<option value="phone">E-Mail</option>
-				</select>
-				<input name="contact_value" type="text"></input>
-				<br />
-				<span>是否有车</span>
-				<!--如果有车的话，后续有车型、年份、乘客数等问题-->
-				<input name="car" value="true" type="radio">是</input> 
-				<input name="car" value="false" type="radio">否</input>
-				<br />
-				<span>兴趣爱好</span>
-				<input type=checkbox name="tags" value="摄影">摄影
-				<input type=checkbox name="tags" value="美食">美食
-				<input type=checkbox name="tags" value="历史">历史
-				<input type=checkbox name="tags" value="体育">体育
-				<input type=checkbox name="tags" value="艺术">艺术
-				<br />
-				<span>自我介绍</span>
-				<br />
-				<textarea name="intro1" rows="4" cols="50"></textarea>
-				<br />
-				<span>城市印象</span>
-				<br />
-				<textarea name="intro2" rows="4" cols="50"></textarea>
-				<br />				
-				<span>照片</span><input type="file" name="photos">
-				<br />
-				<button type="submit">提交</button>
-			</form>
+		<div class="form-wrapper">
+			<div class="form-header">
+				<span>欢迎加入旅橙大家庭<span>
+			</div>
+			<div class="form-body">
+				<div class="form-nav v-top">
+					<div class="form-step active" id="step-1">
+						<span class="step-number">1</span>
+						<span class="step-title">基本信息</span>
+					</div>
+					<div class="form-step disable" id="step-2">
+						<span class="step-number">2</span>
+						<span class="step-title">详细信息</span>
+					</div>
+					<div class="form-step disable" id="step-3">
+						<span class="step-number">3</span>
+						<span class="step-title">自我介绍</span>
+					</div>
+				</div>
+				<div class="form-content v-middle">
+					<form id="signup-form" method="post" action="/signup/guide" enctype="multipart/form-data">
+						<div id="form-step1" class="show">
+							<div class="form-record">
+								<div class="form-label">姓名</div>
+								<div class="input-container">
+									<input data-parsley-group="step1" required name="name" type="text">
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">性别</div>
+								<div class="input-container">
+									<div>
+									<input name="sex" value="男" type="radio" data-parsley-group="step1" required>&nbsp;男 &nbsp;&nbsp;
+									<input name="sex" value="女" type="radio">&nbsp;女
+									</div>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">年龄</div>
+								<div class="input-container">
+									<select name="age" data-parsley-group="step1" required>
+										<option value="90后">90后</option>
+										<option value="80后">80后</option>
+										<option value="70后">70后</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">所在城市</div>
+								<div class="input-container">
+									<select name="city" data-parsley-group="step1" required>
+										<option value="纽约">纽约</option>
+										<option value="波士顿">波士顿</option>
+										<option value="费城">费城</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">家乡</div>
+								<div class="input-container">
+									<select name="hometown" data-parsley-group="step1" required>
+								    <option value="北京">北京市</option>
+									<option value="浙江省">浙江省</option>
+								    <option value="天津市">天津市</option>
+								    <option value="安徽省">安徽省</option>
+								    <option value="上海市">上海市</option>
+								    <option value="福建省">福建省</option>
+								    <option value="重庆市">重庆市</option>
+								    <option value="江西省">江西省</option>
+								    <option value="山东省">山东省</option>
+								    <option value="河南省">河南省</option>
+								    <option value="湖北省">湖北省</option>
+								    <option value="湖南省">湖南省</option>
+								    <option value="广东省">广东省</option>
+								    <option value="海南省">海南省</option>
+								    <option value="山西省">山西省</option>
+									<option value="青海省">青海省</option>
+									<option value="江苏省">江苏省</option>
+									<option value="辽宁省">辽宁省</option>
+									<option value="吉林省">吉林省</option>
+									<option value="台湾省">台湾省</option>
+									<option value="河北省">河北省</option>
+								 	<option value="贵州省">贵州省</option>
+									<option value="四川省">四川省</option>
+								  	<option value="云南省">云南省</option>
+								    <option value="陕西省">陕西省</option>
+								  	<option value="甘肃省">甘肃省</option>
+								 	<option value="黑龙江省">黑龙江省</option>
+									<option value="香港特别行政区">香港特别行政区</option>
+									<option value="澳门特别行政区">澳门特别行政区</option>
+									<option value="广西壮族自治区">广西壮族自治区</option>
+									<option value="宁夏回族自治区">宁夏回族自治区</option>
+									<option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+								 	<option value="内蒙古自治区">内蒙古自治区</option>
+								 	<option value="西藏自治区">西藏自治区</option>
+								</select>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">职业</div>
+								<div class="input-container">
+									<div>
+										<input name="occupation" value="学生" type="radio" data-parsley-group="step1" required>&nbsp;学生 &nbsp;&nbsp;
+										<input name="occupation" value="其他" type="radio">&nbsp;其他
+									</div>
+								</div>
+							</div>
+							<div class="button-container pull-right">
+								<button type="button" class="btn btn-default btn-sm btn-next" data-current-step="1">下一步</button>
+							</div>
+						</div>
+						
+						<div id="form-step2" class="hidden">
+							<div class="form-record">
+								<div class="form-label">联系方式</div>
+								<div class="input-container">
+									<input name="contact_value" type="text" required data-parsley-group="step2"></input>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">是否有车</div>
+								<div class="input-container">
+									<div>
+										<input name="car" value="true" type="radio" required data-parsley-group="step2">&nbsp;是&nbsp;&nbsp; 
+										<input name="car" value="false" type="radio">&nbsp;否
+									</div>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">兴趣爱好</div>
+								<div class="input-container">
+									<div>
+										<input type=checkbox name="tags" value="摄影" required data-parsley-group="step2">&nbsp;摄影&nbsp;&nbsp;
+										<input type=checkbox name="tags" value="美食">&nbsp;美食&nbsp;&nbsp;
+										<input type=checkbox name="tags" value="历史">&nbsp;历史&nbsp;&nbsp;
+										<input type=checkbox name="tags" value="体育">&nbsp;体育&nbsp;&nbsp;
+										<input type=checkbox name="tags" value="艺术">&nbsp;艺术&nbsp;&nbsp;
+									</div>
+								</div>
+							</div>
+							<div class="button-container pull-right">
+								<button type="button" class="btn btn-default btn-sm btn-next" data-current-step="2">下一步</button>
+							</div>
+						</div>
+						
+						<div id="form-step3" class="hidden">
+							<div class="form-record">
+								<div class="form-label v-top">自我介绍</div>
+								<div class="input-container">
+									<textarea name="intro1" rows="4" cols="50"></textarea>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label v-top">城市印象</div>
+								<div class="input-container">
+									<textarea name="intro2" rows="4" cols="50"></textarea>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">照片</div>
+								<div class="input-container">
+									<input type="file" name="photos">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>	
+			</div>
+		</div>
+		
+			
 	</body>
 </html>

@@ -17,9 +17,6 @@ app.use(expressSession({secret: '910723'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//var multer = require('multer');
-//app.use(multer({dest:"./upload"}));
-
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

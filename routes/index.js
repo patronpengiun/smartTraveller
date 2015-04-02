@@ -5,7 +5,7 @@ var multer = require('multer');
 var Guide = require('../models/guide');
 
 module.exports = function(passport) {
-	router.get('/', function(req, res) {		
+	router.get('/', function(req, res) {
 		if (req.isAuthenticated()) {
 			res.render('index', {user: req.user});
 		} else {
@@ -62,7 +62,11 @@ module.exports = function(passport) {
 	});
 	
 	router.get('/signup/guide', function(req, res) {
-		res.render('guide_signup');
+		if (req.isAuthenticated()) {
+			res.render('guide_signup');
+		} else {
+			res.redirect("/");
+		}
 	});
 	
 	router.post('/signup/guide', multer({
@@ -70,25 +74,22 @@ module.exports = function(passport) {
 				rename: function (fieldname, filename, req, res) {	
     						return req.user.username + '_' + filename + '_' + Date.now();
   						},
-				onFileUploadStart: function (file) {
-  			  		console.log(file.originalname + ' is starting ...')
-				},
 			}), function(req, res) {
-		//if (req.isAuthenticated()) {
-			console.log(req.files);
-			var temp = req.body;
-			//temp.username = req.user.username;
-			temp.photos = [];
-			temp.photos.push(req.files.photos.name);
-			var newGuide = new Guide(temp);
-			newGuide.save(function(err) {
-				
-			});
-			res.send("save successfully");
-			/*} else {
-			res.send("unauthorized!");
-		}*/
-	});
+				if (req.isAuthenticated()) {
+					console.log(req.files);
+					var temp = req.body;
+					temp.username = req.user.username;
+					temp.photos = [];
+					temp.photos.push(req.files.photos.name);
+					var newGuide = new Guide(temp);
+					newGuide.save(function(err) {
+						res.send("save successfully");
+					});
+				} else {
+					res.redirect("/");
+				}
+			}
+		);
 	
 	return router;
 }
