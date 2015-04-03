@@ -62,32 +62,35 @@ module.exports = function(passport) {
 	});
 	
 	router.get('/signup/guide', function(req, res) {
+		/*
 		if (req.isAuthenticated()) {
 			res.render('guide_signup');
 		} else {
 			res.redirect("/");
-		}
+		}*/
+		res.render('guide_signup');
 	});
 	
 	router.post('/signup/guide', multer({
 				dest: './upload', 
 				rename: function (fieldname, filename, req, res) {	
-    						return req.user.username + '_' + filename + '_' + Date.now();
+    						//return req.user.username + '_' + filename + '_' + Date.now();
+							return filename + '_' + Date.now();
   						},
 			}), function(req, res) {
-				if (req.isAuthenticated()) {
+				//if (req.isAuthenticated()) {
 					console.log(req.files);
 					var temp = req.body;
-					temp.username = req.user.username;
+					//temp.username = req.user.username;
 					temp.photos = [];
 					temp.photos.push(req.files.photos.name);
 					var newGuide = new Guide(temp);
 					newGuide.save(function(err) {
-						res.send("save successfully");
+						res.send("saved successfully");
 					});
-				} else {
-					res.redirect("/");
-				}
+					//} else {
+				//	res.redirect("/");
+				//}
 			}
 		);
 	
