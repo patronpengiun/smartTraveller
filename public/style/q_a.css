@@ -1,0 +1,58 @@
+body{
+	font-family: "Microsoft YaHei" ! important;
+	background-color: #363636;
+}
+
+#page > div{
+	display: inline-block;
+}
+
+#page {
+	margin-left: auto;
+    margin-right: auto;
+	width: 1328px;
+	position: relative;
+	overflow: hidden;
+}
+
+#title{
+	font-size: 60px;
+	width: 180px;
+	float: left;
+	color: #f2ba1e;
+}
+
+#content{
+	width: 800px;
+	float: left;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+.question{
+	color: #f2ba1e;
+}
+
+.answer{
+	color: #ffffff;
+}
+
+li{
+	margin-bottom: 40px;
+}
+
+button{
+	cursor: pointer;
+	position: absolute;
+	left: 50%;
+	right: 50%;
+	font-size: 150%;
+	line-height: 2.5;
+	width: 180px;
+	border-radius: 50px;
+	border-color: #f2ba1e;
+	color: #f2ba1e;
+	background-color: #363636;
+	border-style: solid;
+	border-width: 3px;
+}

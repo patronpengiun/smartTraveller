@@ -68,6 +68,10 @@ module.exports = function(passport) {
 		} else {
 			res.redirect("/");
 		}*/
+		res.render('q_a');
+	});
+
+	router.get('/signup/guide_apply', function(req, res){
 		res.render('guide_signup');
 	});
 	
