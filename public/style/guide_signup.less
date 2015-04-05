@@ -1,60 +1,28 @@
+body{
+	background-color: #363636;
+	color: #f2ba1e;
+}
+
 .form-wrapper {
 	position: relative;
 	width: 800px;
 	margin: 0 auto;
 	
-	.form-header {
-		margin-top: 20px;
-		background-color: orange;
-		padding: 10px 20px;
-		color: white;
-		text-align: center;
-		
-		span {
-			font-size: 32px;
-		}
-	}
-	
 	.form-body {
 		.form-nav {
-			width: 200px;
+			width: 140px;
 			display: inline-block;
 			margin: 5px 10px 0 0;
 			
 			.form-step {
-				height: 100px;
+				height: 300px;
 				border-radius: 4px;
 				margin: 10px 0;
-				padding-left: 8px;
-				
-				&.complete {
-					background-color: #8CC63F;
-					border: 1px solid #8CC63F;
-					color: #F8F8F8;
-					cursor: pointer;
-				}
-				
-				&.active {
-					background-color: #EA8511;
-					border: 1px solid #EA8511;
-					color: #F8F8F8;
-					box-shadow: 1px 5px 10px #888;
-				}
-				
-				&.disable {
-					background-color: #F8F8F8;
-					border: 1px solid #CCC;
-					color: #CCC;
-				}
-				
-				.step-number {
-					font-weight: bold;
-					font-size: 56px;
-				}
+			
 				
 				.step-title {
 					font-weight: bold;
-					font-size: 20px;
+					font-size: 60px;
 				}
 			}
 		}
@@ -63,9 +31,7 @@
 			width: 580px;
 			display: inline-block;
 			margin-top: 15px;
-			border: 1px solid #CCC;
-			border-radius: 3px;
-			
+			font-size: 18px;
 			.form-record {
 				
 				margin: 25px 0;
@@ -83,7 +49,11 @@
 				}
 				
 				input[type="text"], select {
-					width: 100%
+					color: #ffffff;
+					width: 375px;
+					height: 40px;
+					background-color: #363636;
+					border-color:#949393;
 				}
 				
 				select {

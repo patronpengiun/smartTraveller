@@ -8,10 +8,8 @@ module.exports = mongoose.model('Guide',{
 	age: String,
 	hometown: String,
 	occupation: String,
-
-	//联系方式(电话，微信，WhatsApp，邮箱)，也许分成四个field比较好
-	contact_type: String,
-	contact_value: String,
+	phone: String,
+	email: String,
 
 	car: Boolean,
 	car_model: String,
