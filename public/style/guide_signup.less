@@ -32,8 +32,8 @@ body{
 			display: inline-block;
 			margin-top: 15px;
 			font-size: 18px;
-			.form-record {
-				
+			
+			.form-record {	
 				margin: 25px 0;
 				
 				.form-label {
@@ -46,24 +46,69 @@ body{
 				.input-container {
 					display: inline-block;
 					width: 70%;
+
+					.upload {
+						background-color: #363636;
+						font-size: 13px;
+						border-color: #d5d4d4;
+					}
 				}
 				
 				input[type="text"], select {
+					border: 1 #949393;
+					border-width: 1px; 
 					color: #ffffff;
 					width: 375px;
 					height: 40px;
 					background-color: #363636;
-					border-color:#949393;
 				}
 				
 				select {
-					font-size: 20px;
+					font-size: 16px;
 				}
 			}
 			
 			.button-container {
-				margin: 0 40px 20px 0;
+				margin-top: 50px;
+				display: inline;
+				button{
+					border: 0;
+					padding: 0;
+					cursor: pointer;
+					font-size: 120%;
+					line-height: 2.5;
+					width: 200px;
+					height: 60px;
+					border-radius: 50px;
+					border-color: #f2ba1e;
+					color: #f2ba1e;
+					background-color: #363636;
+					border-style: solid;
+					border-width: 3px;
+				}
+				.btn-next{
+					position: absolute;
+					left: 50%;
+					right: 50%;
+				}
+				.btn-previous{
+					position: absolute;
+					left: 37%;
+				}
+				.btn-submit{
+					position: absolute;
+					left: 70%;
+				}
 			}
+
+			textarea {
+				color: #d5d4d4;
+				border-color: #d5d4d4;
+				background-color: #363636;
+			}
+
+
+
 		}
 		
 		.v-middle {
