@@ -21,7 +21,7 @@
 					</div>
 				</div>
 				<div class="form-content v-middle">
-					<form id="signup-form" method="post" action="/signup/guide_apply" enctype="multipart/form-data" data-parsley-required-message="此项为必填项" data-current-step='1'>
+					<form id="signup-form" method="post" action="/signup/guide" enctype="multipart/form-data" data-parsley-required-message="此项为必填项">
 						<div class="form-step1 show">
 							<div class="form-record">
 								<div class="form-label">姓名</div>
@@ -101,6 +101,7 @@
 									<div>
 										<input name="occupation" value="学生" type="radio" data-parsley-group="step1" required>&nbsp;学生 &nbsp;&nbsp;
 										<input name="occupation" value="其他" type="radio">&nbsp;其他
+										<input class="showup-text-occupation hidden" id="occupation_input" name="occupation" type="text">
 									</div>
 								</div>
 							</div>
@@ -122,6 +123,30 @@
 									<div>
 										<input name="car" value="true" type="radio" required data-parsley-group="step1">&nbsp;是&nbsp;&nbsp; 
 										<input name="car" value="false" type="radio">&nbsp;否
+									</div>
+								</div>
+							</div>
+							<div class="form-record showup-text-car hidden">
+								<div class="form-label">汽车品牌</div>
+								<div class="input-container">
+									<div>
+										<input name="car_brand" type="text"></input>
+									</div>
+								</div>
+							</div>
+							<div class="form-record showup-text-car hidden">
+								<div class="form-label">汽车型号</div>
+								<div class="input-container">
+									<div>
+										<input name="car_model" type="text"></input>
+									</div>
+								</div>
+							</div>
+							<div class="form-record showup-text-car hidden">
+								<div class="form-label">汽车年份</div>
+								<div class="input-container">
+									<div>
+										<input name="car_year" type="text"></input>
 									</div>
 								</div>
 							</div>

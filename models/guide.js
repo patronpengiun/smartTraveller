@@ -14,7 +14,7 @@ module.exports = mongoose.model('Guide',{
 	car: Boolean,
 	car_model: String,
 	car_year: String,
-	car_passengers: Number,//多少座, driver exculded
+	car_brand: String,
 
 	intro1: String,
 	intro2: String,
