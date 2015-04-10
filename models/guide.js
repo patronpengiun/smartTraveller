@@ -18,8 +18,9 @@ module.exports = mongoose.model('Guide',{
 
 	intro1: String,
 	intro2: String,
-	//intro3: String,
-	
 	tags: [String],
-	photos: [String],
+	
+	photo_portrait: String,
+	photo_view: [String],
+	photo_life: [String],
 });

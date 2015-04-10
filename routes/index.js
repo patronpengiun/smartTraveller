@@ -62,12 +62,6 @@ module.exports = function(passport) {
 	});
 	
 	router.get('/signup/guide', function(req, res) {
-		/*
-		if (req.isAuthenticated()) {
-			res.render('guide_signup');
-		} else {
-			res.redirect("/");
-		}*/
 		res.render('q_a');
 	});
 
@@ -82,19 +76,31 @@ module.exports = function(passport) {
 							return filename + '_' + Date.now();
   						},
 			}), function(req, res) {
-				//if (req.isAuthenticated()) {
-					console.log(req.files);
-					var temp = req.body;
-					//temp.username = req.user.username;
-					temp.photos = [];
-					temp.photos.push(req.files.photos.name);
-					var newGuide = new Guide(temp);
-					newGuide.save(function(err) {
-						res.send("saved successfully");
-					});
-					//} else {
-				//	res.redirect("/");
-				//}
+				console.log(req.files);
+				var temp = req.body;
+				//temp.username = req.user.username;
+				
+				// TODO: refactor
+				temp.photo_portrait = req.files.photo_portrait.name;
+				temp.photo_view = [];
+				for (var i=0;i<req.files.photo_view.length;i++) {
+					temp.photo_view.push(req.files.photo_view[i].name);
+				}
+				if (req.files.photo_view.name) {
+					temp.photo_view.push(req.files.photo_view.name);
+				}
+				temp.photo_life = [];
+				for (var i=0;i<req.files.photo_life.length;i++) {
+					temp.photo_life.push(req.files.photo_life[i].name);
+				}
+				if (req.files.photo_life.name) {
+					temp.photo_life.push(req.files.photo_life.name);
+				}
+				
+				var newGuide = new Guide(temp);
+				newGuide.save(function(err) {
+					res.send("saved successfully");
+				});
 			}
 		);
 	

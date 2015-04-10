@@ -1,11 +1,11 @@
 $(function() {
 	$('.btn-next').click(function() {
-		//if(!$('#signup-form').parsley().validate('step1')){
-		//	return;
-		//} else {
+		if(!$('#signup-form').parsley().validate('step1')){
+			return;
+		} else {
 			$('.form-step1').removeClass('show').addClass('hidden');
 			$('.form-step2').removeClass('hidden').addClass('show');
-		//}
+		}
 	});	
 
 	$('.btn-previous').click(function() {
@@ -17,6 +17,9 @@ $(function() {
 		if(!$('#signup-form').parsley().validate('step2')){
 			return;
 		} else {
+			if($('input[name=occupation]:checked').val() == '其他'){
+				$('input[name=occupation]:checked').val($('#occupation_input').val());
+			}
 			$('#signup-form').submit();
 		}
 			
@@ -27,20 +30,23 @@ $(function() {
 
 
 $(document).ready( function() {
-  	$('#signup-form input').on('change', function() {
-  		if($('input[name=occupation]:checked', '#signup-form').val() == '其他'){
-  			$('.showup-text-occupation').removeClass('hidden');
-  			$('input[name=occupation]:checked', '#signup-form').val() = $('#occupation_input').val();
+  	$('#signup-form input[name=occupation]').on('change', function() {
+  		if($('input[name=occupation]:checked').val() == '其他'){
+			$(this).parent().append($('<input class="showup-text-occupation" id="occupation_input" type="text" required data-parsley-group="step1">'));
   		}
-  		if($('input[name=occupation]:checked', '#signup-form').val() == '学生'){
-  			$('.showup-text-occupation').addClass('hidden');
+  		if($('input[name=occupation]:checked').val() == '学生'){
+  			$('#occupation_input').remove();
   		}
-
+	});
+	
+	$('#signup-form input[name=car]').on('change', function() {
   		if($('input[name=car]:checked', '#signup-form').val() == 'true'){
   			$('.showup-text-car').removeClass('hidden');
   		}
   		if($('input[name=car]:checked', '#signup-form').val() == 'false'){
   			$('.showup-text-car').addClass('hidden');
   		}
-	}); 		
+	});
+	
+	 		
 });
