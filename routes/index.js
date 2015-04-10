@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+var AWS = require('aws-sdk');
+
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var S3_BUCKET = process.env.S3_BUCKET;
+AWS.config.update({
+    accessKeyId: AWS_ACCESS_KEY,
+    secretAccessKey: AWS_SECRET_KEY,
+});
+var s3 = new AWS.S3();
 
 var Guide = require('../models/guide');
 
@@ -69,13 +79,42 @@ module.exports = function(passport) {
 		res.render('guide_signup');
 	});
 	
-	router.post('/signup/guide', multer({
+	var _multer;
+	if (process.env.MODE == 'dev') {
+		_multer = multer({
 				dest: './upload', 
 				rename: function (fieldname, filename, req, res) {	
     						//return req.user.username + '_' + filename + '_' + Date.now();
 							return filename + '_' + Date.now();
   						},
-			}), function(req, res) {
+				});
+	} else {
+		_multer = multer({
+			dest: './upload', 
+			rename: function (fieldname, filename, req, res) {	
+						//return req.user.username + '_' + filename + '_' + Date.now();
+						return filename + '_' + Date.now();
+					},
+			onFileUploadData: function (file, data, req, res) {
+			    var params = {
+			    	Bucket: S3_BUCKET,
+			    	Key: file.name,
+			    	Body: data
+			    };
+
+			    s3.putObject(params, function (perr, pres) {
+			    	if (perr) {
+						console.log("Error uploading data: ", perr);
+			      	} else {
+			        	console.log("Successfully uploaded data");
+			      	}
+			    });
+			},
+		});
+	}
+	
+	router.post('/signup/guide', _multer, 
+			function(req, res) {
 				console.log(req.files);
 				var temp = req.body;
 				//temp.username = req.user.username;
