@@ -20,6 +20,8 @@ $(function() {
 			if($('input[name=occupation]:checked').val() == '其他'){
 				$('input[name=occupation]:checked').val($('#occupation_input').val());
 			}
+			$('.two-btn').hide();
+			$('.submit-notice').show();
 			$('#signup-form').submit();
 		}
 			

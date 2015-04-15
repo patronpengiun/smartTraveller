@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>旅橙向导注册</title>
+		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 		<link rel="stylesheet" href="/style/bootstrap.min.css">
 		<link rel="stylesheet" href="/style/guide_signup.css">
 		<link rel="stylesheet" href="/style/parsley.css">
@@ -21,7 +23,7 @@
 					</div>
 				</div>
 				<div class="form-content v-middle">
-					<form id="signup-form" method="post" action="/signup/guide" enctype="multipart/form-data" data-parsley-required-message="此项为必填项" data-parsley-typeemail-message="abc">
+					<form id="signup-form" method="post" action="/signup/guide/apply" enctype="multipart/form-data" data-parsley-required-message="此项为必填项">
 						<div class="form-step1 show">
 							<div class="form-record">
 								<div class="form-label">姓名</div>
@@ -50,11 +52,17 @@
 									<select name="city" data-parsley-group="step1" required>
 										<option></option>
 										<option value="波士顿">波士顿</option>
-										<option value="华盛顿">华盛顿</option>
 										<option value="费城">费城</option>
+										<option value="华盛顿">华盛顿</option>
+										<option value="旧金山">旧金山</option>
+										<option value="洛杉矶">洛杉矶</option>
 										<option value="迈阿密">迈阿密</option>
 										<option value="纽约">纽约</option>
 										<option value="匹兹堡">匹兹堡</option>
+										<option value="西雅图">西雅图</option>
+										<option value="休斯顿">休斯顿</option>
+										<option value="芝加哥">芝加哥</option>
+										<option value="其它">其它</option>
 									</select>
 								</div>
 							</div>
@@ -175,31 +183,31 @@
 							<div class="form-record">
 								<div class="form-label v-top">自我介绍</div>
 								<div class="input-container">
-									<textarea name="intro1" rows="6" cols="50" required data-parsley-group="step2"></textarea>
+									<textarea name="intro1" rows="6" cols="50" required data-parsley-group="step2" placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
 								</div>
 							</div>
 							<div class="form-record">
 								<div class="form-label v-top">城市印象</div>
 								<div class="input-container">
-									<textarea name="intro2" rows="6" cols="50" required data-parsley-group="step2"></textarea>
+									<textarea name="intro2" rows="6" cols="50" required data-parsley-group="step2" placeholder="简单介绍下你对这个城市的感受"></textarea>
 								</div>
 							</div>
 							<div class="form-record">
-								<div class="form-label">封面照</div>
+								<div class="form-label">头像</div>
 								<div class="input-container">
-									<input class="upload" type="file" name="photo_portrait" required data-parsley-group="step2">
+									<input class="upload" type="file" name="photo_portrait" required data-parsley-group="step2" accept=".gif,.jpg,.png">
 								</div>
 							</div>
 							<div class="form-record">
 								<div class="form-label">城市风景照</div>
 								<div class="input-container">
-									<input class="upload" type="file" multiple name="photo_view" required data-parsley-group="step2">
+									<input class="upload" type="file" multiple name="photo_view" required data-parsley-group="step2" accept=".gif,.jpg,.png">
 								</div>
 							</div>
 							<div class="form-record">
 								<div class="form-label">生活照</div>
 								<div class="input-container">
-									<input class="upload" type="file" multiple name="photo_life" required data-parsley-group="step2">
+									<input class="upload" type="file" multiple name="photo_life" required data-parsley-group="step2" accept=".gif,.jpg,.png">
 								</div>
 							</div>
 							
@@ -207,12 +215,11 @@
 								<button type="button" class="btn btn-default btn-sm btn-previous">上一步</button>
 								<button type="button" class="btn btn-default btn-sm btn-submit">提交</button>
 							</div>
+							<div class="submit-notice">提交中...</div>
 						</div>
 					</form>
 				</div>	
 			</div>
 		</div>
-		
-			
 	</body>
 </html>

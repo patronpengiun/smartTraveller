@@ -71,11 +71,11 @@ module.exports = function(passport) {
 		res.send({message: "logged out"});
 	});
 	
-	router.get('/signup/guide', function(req, res) {
+	router.get('/signup/guide/qa', function(req, res) {
 		res.render('q_a');
 	});
 
-	router.get('/signup/guide_apply', function(req, res){
+	router.get('/signup/guide/apply', function(req, res){
 		res.render('guide_signup');
 	});
 	
@@ -113,7 +113,7 @@ module.exports = function(passport) {
 		});
 	}
 	
-	router.post('/signup/guide', _multer, 
+	router.post('/signup/guide/apply', _multer, 
 			function(req, res) {
 				console.log(req.files);
 				var temp = req.body;
@@ -138,7 +138,7 @@ module.exports = function(passport) {
 				
 				var newGuide = new Guide(temp);
 				newGuide.save(function(err) {
-					res.send("saved successfully");
+					res.render('signup_complete');
 				});
 			}
 		);
