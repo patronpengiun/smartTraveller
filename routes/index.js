@@ -25,7 +25,7 @@ module.exports = function(passport) {
 	
 	router.get('/location/:place', function(req, res) {
 		var place = mongo.find(req.pa)
-		res.render('location', place);
+		res.render('location', place)
 	});
 	
 	router.get('/login', function(req, res) {
@@ -143,9 +143,17 @@ module.exports = function(passport) {
 			}
 		);
 
-	// guide page
-	router.get('/guidepage', function(req, res) {
-		res.render('guide_page');
+	// guide page, with guide_id given by guide list page
+	router.get('/guidepage/:guide_id', function(req, res) {
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+			// guides is an array with guide objects
+			if (err || guides.length == 0) {
+				res.send("Oops...No such page, perhaps wrong guide id >_<");
+			} else if (guides) {
+				res.render('guide_page', {guide: guides[0]});
+			} 
+		});
+		
 	});
 	
 	router.get('/guidelist', function(req, res) {
