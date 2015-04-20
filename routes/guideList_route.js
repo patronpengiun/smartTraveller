@@ -6,9 +6,9 @@ var guideList_router = express.Router();
 
 var Guide = require('../models/guide');
 
-module.exports = function(passport) {
-
-	guideList_router.get('/guideList', function(req, res) {
+module.exports = function() {
+	guideList_router.get('/guidelist', function(req, res) {
+		console.log('function called');
 		Guide.find({}, function(err, guides) {
 	    var guideMap = {};
 
@@ -16,7 +16,8 @@ module.exports = function(passport) {
 	      guideMap[guide.username] = guide;
 	    });
 
-	    res.send(guideMap);  
+	   // res.send(guideMap);
+	    res.render('guidelist');  
 	  });
 	});
 

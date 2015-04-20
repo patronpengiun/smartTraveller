@@ -1,2 +1,19 @@
 <!-- Created by Hongda Jiang -->
 <!-- 	4-19-2015 		-->
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>搜索结果</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+	<body>
+		<h1>搜索结果</h1>
+		<div id = "guidelist">
+			<ul>
+			<% for(var i=0; i<guideList.length; i++) {%>
+				<li><%= guideList[i].name %></li>
+			<% } %>
+			</ul>
+		</div>
+	</body>
+</html>
