@@ -41,10 +41,9 @@
 					<div id="avatar-panel" class="left-column">
 						<div id="guide-image-box">
 							<div id="guide-avatar">
-								<!-- <img class="avatar" src="/uploads/service/640_5475878251bfb.jpg"> -->
-<!-- =======
-								<img class="avatar" src="https://demo.wanzi.cc:6080/uploads/service/640_5475878251bfb.jpg"> -->
-								<img class="avatar" src="<%= guide.photo_portrait %>">
+
+								<img class="avatar" src="https://demo.wanzi.cc:6080/uploads/service/640_5475878251bfb.jpg">
+								<!-- <img class="avatar" src="/<%= guide.photo_portrait %>"> -->
 							</div>
 						</div>
 						<div class="guide-name">
@@ -80,11 +79,20 @@
 					<hr>
 					<div id="info-panel" class="left-column">
 						<h2>向导信息</h2>
-						<div id="info-box">
-							<p>姓名 年龄 性别 家乡</p>
-							<p>信息 信息 信息 信息</p>
-							<p>信息 信息 信息 信息</p>
-						</div>
+						<ul id="info-box">
+							<li class="info-list">
+								城市：<%= guide.city %>
+							</li>
+							<li class="info-list">
+								职业：<%= guide.occupation %>
+							</li>
+							<li class="info-list">
+								性别：<%= guide.sex %>
+							</li>
+							<li class="info-list">
+								年龄：<%= guide.age %>
+							</li>
+						</ul>
 					</div>
 					
 					<hr>
@@ -100,6 +108,16 @@
 						<h2>评价</h2>
 						<div id="review-box">
 							<!-- ejs template for reviews goes here in future -->
+							<% for (var i = 0; i < 5; i++) { %>
+								<div class="review-icon">
+									<!-- <img src="anonymous.png"> -->
+									<img src="https://cdn2.iconfinder.com/data/icons/danger-problems/512/anonymous-128.png" style="width:50px;height:50px">
+								</div>
+								<div class="review-text">
+									第一次来纽约旅行，能够认识小晗向导非常荣幸，她热情周到的服务给原本寒冷的冬日之旅增添了异国他乡的温暖，让我们非常感动！感谢小晗，感谢SmartTraveller，我们以后再合作！
+								</div>
+								<hr>
+							<% } %>
 						</div>
 					</div>
 				</div>
