@@ -142,6 +142,11 @@ module.exports = function(passport) {
 				});
 			}
 		);
+
+	// guide page
+	router.get('/guidepage', function(req, res) {
+		res.render('guide_page');
+	});
 	
 	router.get('/guidelist', function(req, res) {
 		Guide.find({}, function(err, guides) {
