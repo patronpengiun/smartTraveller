@@ -37,6 +37,8 @@ initPassport(passport);
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
 
+var guideList_route = require('./routes/guideList_route');
+app.use('/guideList', guideList_route);
 
 var server = app.listen((process.env.PORT || 5000), function() {
 	var host = server.address().address;
