@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var AWS = require('aws-sdk');
+var mongoose = require('mongoose');
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
@@ -141,7 +142,7 @@ module.exports = function(passport) {
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
-		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+		Guide.find({"_id":req.params.guide_id}, function(err, guides) {
 			// guides is an array with guide objects
 			if (err || guides.length == 0) {
 				res.send("Oops...No such page, perhaps wrong guide id >_<");
