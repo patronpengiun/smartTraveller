@@ -30,7 +30,7 @@ app.set('view engine', 'ejs');
 var lessMiddleware = require('less-middleware');
 app.use(lessMiddleware(path.join(__dirname, "public"),{compress : true}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'upload')));
 
 var initPassport = require('./passport/init');
 initPassport(passport);

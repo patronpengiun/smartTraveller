@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var AWS = require('aws-sdk');
+var mongoose = require('mongoose');
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
@@ -13,6 +14,7 @@ AWS.config.update({
 var s3 = new AWS.S3();
 
 var Guide = require('../models/guide');
+var Place = require('../models/place');
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
@@ -21,11 +23,6 @@ module.exports = function(passport) {
 		} else {
 			res.render('index', {user: {username: "旅橙网"}});
 		}
-	});
-	
-	router.get('/location/:place', function(req, res) {
-		var place = mongo.find(req.pa)
-		res.render('location', place)
 	});
 	
 	router.get('/login', function(req, res) {
@@ -145,7 +142,7 @@ module.exports = function(passport) {
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
-		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+		Guide.find({"_id":req.params.guide_id}, function(err, guides) {
 			// guides is an array with guide objects
 			if (err || guides.length == 0) {
 				res.send("Oops...No such page, perhaps wrong guide id >_<");
@@ -168,5 +165,18 @@ module.exports = function(passport) {
 	  });
 	});
 
+
+	// Place page, with place_id given by .
+	router.get('/places/:place_id', function(req, res) {
+		Place.find({_id:req.params.place_id}, function(err, places) {
+			if (err || places.length == 0) {
+				res.send("No such place.");
+			} else if (places) {
+				// TODO: places[0]?
+				res.render('place_page', {place: places[0]}); 
+			}
+		});
+	});
+	
 	return router;
 }
