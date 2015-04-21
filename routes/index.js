@@ -143,17 +143,17 @@ module.exports = function(passport) {
 			}
 		);
 	
-	router.get('/guidelist', function(req, res) {
-		Guide.find({}, function(err, guides) {
-	    var guideMap = [];
+	// router.get('/guidelist', function(req, res) {
+	// 	Guide.find({}, function(err, guides) {
+	//     var guideMap = [];
 
-	    guides.forEach(function(guide) {
-	      guideMap.push(guide);
-	    });
-	    //res.send(guideMap);
-	    res.render('guide_list', {guideList: guideMap});
-	  });
-	});
+	//     guides.forEach(function(guide) {
+	//       guideMap.push(guide);
+	//     });
+	//     //res.send(guideMap);
+	//     res.render('guide_list', {guideList: guideMap});
+	//   });
+	// });
 
 	return router;
 }
