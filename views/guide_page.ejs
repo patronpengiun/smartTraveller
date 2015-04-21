@@ -105,14 +105,15 @@
 					<div id="review-panel" class="left-column">
 						<h2>评价</h2>
 						<div id="review-box">
-							<!-- ejs template for reviews goes here in future -->
-							<% for (var i = 0; i < 5; i++) { %>
+							<% for (var i = 0; i < reviewList.length; i++) { %>
 								<div class="review-icon">
-									<!-- <img src="anonymous.png"> -->
-									<img src="https://cdn2.iconfinder.com/data/icons/danger-problems/512/anonymous-128.png" style="width:50px;height:50px">
+									<img src="/<%= guide.photo_portrait %>" style="width:60px;height:60px;border-radius: 30px">
 								</div>
 								<div class="review-text">
-									第一次来纽约旅行，能够认识小晗向导非常荣幸，她热情周到的服务给原本寒冷的冬日之旅增添了异国他乡的温暖，让我们非常感动！感谢小晗，感谢SmartTraveller，我们以后再合作！
+									<%= reviewList[i].review_text %>
+								</div>
+								<div class="review-date">
+									<%= reviewList[i].date %>
 								</div>
 								<hr>
 							<% } %>
