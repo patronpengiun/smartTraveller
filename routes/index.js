@@ -13,6 +13,7 @@ AWS.config.update({
 var s3 = new AWS.S3();
 
 var Guide = require('../models/guide');
+var Place = require('../models/place');
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
@@ -21,11 +22,6 @@ module.exports = function(passport) {
 		} else {
 			res.render('index', {user: {username: "旅橙网"}});
 		}
-	});
-	
-	router.get('/location/:place', function(req, res) {
-		var place = mongo.find(req.pa)
-		res.render('location', place)
 	});
 	
 	router.get('/login', function(req, res) {
@@ -168,5 +164,18 @@ module.exports = function(passport) {
 	  });
 	});
 
+
+	// Place page, with place_id given by .
+	router.get('/places/:place_id', function(req, res) {
+		Place.find({_id:req.params.place_id}, function(err, places) {
+			if (err || places.length == 0) {
+				res.send("No such place.");
+			} else if (places) {
+				// TODO: places[0]?
+				res.render('place_page', {place: places[0]}); 
+			}
+		});
+	});
+	
 	return router;
 }
