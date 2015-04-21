@@ -1,21 +1,33 @@
 <!-- Created by Hongda Jiang -->
-<!-- 	4-19-2015 		-->
+<!-- 	4-19-2015 	test	-->
 <!DOCTYPE html>
 <html>
 	<head>
 	<title>搜索结果</title>
+	<link rel='stylesheet' href='/style/guide_list.css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	</head>
 	<body>
 		<h1>搜索结果</h1>
 		<div id = "guidelist">
-			<ul>
 			<% for(var i=0; i<guideList.length; i++) {%>
+			<a href='/guidepage/<%= guideList[i].id %>'>
 				<div class='guide_card'>
-				<li><%= guideList[i].name %></li>
+					<div class='guide_portrait'>
+						<img src='/<%= guideList[i].photo_portrait %>' >
+					</div>
+					<div class='guide_info'>
+						<div class='info_section1'>
+							<span><%= guideList[i].name %></span>
+							<span><%= guideList[i].city %></span>
+						</div>
+						<div class='info_section2'>
+							<span><%= guideList[i].intro1 %></span>
+						</div>
+					</div>
 				</div>
+			</a>
 			<% } %>
-			</ul>
 		</div>
 	</body>
 </html>
