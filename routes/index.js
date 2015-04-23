@@ -15,6 +15,8 @@ var s3 = new AWS.S3();
 
 var Guide = require('../models/guide');
 var Place = require('../models/place');
+var Review = require('../models/review');
+var User = require('../models/user')
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
@@ -142,28 +144,38 @@ module.exports = function(passport) {
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
-		Guide.find({"_id":req.params.guide_id}, function(err, guides) {
+		console.log("Display guide page");
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
 			// guides is an array with guide objects
 			if (err || guides.length == 0) {
 				res.send("Oops...No such page, perhaps wrong guide id >_<");
-			} else if (guides) {
-				res.render('guide_page', {guide: guides[0]});
+			} else {
+				// Query review information
+				Review.find({reviewee_id:req.params.guide_id}, function(err, reviews) {
+					if (err) {
+						res.send("Oops...No such page, perhaps wrong guide id >_<");
+					} else {
+						res.render('guide_page', {guide: guides[0], reviewList: reviews});
+					}
+				});
 			} 
 		});
-		
 	});
-	
-	// router.get('/guidelist', function(req, res) {
-	// 	Guide.find({}, function(err, guides) {
-	//     var guideMap = [];
 
-	//     guides.forEach(function(guide) {
-	//       guideMap.push(guide);
-	//     });
-	//     //res.send(guideMap);
-	//     res.render('guide_list', {guideList: guideMap});
-	//   });
-	// });
+	// ------------ Pages just for creating review and test! -----------
+	router.get('/review/create', function(req, res) {
+		res.render('create_review');
+	});
+	router.post('/review/create', _multer, function(req, res) {
+		console.log("submit create review request!");
+		console.log(req.body);
+		var info = req.body;
+		var newReview = new Review(info);
+		newReview.save(function(err) {
+			res.render('create_review');
+		});
+	});
+
 
 
 	// Place page, with place_id given by .

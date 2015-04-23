@@ -23,13 +23,34 @@
 	background: #28bcdc;
 	color: white;
 	display: inline-block;
-	/*padding-top: 5px;*/
 	padding-right: 15px;
-	/*padding-bottom: 5px;*/
 	padding-left: 15px;
-	position: relative;
+	position: absolute;
 	margin-left: -10px;
 	margin-top: -50px;
+}
+
+.guide-tag {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	color: #555555;
+	background: #54544e;
+	display: inline-block;
+	color: #ffffff;
+}
+
+.guide-tag .guide-tag-text {
+	font-size: 20px;
+  	padding-left: 30px;
+  	padding-right: 30px;
+  	padding-top: 5px;
+}
+
+.guide-car-title {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 8px;
 }
 
 .left-column {
@@ -50,6 +71,7 @@
 }
 
 .avatar {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -109,5 +131,72 @@
 	margin-top: 10px;
 	color: #fc7c1a;
 	font-size: 26px;
+}
+
+
+/* For guide info grid use */
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	font-size: 15px;
+	display: block;
+	float:left;
+	margin: 1% 0 1% 6%;
+	text-align: center;
+	text-shadow: 0 0 0 #FFF;
+  	background: #FAFAFA;
+	border: 1px solid #F2F2F2;
+    border-bottom-color: #EFEFEF;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF THREE  */
+.span_3_of_3 { width: 100%; }
+.span_2_of_3 { width: 64.66%; }
+.span_1_of_3 { width: 29.33%; }
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {  margin: 1% 0 1% 0%; }
+	.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
+}
+
+
+/* For Review Section */
+.single-review > .review-icon {
+	float: left;
+}
+
+.review-icon > #reviewer-icon {
+	width:70px;
+	height:70px;
+	border-radius: 50%;
+}
+
+.single-review > .review-text {
+	/*float: left;*/
+	margin-left: 15%;
+}
+
+.single-review > .review-date {
+	clear: both;
+	float: right;
+	font-size: 11px;
+	margin-bottom: 10px;
+}
+
+#review-box > hr {
+	clear: both;
 }
 

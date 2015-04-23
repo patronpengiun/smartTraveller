@@ -47,6 +47,17 @@
 						<div class="guide-name">
 							<h1><%= guide.name %></h1>
 						</div>
+						<div class="guide-tag">
+							<h1 class="guide-tag-text">
+								兴趣：
+								<% for (var i = 0; i < guide.tags.length; i++) { %>
+									<%= guide.tags[i] %>
+									<% if (i != guide.tags.length - 1) { %>
+										/
+									<% } %>
+								<% } %>
+							</h1>
+						</div>
 					</div>
 					
 					<div id="reservation-panel" class="right-column">
@@ -54,9 +65,9 @@
                     		<p>价格</p>
                     		<p>
 								<p>每天徒步（单独导游，公共交通出行）</p>
-								<p>费用=定金 50 加拿大元 + 现付 100加拿大元</p>
+								<p>费用=定金 50 美元 + 现付 100美元</p>
 								<p>每天包车</p>
-								<p>费用=定金 50 加拿大元 + 现付 230加拿大元</p>
+								<p>费用=定金 50 美元 + 现付 230美元</p>
 								<p>接送机费用请见向导附加费</p>
 							</p>
 						</div>
@@ -73,24 +84,61 @@
 							</a>
 						</div>
 					</div>
+
+					<div id="guide-photo-life-panel" class="right-column">
+						<img class="avatar" src="/<%= guide.photo_life[0] %>">
+
+						<!-- How to pass guide.photo_life.length to js function ??? -->
+
+
+
+
+					</div>
 					
-					<hr>
 					<div id="info-panel" class="left-column">
+					<hr>
 						<h2>向导信息</h2>
-						<ul id="info-box">
-							<li class="info-list">
+						<div class="section group">
+							<div class="col span_1_of_3">
 								城市：<%= guide.city %>
-							</li>
-							<li class="info-list">
+							</div>
+							<div class="col span_1_of_3">
 								职业：<%= guide.occupation %>
-							</li>
-							<li class="info-list">
+							</div>
+							<div class="col span_1_of_3">
 								性别：<%= guide.sex %>
-							</li>
-							<li class="info-list">
+							</div>
+						</div>
+						<div class="section group">
+							<div class="col span_1_of_3">
 								年龄：<%= guide.age %>
-							</li>
-						</ul>
+							</div>
+							<div class="col span_1_of_3">
+								家乡：<%= guide.hometown %>
+							</div>
+							<div class="col span_1_of_3">
+								职业：<%= guide.occupation %>
+							</div>
+						</div>
+						<br>
+
+						<% if (guide.car) { %>
+							<p class="guide-car-title">私人用车：提供 </p>
+						<div class="section group">
+							<div class="col span_1_of_3">
+								品牌：<%= guide.car_brand %>
+							</div>
+							<div class="col span_1_of_3">
+								年份：<%= guide.car_year %>
+							</div>
+							<div class="col span_1_of_3">
+								型号：<%= guide.car_model %>
+							</div>
+						</div>
+						<% } else { %>
+							<p class="guide-car-title">私人用车：不提供 </p>
+						<% } %>
+
 					</div>
 					
 					<hr>
@@ -102,19 +150,33 @@
 					</div>
 					
 					<hr>
+					<div id="path-intro-panel" class="left-column">
+						<h2>个人路线介绍</h2>
+						<div id="path-intro-box">
+							<!-- <img src="/<%= guide.photo_view[0] %>">  -->
+							<p><%= guide.intro2 %></p>
+						</div>
+					</div>
+
+					<hr>
 					<div id="review-panel" class="left-column">
 						<h2>评价</h2>
 						<div id="review-box">
-							<!-- ejs template for reviews goes here in future -->
-							<% for (var i = 0; i < 5; i++) { %>
+							<% for (var i = 0; i < reviewList.length; i++) { %>
+							<div class="single-review">
 								<div class="review-icon">
-									<!-- <img src="anonymous.png"> -->
-									<img src="https://cdn2.iconfinder.com/data/icons/danger-problems/512/anonymous-128.png" style="width:50px;height:50px">
+									<!-- Need to change to reviewer's portrait later !!! -->
+									<img id="reviewer-icon" src="/<%= guide.photo_portrait %>">
 								</div>
 								<div class="review-text">
-									第一次来纽约旅行，能够认识小晗向导非常荣幸，她热情周到的服务给原本寒冷的冬日之旅增添了异国他乡的温暖，让我们非常感动！感谢小晗，感谢SmartTraveller，我们以后再合作！
+									<%= reviewList[i].review_text %>
 								</div>
-								<hr>
+								
+								<div class="review-date">
+									<%= reviewList[i].reviewer_name %> - <%= reviewList[i].date %>
+								</div>
+							</div>
+							<hr>
 							<% } %>
 						</div>
 					</div>
