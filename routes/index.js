@@ -159,6 +159,20 @@ module.exports = function(passport) {
 		});
 	});
 
+	// ------------ Pages just for creating review and test! -----------
+	router.get('/review/create', function(req, res) {
+		res.render('create_review');
+	});
+	router.post('/review/create', _multer, function(req, res) {
+		console.log(req.body);
+		var info = req.body;
+		var newReview = new Review(info);
+		newReview.save(function(err) {
+			res.render('create_review');
+		});
+	});
+
+
 
 	// Place page, with place_id given by .
 	router.get('/places/:place_id', function(req, res) {

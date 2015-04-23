@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Review Test</title>
+	</head>
+	<body>
+		<form id="review_form" method="post" action="/review/create">
+			Reviewer_Id:
+			<br>
+			<input type="text" name="reviewer_id" >
+			<br>
+			Reviewee_Id:
+			<br>
+			<input type="text" name="reviewee_id" >
+			<br>
+			Review Text:
+			<br>
+			<input type="text" name="review_text" >
+			<br>
+			Date:
+			<br>
+			<input type="text" name="date" >
+			<br>
+			<button id="btn-submit" onclick="submit()">Submit</button>
+			<br>
+		</form>
+
+		<script>
+			function submit() {
+				$('#review_form').submit();
+			}
+		</script>
+	</body>
+</html>
