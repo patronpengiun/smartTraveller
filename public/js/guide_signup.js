@@ -36,7 +36,12 @@ $(document).ready( function() {
   		if($('input[name=occupation]:checked').val() == '其他'){
 			$(this).parent().append($('<input class="showup-text-occupation" id="occupation_input" type="text" required data-parsley-group="step1">'));
   		}
+
   		if($('input[name=occupation]:checked').val() == '学生'){
+  			$('#occupation_input').remove();
+  		}
+
+  		if($('input[name=occupation]:checked').val() == '在职'){
   			$('#occupation_input').remove();
   		}
 	});

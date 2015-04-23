@@ -15,7 +15,8 @@ module.exports = mongoose.model('Guide',{
 	car_model: String,
 	car_year: String,
 	car_brand: String,
-
+	airport_pickup: Boolean,
+	language: [String],
 	intro1: String,
 	intro2: String,
 	tags: [String],
