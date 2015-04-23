@@ -84,9 +84,19 @@
 							</a>
 						</div>
 					</div>
+
+					<div id="guide-photo-life-panel" class="right-column">
+						<img class="avatar" src="/<%= guide.photo_life[0] %>">
+
+						<!-- How to pass guide.photo_life.length to js function ??? -->
+
+
+
+
+					</div>
 					
-					<hr>
 					<div id="info-panel" class="left-column">
+					<hr>
 						<h2>向导信息</h2>
 						<div class="section group">
 							<div class="col span_1_of_3">
@@ -139,6 +149,15 @@
 						</div>
 					</div>
 					
+					<hr>
+					<div id="path-intro-panel" class="left-column">
+						<h2>个人路线介绍</h2>
+						<div id="path-intro-box">
+							<!-- <img src="/<%= guide.photo_view[0] %>">  -->
+							<p><%= guide.intro2 %></p>
+						</div>
+					</div>
+
 					<hr>
 					<div id="review-panel" class="left-column">
 						<h2>评价</h2>
