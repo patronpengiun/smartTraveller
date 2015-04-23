@@ -171,3 +171,32 @@
 	.col {  margin: 1% 0 1% 0%; }
 	.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
 }
+
+
+/* For Review Section */
+.single-review > .review-icon {
+	float: left;
+}
+
+.review-icon > #reviewer-icon {
+	width:70px;
+	height:70px;
+	border-radius: 50%;
+}
+
+.single-review > .review-text {
+	/*float: left;*/
+	margin-left: 15%;
+}
+
+.single-review > .review-date {
+	clear: both;
+	float: right;
+	font-size: 11px;
+	margin-bottom: 10px;
+}
+
+#review-box > hr {
+	clear: both;
+}
+

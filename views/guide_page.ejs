@@ -163,16 +163,20 @@
 						<h2>评价</h2>
 						<div id="review-box">
 							<% for (var i = 0; i < reviewList.length; i++) { %>
+							<div class="single-review">
 								<div class="review-icon">
-									<img src="/<%= guide.photo_portrait %>" style="width:60px;height:60px;border-radius: 30px">
+									<!-- Need to change to reviewer's portrait later !!! -->
+									<img id="reviewer-icon" src="/<%= guide.photo_portrait %>">
 								</div>
 								<div class="review-text">
 									<%= reviewList[i].review_text %>
 								</div>
+								
 								<div class="review-date">
-									<%= reviewList[i].date %>
+									<%= reviewList[i].reviewer_name %> - <%= reviewList[i].date %>
 								</div>
-								<hr>
+							</div>
+							<hr>
 							<% } %>
 						</div>
 					</div>

@@ -7,19 +7,24 @@
 		<form id="review_form" method="post" action="/review/create">
 			Reviewer_Id:
 			<br>
-			<input type="text" name="reviewer_id" >
+			<input type="text" name="reviewer_id" required>
+			<br>
+			Reviewer_Name:
+			<br>
+			<input type="text" name="reviewer_name" required>
 			<br>
 			Reviewee_Id:
 			<br>
-			<input type="text" name="reviewee_id" >
+			<input type="text" name="reviewee_id" required>
 			<br>
 			Review Text:
 			<br>
-			<input type="text" name="review_text" >
+			<textarea name="review_text" rows="5" cols="50" required>
+			</textarea>
 			<br>
 			Date:
 			<br>
-			<input type="text" name="date" >
+			<input type="text" name="date" required>
 			<br>
 			<button id="btn-submit" onclick="submit()">Submit</button>
 			<br>

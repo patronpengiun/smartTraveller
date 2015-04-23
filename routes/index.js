@@ -16,6 +16,7 @@ var s3 = new AWS.S3();
 var Guide = require('../models/guide');
 var Place = require('../models/place');
 var Review = require('../models/review');
+var User = require('../models/user')
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
@@ -143,11 +144,13 @@ module.exports = function(passport) {
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
+		console.log("Display guide page");
 		Guide.find({_id:req.params.guide_id}, function(err, guides) {
 			// guides is an array with guide objects
 			if (err || guides.length == 0) {
 				res.send("Oops...No such page, perhaps wrong guide id >_<");
 			} else {
+				// Query review information
 				Review.find({reviewee_id:req.params.guide_id}, function(err, reviews) {
 					if (err) {
 						res.send("Oops...No such page, perhaps wrong guide id >_<");
@@ -164,6 +167,7 @@ module.exports = function(passport) {
 		res.render('create_review');
 	});
 	router.post('/review/create', _multer, function(req, res) {
+		console.log("submit create review request!");
 		console.log(req.body);
 		var info = req.body;
 		var newReview = new Review(info);
