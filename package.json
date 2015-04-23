@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "MODE=dev node app.js"
+    "prod": "MODE=product node app.js"
   },
   "author": "",
   "license": "ISC",
