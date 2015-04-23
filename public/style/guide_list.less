@@ -1,50 +1,103 @@
 /* Created by Hongad Jiang 
 	4-19-2015	*/
 
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+#filter_bar {
+    float: left;
+    width: 300px;
+    height: 100%;
+
+    button {
+    	width: 40%;
+    	text-align: center;
+    	margin-top: 30px;
+    	position: relative;
+    }
+}
+
+.option_wrapper_vertical {
+    border: 1px solid #cccccc;
+    margin-bottom: 5px;
+    p {
+        img {
+            height: 32px;
+            width: 32px;
+            vertical-align: middle;
+        }
+        input {
+            position: relative;
+            right: 0;
+            vertical-align: middle;
+            clear: both;
+        }
+    }
+}
+
+.option_wrapper_horizontal {
+    overflow: auto;
+    border: 1px solid #cccccc;
+    margin-top: 5px;
+    p {
+        float: left;
+        margin-left: 3px;
+        input {
+            position: relative;
+            margin-left: 5px;
+            margin-right: 35px;
+            vertical-align: middle;
+            clear: both;
+        }
+    }
+}
+
 #guidelist {
-	margin-left: auto;
-	margin-right: auto;
-	width: 600px;
+    float: left;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 600px;
 }
 
 .guide_card {
-	width: 580px;
-	height: 180px;
-	margin-bottom: 3px;
+    width: 580px;
+    height: 180px;
+    margin-bottom: 3px;
 }
 
 .guide_portrait {
-	display: inline;
-	float: left;
-	width: 300px;
-	height: 180px;
-	img {
-		width: 300px;
-		height: 180px;
-	}
+    display: inline;
+    float: left;
+    width: 300px;
+    height: 180px;
+    img {
+        width: 300px;
+        height: 180px;
+    }
 }
 
 .guide_info {
-	background-color: #cccccc;
-	position: relative;
-	display: inline;
-	float: right;
-	width: 260px;
-	height: 180px;
-	margin-right: 20px;
-	
-	.info_section1 {
-		position: absolute;
-		left: 10px;
-		top: 10px;
-		span {
-			display: block;
-		}
-	}
-	
-	.info_section2 {
-		position: absolute;
-		left: 10px;
-		bottom: 10px;
-	}
+    background-color: #cccccc;
+    position: relative;
+    display: inline;
+    float: right;
+    width: 260px;
+    height: 180px;
+    margin-right: 20px;
+    .info_section1 {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        span {
+            display: block;
+        }
+    }
+    .info_section2 {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+    }
 }
