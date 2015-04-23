@@ -47,6 +47,17 @@
 						<div class="guide-name">
 							<h1><%= guide.name %></h1>
 						</div>
+						<div class="guide-tag">
+							<h1 class="guide-tag-text">
+								兴趣：
+								<% for (var i = 0; i < guide.tags.length; i++) { %>
+									<%= guide.tags[i] %>
+									<% if (i != guide.tags.length - 1) { %>
+										/
+									<% } %>
+								<% } %>
+							</h1>
+						</div>
 					</div>
 					
 					<div id="reservation-panel" class="right-column">
@@ -77,20 +88,47 @@
 					<hr>
 					<div id="info-panel" class="left-column">
 						<h2>向导信息</h2>
-						<ul id="info-box">
-							<li class="info-list">
+						<div class="section group">
+							<div class="col span_1_of_3">
 								城市：<%= guide.city %>
-							</li>
-							<li class="info-list">
+							</div>
+							<div class="col span_1_of_3">
 								职业：<%= guide.occupation %>
-							</li>
-							<li class="info-list">
+							</div>
+							<div class="col span_1_of_3">
 								性别：<%= guide.sex %>
-							</li>
-							<li class="info-list">
+							</div>
+						</div>
+						<div class="section group">
+							<div class="col span_1_of_3">
 								年龄：<%= guide.age %>
-							</li>
-						</ul>
+							</div>
+							<div class="col span_1_of_3">
+								家乡：<%= guide.hometown %>
+							</div>
+							<div class="col span_1_of_3">
+								职业：<%= guide.occupation %>
+							</div>
+						</div>
+						<br>
+
+						<% if (guide.car) { %>
+							<p class="guide-car-title">私人用车：提供 </p>
+						<div class="section group">
+							<div class="col span_1_of_3">
+								品牌：<%= guide.car_brand %>
+							</div>
+							<div class="col span_1_of_3">
+								年份：<%= guide.car_year %>
+							</div>
+							<div class="col span_1_of_3">
+								型号：<%= guide.car_model %>
+							</div>
+						</div>
+						<% } else { %>
+							<p class="guide-car-title">私人用车：不提供 </p>
+						<% } %>
+
 					</div>
 					
 					<hr>
