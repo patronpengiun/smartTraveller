@@ -41,7 +41,7 @@
 					<div id="avatar-panel" class="left-column">
 						<div id="guide-image-box">
 							<div id="guide-avatar">
-								<img class="avatar" src="/<%= guide.photo_portrait %>">
+								<img class="photo" src="/<%= guide.photo_portrait %>">
 							</div>
 						</div>
 						<div class="guide-name">
@@ -86,10 +86,18 @@
 					</div>
 
 					<div id="guide-photo-life-panel" class="right-column">
-						<img class="avatar" src="/<%= guide.photo_life[0] %>">
+					<h2>向导相簿</h2>
+						<input id="photo-life-count" type="hidden" value="<%= guide.photo_life.length %>">
 
-						<!-- How to pass guide.photo_life.length to js function ??? -->
+						<% for (var i = 0; i < guide.photo_life.length; i++) {%>
+							<img id="photo_life_<%= i %>" class="photo hidden" src="/<%= guide.photo_life[i] %>">
+						<% } %>
 
+						<div class="photo-navigation">
+							<a href="#" id="photo_life_previous_button" class="previous"></a>
+							<a href="#" id="photo_life_next_button" class="next"></a>
+
+						</div>
 
 
 
