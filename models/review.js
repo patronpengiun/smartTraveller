@@ -5,5 +5,6 @@ module.exports = mongoose.model('Review',{
     reviewer_name: String,
     reviewee_id: String,
     review_text: String,
+    rating: Number,
     date: String,
 });
