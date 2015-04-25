@@ -243,3 +243,7 @@ max-width: 1000px;
 	clear: both;
 }
 
+.fb-share-button {
+	float: right;
+  	padding-top: 20px;
+}
