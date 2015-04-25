@@ -99,7 +99,9 @@
                                 <span><%= guideList[i].city %></span>
                             </div>
                             <div class='info_section2'>
-                                <span><%= guideList[i].intro1 %></span>
+                            	<% for(var j=0; j<guideList[i].tags.length; j++) {%>
+                                <span class='tag'><%= guideList[i].tags[j] %></span>
+                                <% } %>
                             </div>
                         </div>
                     </div>
