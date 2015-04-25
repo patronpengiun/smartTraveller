@@ -5,7 +5,8 @@
     <head>
         <title>搜索结果</title>
         <link rel='stylesheet' href='/style/guide_list.css'>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="style/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         </head>
         <body>
             <div id='content'>
@@ -17,12 +18,12 @@
                             徒步向导
                             <input type='checkbox' class='filter_checkbox' name='walk' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             <img src='../img/icons/drive.png'>
                             带车向导
                             <input type='checkbox' class='filter_checkbox' name='drive' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             <img src='../img/icons/airport_pickup.png'>
                             接机服务
                             <input type='checkbox' class='filter_checkbox' name='pickup' value="0">
@@ -34,12 +35,12 @@
                             在读学生
                             <input type='checkbox' class='filter_checkbox' name='student' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             <img src='../img/icons/professional.png'>
                             在职白领
                             <input type='checkbox' class='filter_checkbox' name='employee' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             <img src='../img/icons/people.png'>
                             歪果仁
                             <input type='checkbox' class='filter_checkbox' name='forenginer' value="0">
@@ -50,7 +51,7 @@
                             粤语
                             <input type='checkbox' class='filter_checkbox' name='cantonese' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             闽南语
                             <input type='checkbox' class='filter_checkbox' name='min_nan_yu' value="0">
                             </p>
@@ -60,7 +61,7 @@
                             男
                             <input type='checkbox' class='filter_checkbox' name='male' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             女
                             <input type='checkbox' class='filter_checkbox' name='female' value="0">
                             </p>
@@ -70,18 +71,18 @@
                             70后
                             <input type='checkbox' class='filter_checkbox' name='70s' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             80后
                             <input type='checkbox' class='filter_checkbox' name='80s' value="0">
                             </p>
-                            <p>
+                            <p class='option'>
                             90后
                             <input type='checkbox' class='filter_checkbox' name='90s' value="0">
                             </p>
                         </div>
                     </form>
                   
-                    <button type="button" id='filter_update' class="btn">
+                    <button type="button" id='filter_update' class="btn btn-primary">
                     	更新结果
                     </button>
                 
@@ -89,24 +90,28 @@
                 <div id = "guidelist">
                     <% for(var i=0; i<guideList.length; i++) {%>
                     <a href='/guidepage/<%= guideList[i].id %>'>
+                    <div class='divide_line'>
+                    </div>
                     <div class='guide_card'>
                         <div class='guide_portrait'>
                             <img src='/<%= guideList[i].photo_portrait %>' >
                         </div>
                         <div class='guide_info'>
                             <div class='info_section1'>
-                                <span><%= guideList[i].name %></span>
-                                <span><%= guideList[i].city %></span>
+                                <span class='name'><%= guideList[i].name %></span>
+                                <span class='city'><%= guideList[i].city %></span>
                             </div>
                             <div class='info_section2'>
-                            	<% for(var j=0; j<guideList[i].tags.length; j++) {%>
-                                <span class='tag'><%= guideList[i].tags[j] %></span>
+                            	<% for(var j=0; j<guideList[i].tags.length; j++) { %>
+                                	<span class='tag'><%= guideList[i].tags[j] %></span>
+
                                 <% } %>
                             </div>
                         </div>
                     </div>
                     </a>
                     <% } %>
+                    <div class='divide_line'>
                 </div>
             </div>
         </body>
