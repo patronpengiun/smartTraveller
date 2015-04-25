@@ -73,10 +73,12 @@
 						<img id="photo_life_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_life[i] %>">
 						<% } %>
 
-						<div class="photo-navigation">
-							<a href="#" id="photo_life_previous_button" class="previous"></a>
-							<a href="#" id="photo_life_next_button" class="next"></a>
-						</div>
+						<% if (guide.photo_life.length != 1) { %>
+							<div class="photo-navigation">
+								<a href="#" id="photo_life_previous_button" class="previous"></a>
+								<a href="#" id="photo_life_next_button" class="next"></a>
+							</div>
+						<% } %>
 					</div>
 
 					<div class="photo-album-title">城市相簿</div>
@@ -87,10 +89,12 @@
 						<img id="photo_view_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_view[i] %>">
 						<% } %>
 
-						<div class="photo-navigation">
-							<a href="#" id="photo_view_previous_button" class="previous"></a>
-							<a href="#" id="photo_view_next_button" class="next"></a>
-						</div>
+						<% if (guide.photo_view.length != 1) { %>
+							<div class="photo-navigation">
+								<a href="#" id="photo_view_previous_button" class="previous"></a>
+								<a href="#" id="photo_view_next_button" class="next"></a>
+							</div>
+						<% } %>
 					</div>
 				</div>
 
