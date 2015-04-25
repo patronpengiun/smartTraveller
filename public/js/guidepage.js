@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	// For Facebook share button
 	// Useful when directing URL is a online URL
-	$('.fb-share-button').attr("data-href", document.URL); 	
+	$('.fb-like').attr("data-href", document.URL); 	
 
 	var length_life = parseInt($('#photo-life-count').val());
 	var curr_life = 0;

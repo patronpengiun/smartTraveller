@@ -41,6 +41,7 @@ max-width: 1000px;
 	background: #54544e;
 	display: inline-block;
 	color: #ffffff;
+	max-width: 70%;
 }
 
 .guide-tag .guide-tag-text {
@@ -243,7 +244,7 @@ max-width: 1000px;
 	clear: both;
 }
 
-.fb-share-button {
+.fb-like {
 	float: right;
   	padding-top: 20px;
 }

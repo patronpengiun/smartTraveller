@@ -119,7 +119,7 @@
 						</div>
 
 						<!-- Facebook share button -->
-						<div class="fb-share-button" data-layout="button"></div>
+						<div class="fb-like" data-layout="button" data-action="recommend" data-show-faces="true" data-share="true"></div>
 					</div>
 
 					<div id="info-panel">
@@ -211,7 +211,7 @@
 		</div>
 	</div>
 
-	<!-- For Facebook Share Button -->
+	<!-- For Facebook Share Button 
 	<div id="fb-root"></div>
 	<script>
 		(function(d, s, id) {
@@ -221,7 +221,17 @@
 			js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=691829944211730";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-	</script>
+	</script>   
+	-->
+
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=691829944211730";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 </body>
 </html>
