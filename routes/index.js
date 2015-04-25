@@ -8,8 +8,8 @@ var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
 AWS.config.update({
-    accessKeyId: AWS_ACCESS_KEY,
-    secretAccessKey: AWS_SECRET_KEY,
+	accessKeyId: AWS_ACCESS_KEY,
+	secretAccessKey: AWS_SECRET_KEY,
 });
 var s3 = new AWS.S3();
 
@@ -39,8 +39,8 @@ module.exports = function(passport) {
 				return res.send({message: "fail"});
 			} else {
 				req.login(user, function(err) {
-				  if (err) { return next(err); }
-				  return res.send({message: "success", user: user});
+					if (err) { return next(err); }
+					return res.send({message: "success", user: user});
 				});
 			}
 		})(req, res, next);
@@ -58,8 +58,8 @@ module.exports = function(passport) {
 				return res.send(info);
 			} else {
 				req.login(user, function(err) {
-				  if (err) { return next(err); }
-				  return res.send({message: "success", user: user});
+					if (err) { return next(err); }
+					return res.send({message: "success", user: user});
 				});
 			}
 		})(req, res, next);
@@ -81,12 +81,12 @@ module.exports = function(passport) {
 	var _multer;
 	if (process.env.MODE == 'dev') {
 		_multer = multer({
-				dest: './upload', 
-				rename: function (fieldname, filename, req, res) {	
+			dest: './upload', 
+			rename: function (fieldname, filename, req, res) {	
     						//return req.user.username + '_' + filename + '_' + Date.now();
-							return filename + '_' + Date.now();
-  						},
-				});
+    						return filename + '_' + Date.now();
+    					},
+    				});
 	} else {
 		_multer = multer({
 			dest: './upload', 
@@ -94,28 +94,28 @@ module.exports = function(passport) {
 						//return req.user.username + '_' + filename + '_' + Date.now();
 						return filename + '_' + Date.now();
 					},
-			onFileUploadData: function (file, data, req, res) {
-			    var params = {
-			    	Bucket: S3_BUCKET,
-			    	Key: file.name,
-			    	Body: data
-			    };
+					onFileUploadData: function (file, data, req, res) {
+						var params = {
+							Bucket: S3_BUCKET,
+							Key: file.name,
+							Body: data
+						};
 
-			    s3.putObject(params, function (perr, pres) {
-			    	if (perr) {
-						console.log("Error uploading data: ", perr);
-			      	} else {
-			        	console.log("Successfully uploaded data");
-			      	}
-			    });
-			},
-		});
+						s3.putObject(params, function (perr, pres) {
+							if (perr) {
+								console.log("Error uploading data: ", perr);
+							} else {
+								console.log("Successfully uploaded data");
+							}
+						});
+					},
+				});
 	}
 	
 	router.post('/signup/guide/apply', _multer, 
-			function(req, res) {
-				console.log(req.files);
-				var temp = req.body;
+		function(req, res) {
+			console.log(req.files);
+			var temp = req.body;
 				//temp.username = req.user.username;
 				
 				// TODO: refactor
@@ -140,11 +140,10 @@ module.exports = function(passport) {
 					res.render('signup_complete');
 				});
 			}
-		);
+			);
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
-		console.log("Display guide page");
 		Guide.find({_id:req.params.guide_id}, function(err, guides) {
 			// guides is an array with guide objects
 			if (err || guides.length == 0) {

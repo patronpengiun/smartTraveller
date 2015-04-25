@@ -70,7 +70,7 @@
 						<input id="photo-life-count" type="hidden" value="<%= guide.photo_life.length %>">
 
 						<% for (var i = 0; i < guide.photo_life.length; i++) {%>
-						<img id="photo_life_<%= i %>" class="photo hidden" src="/<%= guide.photo_life[i] %>" align="middle">
+						<img id="photo_life_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_life[i] %>">
 						<% } %>
 
 						<div class="photo-navigation">
@@ -84,7 +84,7 @@
 						<input id="photo-view-count" type="hidden" value="<%= guide.photo_view.length %>">
 
 						<% for (var i = 0; i < guide.photo_view.length; i++) {%>
-						<img id="photo_view_<%= i %>" class="photo hidden" src="/<%= guide.photo_view[i] %>">
+						<img id="photo_view_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_view[i] %>">
 						<% } %>
 
 						<div class="photo-navigation">
