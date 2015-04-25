@@ -249,6 +249,15 @@ max-width: 1000px;
 	clear: both;
 }
 
+#review-panel #review-star {
+	background-image: url('/img/rating_stars.png');
+	/*float: left;*/
+  	width: 200px;
+  	height: 40px;
+  	/*position: relative;*/
+  	top: 2px;
+}
+
 .fb-like {
 	float: right;
   	padding-top: 20px;

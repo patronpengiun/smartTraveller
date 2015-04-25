@@ -189,7 +189,12 @@
 
 					<hr>
 					<div id="review-panel">
-						<h2>评价</h2>
+						<div>
+							<h2>评价</h2>
+							<input id="review-rating-avg" type="hidden" value="<%= avgRating %>"></input>
+							<div id="review-star"></div>
+						</div>
+						<hr>
 						<div id="review-box">
 							<% for (var i = 0; i < reviewList.length; i++) { %>
 							<div class="single-review">
