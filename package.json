@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "MODE=dev node app.js"
+    "dev": "MODE=dev node app.js",
+    "prod": "MODE=product node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "express": "^4.10.6",
     "express-session": "^1.10.2",
     "jade": "^1.8.2",
+    "jquery": "^2.1.3",
     "less-middleware": "^1.0.4",
     "mongoose": "^3.8.23",
     "multer": "^0.1.8",
