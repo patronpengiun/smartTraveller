@@ -1,0 +1,143 @@
+/* Created by Hongad Jiang 
+	4-19-2015	*/
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+#filter_bar {
+    float: left;
+    width: 250px;
+    height: 100%;
+
+    button {
+    	width: 40%;
+    	text-align: center;
+    	margin-top: 30px;
+    	position: relative;
+    	left: 50%;
+    	margin-left: -60px;
+    }
+}
+
+.option_wrapper_vertical {
+    border: 1px solid #cccccc;
+    margin-bottom: 5px;
+    p {
+        img {
+            height: 32px;
+            width: 32px;
+            vertical-align: middle;
+        }
+    }
+    .option {
+    	position: relative;
+
+    	input {
+            right: 20px;
+            vertical-align: middle;
+            position: absolute;
+        }
+    }
+}
+
+.option_wrapper_horizontal {
+    overflow: auto;
+    border: 1px solid #cccccc;
+    margin-top: 5px;
+    p {
+        float: left;
+        margin-left: 3px;
+        input {
+            position: relative;
+            margin-left: 5px;
+            margin-right: 25px;
+            vertical-align: middle;
+            clear: both;
+        }
+    }
+}
+
+#guidelist {
+    float: left;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 560px;
+    border-right: 1px solid #cccccc;
+    .divide_line {
+    	height: 1px;
+    	border-top: 1px solid #cccccc;
+    }
+}
+
+.guide_card {
+    width: 560px;
+    height: 180px;
+    .tag {
+    	font-size: 13px;
+    	border: 1px solid #cccccc;
+    }
+}
+
+.guide_card:hover {
+	.guide_info {
+		background-color: #E6E6FA;
+	}
+}
+
+.guide_portrait {
+    display: inline;
+    float: left;
+    width: 300px;
+    height: 180px;
+    img {
+        width: 300px;
+        height: 180px;
+    }
+}
+
+.guide_info {
+    position: relative;
+    display: inline;
+    float: left;
+    width: 260px;
+    height: 180px;
+    
+    .info_section1 {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        span {
+            display: block;
+            color: #555555;
+        }
+        .name {
+        	font-size: 18px;
+        }
+    }
+    .info_section2 {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        .tag {
+        	border: 1px solid #cccccc;
+        	color: #555555;
+        	padding: 2px;
+        }
+    }
+
+    .info_section3 {
+    	display: inline;
+    	top: 10px;
+    	.icon {
+    		position: relative;
+    		display: block;
+    		img {
+    			position: absolute;
+    			right: 2px;
+    		}
+    	}
+    }
+}

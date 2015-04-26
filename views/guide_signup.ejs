@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
 	<head>
 		<title>旅橙向导注册</title>
 		<link rel="shortcut icon" type="image/x-icon" href="/icon/favicon.ico">
@@ -112,7 +112,10 @@
 								<div class="form-label">职业</div>
 								<div class="input-container">
 									<div>
-										<input name="occupation" value="学生" type="radio" data-parsley-group="step1" required>&nbsp;学生 &nbsp;&nbsp;
+										<input name="occupation" value="学生" type="radio" data-parsley-group="step1" required>
+										&nbsp;学生&nbsp;&nbsp;
+										<input name="occupation" value="在职" type="radio" data-parsley-group="step1" required>
+										&nbsp;在职&nbsp;&nbsp;
 										<input name="occupation" value="其他" type="radio">&nbsp;<span>其他</span>
 									</div>
 								</div>
@@ -159,6 +162,17 @@
 								<div class="input-container">
 									<div>
 										<input name="car_year" type="text"></input>
+									</div>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">语言</div>
+								<div class="input-container">
+									<div>
+										<input type=checkbox name="language" value="english" required data-parsley-group="step1">&nbsp;英文&nbsp;&nbsp;
+										<input type=checkbox name="language" value="mandarin">&nbsp;普通话&nbsp;&nbsp;
+										<input type=checkbox name="language" value="cantonese">&nbsp;粤语&nbsp;&nbsp;
+										<input type=checkbox name="language" value="min_nan_yu">&nbsp;闽南语&nbsp;&nbsp;
 									</div>
 								</div>
 							</div>
