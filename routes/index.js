@@ -194,5 +194,11 @@ module.exports = function(passport) {
 		});
 	});
 	
+
+	// Dashboard page
+	router.get('/guide/dashboard', function(req, res) {
+		res.render('guide_dashboard');
+	});
+
 	return router;
 }
