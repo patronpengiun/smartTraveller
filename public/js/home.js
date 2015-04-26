@@ -24,6 +24,9 @@ $(function() {
 			}
 		).done(signupCallback);
 	})
+
+	$('#start-date').datepicker();
+	$('#end-date').datepicker();
 });
 
 function loginCallback(data) {

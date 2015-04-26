@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default" id="nav-top">
+	<div class="navbar-header">
+		<div class="navbar-brand">旅橙网</div>
+	</div>
+	<form class="navbar-form navbar-left" method="GET" action="/guidelist">
+		<div class="form-group">
+			<input class="form-control" name="city" placeholder="Destination" type="text" id="destination">
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="startDate" placeholder="Start Date" type="text" id="start-date">
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="endDate" placeholder="End Date" type="text" id="end-date">
+		</div>
+		<button class="btn btn-default" type="submit">Submit</button>
+	</form>
+	<div id="login-control">
+		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">注册</button>
+		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">登陆</button>
+	</div>
+	<ul id="user-control" class="nav navbar-nav pull-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+				<span id="user-display"></span>
+				<span class="caret"></span>
+			</a>
+		</li>
+	</ul>
+</nav>

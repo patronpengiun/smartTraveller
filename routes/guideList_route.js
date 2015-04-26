@@ -8,28 +8,21 @@ var Guide = require('../models/guide');
 
 module.exports = function() {
 	guideList_router.get('/', function(req, res) {
-		Guide.find({}, function(err, guides) {
+		var filter = {};
+		if (req.query && req.query.city) {
+			filter.city = req.query.city;
+		}
+
+
+		Guide.find(filter, function(err, guides) {
 	    var guideMap = [];
 
 	    guides.forEach(function(guide) {
 	      guideMap.push(guide);
 	    });
-	    //res.send(guideMap);
 	    res.render('guide_list', {guideList: guideMap});
 	  });
 	});
 
 	return guideList_router;
-
-	// router.get('/guidelist', function(req, res) {
-	// 	Guide.find({}, function(err, guides) {
-	//     var guideMap = [];
-
-	//     guides.forEach(function(guide) {
-	//       guideMap.push(guide);
-	//     });
-	//     //res.send(guideMap);
-	//     res.render('guide_list', {guideList: guideMap});
-	//   });
-	// });
 }
