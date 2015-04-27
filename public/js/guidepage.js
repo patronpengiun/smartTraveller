@@ -60,4 +60,9 @@ $(document).ready(function() {
 		pixelNum = -(rating * 39.8);
 	}
 	$('#review-star').css('background-position', '0px ' + pixelNum + 'px');
+
+	// For request button
+	$('#reservation-tool').click(function() {
+		
+	});
 });

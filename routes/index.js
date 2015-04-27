@@ -16,7 +16,8 @@ var s3 = new AWS.S3();
 var Guide = require('../models/guide');
 var Place = require('../models/place');
 var Review = require('../models/review');
-var User = require('../models/user')
+var User = require('../models/user');
+var Request = require('../models/request');
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
@@ -116,31 +117,31 @@ module.exports = function(passport) {
 		function(req, res) {
 			console.log(req.files);
 			var temp = req.body;
-				//temp.username = req.user.username;
-				
-				// TODO: refactor
-				temp.photo_portrait = req.files.photo_portrait.name;
-				temp.photo_view = [];
-				for (var i=0;i<req.files.photo_view.length;i++) {
-					temp.photo_view.push(req.files.photo_view[i].name);
-				}
-				if (req.files.photo_view.name) {
-					temp.photo_view.push(req.files.photo_view.name);
-				}
-				temp.photo_life = [];
-				for (var i=0;i<req.files.photo_life.length;i++) {
-					temp.photo_life.push(req.files.photo_life[i].name);
-				}
-				if (req.files.photo_life.name) {
-					temp.photo_life.push(req.files.photo_life.name);
-				}
-				
-				var newGuide = new Guide(temp);
-				newGuide.save(function(err) {
-					res.render('signup_complete');
-				});
+			//temp.username = req.user.username;
+			
+			// TODO: refactor
+			temp.photo_portrait = req.files.photo_portrait.name;
+			temp.photo_view = [];
+			for (var i=0;i<req.files.photo_view.length;i++) {
+				temp.photo_view.push(req.files.photo_view[i].name);
 			}
-			);
+			if (req.files.photo_view.name) {
+				temp.photo_view.push(req.files.photo_view.name);
+			}
+			temp.photo_life = [];
+			for (var i=0;i<req.files.photo_life.length;i++) {
+				temp.photo_life.push(req.files.photo_life[i].name);
+			}
+			if (req.files.photo_life.name) {
+				temp.photo_life.push(req.files.photo_life.name);
+			}
+			
+			var newGuide = new Guide(temp);
+			newGuide.save(function(err) {
+				res.render('signup_complete');
+			});
+		}
+		);
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
@@ -159,6 +160,8 @@ module.exports = function(passport) {
 							sum += reviews[i].rating;
 						};
 						var avg = sum / reviews.length;	
+						console.log('------------------------');
+						console.log(guides[0]);
 						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg});
 					}
 				});
@@ -194,5 +197,38 @@ module.exports = function(passport) {
 		});
 	});
 	
+	// ------------ for request page ----------------
+	router.get('/request/:guide_id', function(req, res) {
+		res.render('request', {guideID: req.params.guide_id});
+	});
+
+	router.post('/request/:guide_id', function(req, res) {
+		console.log(req.params.guide_id);
+		// check if the user is loged in, if not, send warning and return
+		if(req.user == undefined){
+			res.send('Please login first.');
+			return;
+		}
+
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+			// check if the guide can be found with guide id
+			// if not, send warning and return
+			if (err || guides.length == 0) {
+				res.send("Oops...No such guide, perhaps wrong guide id >_<");
+				return;
+			} 
+			// 
+			else {
+				var newRequest = new Request(req.body);
+				newRequest.customer_Username = req.user.username;	
+				newRequest.guideId = req.params.guide_id;
+				newRequest.save(function(err) {
+				res.render('request');
+			});
+			} 
+		});
+
+	});
+
 	return router;
 }

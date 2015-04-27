@@ -1,232 +1,218 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Guide Page</title>
+    <head>
+        <title>Guide Page</title>
+        <!-- Just for nav bar, some may be useless ??? -->
+        <link rel="stylesheet" href="/style/bootstrap.min.css">
+        <link rel="stylesheet" href="/style/index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/home.js"></script>
+        <!-- For guide page -->
+        <link rel="stylesheet" href="/style/guide_page.css">
+        <script src="/js/guidepage.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <div class="navbar-brand">旅橙网</div>
+            </div>
+            <div id="login-control">
+                <button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">注册</button>
+                <button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">登陆</button>
+            </div>
+            <ul id="user-control" class="nav navbar-nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    <span id="user-display"></span>
+                    <span class="caret"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div id="page">
+            <div id="content">
+                <div id="guide-listing">
 
-	<!-- Just for nav bar, some may be useless ??? -->
-	<link rel="stylesheet" href="/style/bootstrap.min.css">
-	<link rel="stylesheet" href="/style/index.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/home.js"></script>
-
-	<!-- For guide page -->
-	<link rel="stylesheet" href="/style/guide_page.css">
-	<script src="/js/guidepage.js"></script>
-</head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<div class="navbar-brand">旅橙网</div>
-		</div>
-		<div id="login-control">
-			<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">注册</button>
-			<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">登陆</button>
-		</div>
-		<ul id="user-control" class="nav navbar-nav pull-right">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-					<span id="user-display"></span>
-					<span class="caret"></span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-
-	<div id="page">
-		<div id="content">
-			<div id="guide-listing">
-				
-				<!-- Right column -->
-				<div class="right-column">
-					<div id="reservation-panel">
-						<div class="rates">
-							<p>价格</p>
-							<p>
-								<p>每天徒步（单独导游，公共交通出行）</p>
-								<p>费用=定金 50 美元 + 现付 100美元</p>
-								<p>每天包车</p>
-								<p>费用=定金 50 美元 + 现付 230美元</p>
-								<p>接送机费用请见向导附加费</p>
-							</p>
-						</div>
-						<hr>
-						<div id="reservation-tool">
-							<a class="reserve-button button green">
-								提交请求
-							</a>
-						</div>
-						<hr>
-						<div id="in-mail">
-							<a class="reserve-button button">
-								站内信
-							</a>
-						</div>
-					</div>
-
-					<div class="photo-album-title">个人相簿</div>
-					<div id="guide-photo-panel" >
-						<input id="photo-life-count" type="hidden" value="<%= guide.photo_life.length %>">
-
-						<% for (var i = 0; i < guide.photo_life.length; i++) {%>
-						<img id="photo_life_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_life[i] %>">
-						<% } %>
-
-						<% if (guide.photo_life.length != 1) { %>
-							<div class="photo-navigation">
-								<a href="#" id="photo_life_previous_button" class="previous"></a>
-								<a href="#" id="photo_life_next_button" class="next"></a>
-							</div>
-						<% } %>
-					</div>
-
-					<div class="photo-album-title">城市相簿</div>
-					<div id="guide-photo-panel" >
-						<input id="photo-view-count" type="hidden" value="<%= guide.photo_view.length %>">
-
-						<% for (var i = 0; i < guide.photo_view.length; i++) {%>
-						<img id="photo_view_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_view[i] %>">
-						<% } %>
-
-						<% if (guide.photo_view.length != 1) { %>
-							<div class="photo-navigation">
-								<a href="#" id="photo_view_previous_button" class="previous"></a>
-								<a href="#" id="photo_view_next_button" class="next"></a>
-							</div>
-						<% } %>
-					</div>
-				</div>
-
-				<!-- Left column -->
-				<div class="left-column">
-					<div id="avatar-panel">
-						<div id="guide-image-box">
-							<div id="guide-avatar">
-								<img class="photo" src="/<%= guide.photo_portrait %>">
-							</div>
-						</div>
-						<div class="guide-name">
-							<h1><%= guide.name %></h1>
-						</div>
-						<div class="guide-tag">
-							<h1 class="guide-tag-text">
-								兴趣：
-								<% for (var i = 0; i < guide.tags.length; i++) { %>
-								<%= guide.tags[i] %>
-								<% if (i != guide.tags.length - 1) { %>
-								/
-								<% } %>
-								<% } %>
-							</h1>
-						</div>
-
-						<!-- Facebook share button -->
-						<div class="fb-like" data-layout="button" data-action="recommend" data-show-faces="true" data-share="true"></div>
-					</div>
-
-					<div id="info-panel">
-						<hr>
-						<h2>向导信息</h2>
-						<div class="section group">
-							<div class="col span_1_of_3">
-								城市：<%= guide.city %>
-							</div>
-							<div class="col span_1_of_3">
-								职业：<%= guide.occupation %>
-							</div>
-							<div class="col span_1_of_3">
-								性别：<%= guide.sex %>
-							</div>
-						</div>
-						<div class="section group">
-							<div class="col span_1_of_3">
-								年龄：<%= guide.age %>
-							</div>
-							<div class="col span_1_of_3">
-								家乡：<%= guide.hometown %>
-							</div>
-							<div class="col span_1_of_3">
-								职业：<%= guide.occupation %>
-							</div>
-						</div>
-						<br>
-
-						<% if (guide.car) { %>
-						<p class="guide-car-title">私人用车：提供 </p>
-						<div class="section group">
-							<div class="col span_1_of_3">
-								品牌：<%= guide.car_brand %>
-							</div>
-							<div class="col span_1_of_3">
-								年份：<%= guide.car_year %>
-							</div>
-							<div class="col span_1_of_3">
-								型号：<%= guide.car_model %>
-							</div>
-						</div>
-						<% } else { %>
-						<p class="guide-car-title">私人用车：不提供 </p>
-						<% } %>
-					</div>
-
-					<hr>
-					<div id="self-intro-panel">
-						<h2>自我介绍</h2>
-						<div id="self-intro-box">
-							<p><%= guide.intro1 %></p>
-						</div>
-					</div>
-
-
-					<hr>
-					<div id="path-intro-panel">
-						<h2>个人路线介绍</h2>
-						<div id="path-intro-box">
-							<p><%= guide.intro2 %></p>
-						</div>
-					</div>
-
-					<hr>
-					<div id="review-panel">
-						<div>
-							<h2>评价</h2>
-							<input id="review-rating-avg" type="hidden" value="<%= avgRating %>"></input>
-							<div id="review-star"></div>
-						</div>
-						<hr>
-						<div id="review-box">
-							<% for (var i = 0; i < reviewList.length; i++) { %>
-							<div class="single-review">
-								<div class="review-icon">
-									<!-- Need to change to reviewer's portrait later !!! -->
-									<img id="reviewer-icon" src="/img/anonymous.png">
-								</div>
-								<div class="review-text">
-									<%= reviewList[i].review_text %>
-								</div>
-
-								<div class="review-date">
-									<%= reviewList[i].reviewer_name %> - <%= reviewList[i].date %>
-								</div>
-							</div>
-							<hr>
-							<% } %>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=691829944211730";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-
-</body>
+                    <!-- Right column -->
+                    <div class="right-column">
+                        <div id="reservation-panel">
+                            <div class="rates">
+                                <p>价格</p>
+                                <p>
+                                <p>每天徒步（单独导游，公共交通出行）</p>
+                                <p>费用=定金 50 美元 + 现付 100美元</p>
+                                <p>每天包车</p>
+                                <p>费用=定金 50 美元 + 现付 230美元</p>
+                                <p>接送机费用请见向导附加费</p>
+                                </p>
+                            </div>
+                            <hr>
+                            <div id="reservation-tool">
+                                <a class="reserve-button button green" data-toggle="modal"
+                                data-target="#requestWindow">
+                                提交请求
+                                </a>
+                            </div>
+                            <div class="modal fade" id="requestWindow" tabindex="-1" role="dialog" aria-labelledby="requestWindow" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <iframe src="/request/<%= guide._id %>"></iframe>
+                                </div>
+                            </div>
+                            <hr>
+                            <div id="in-mail">
+                                <a class="reserve-button button">
+                                站内信
+                                </a>
+                            </div>
+                        </div>
+                        <div class="photo-album-title">个人相簿</div>
+                        <div id="guide-photo-panel" >
+                            <input id="photo-life-count" type="hidden" value="<%= guide.photo_life.length %>">
+                            <% for (var i = 0; i < guide.photo_life.length; i++) {%>
+                            <img id="photo_life_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_life[i] %>">
+                            <% } %>
+                            <% if (guide.photo_life.length != 1) { %>
+                            <div class="photo-navigation">
+                                <a href="#" id="photo_life_previous_button" class="previous"></a>
+                                <a href="#" id="photo_life_next_button" class="next"></a>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="photo-album-title">城市相簿</div>
+                        <div id="guide-photo-panel" >
+                            <input id="photo-view-count" type="hidden" value="<%= guide.photo_view.length %>">
+                            <% for (var i = 0; i < guide.photo_view.length; i++) {%>
+                            <img id="photo_view_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_view[i] %>">
+                            <% } %>
+                            <% if (guide.photo_view.length != 1) { %>
+                            <div class="photo-navigation">
+                                <a href="#" id="photo_view_previous_button" class="previous"></a>
+                                <a href="#" id="photo_view_next_button" class="next"></a>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <!-- Left column -->
+                    <div class="left-column">
+                        <div id="avatar-panel">
+                            <div id="guide-image-box">
+                                <div id="guide-avatar">
+                                    <img class="photo" src="/<%= guide.photo_portrait %>">
+                                </div>
+                            </div>
+                            <div class="guide-name">
+                                <h1><%= guide.name %></h1>
+                            </div>
+                            <div class="guide-tag">
+                                <h1 class="guide-tag-text">
+                                兴趣：
+                                <% for (var i = 0; i < guide.tags.length; i++) { %>
+                                <%= guide.tags[i] %>
+                                <% if (i != guide.tags.length - 1) { %>
+                                /
+                                <% } %>
+                                <% } %>
+                                </h1>
+                            </div>
+                            <!-- Facebook share button -->
+                            <div class="fb-like" data-layout="button" data-action="recommend" data-show-faces="true" data-share="true"></div>
+                        </div>
+                        <div id="info-panel">
+                            <hr>
+                            <h2>向导信息</h2>
+                            <div class="section group">
+                                <div class="col span_1_of_3">
+                                    城市：<%= guide.city %>
+                                </div>
+                                <div class="col span_1_of_3">
+                                    职业：<%= guide.occupation %>
+                                </div>
+                                <div class="col span_1_of_3">
+                                    性别：<%= guide.sex %>
+                                </div>
+                            </div>
+                            <div class="section group">
+                                <div class="col span_1_of_3">
+                                    年龄：<%= guide.age %>
+                                </div>
+                                <div class="col span_1_of_3">
+                                    家乡：<%= guide.hometown %>
+                                </div>
+                                <div class="col span_1_of_3">
+                                    职业：<%= guide.occupation %>
+                                </div>
+                            </div>
+                            <br>
+                            <% if (guide.car) { %>
+                            <p class="guide-car-title">私人用车：提供 </p>
+                            <div class="section group">
+                                <div class="col span_1_of_3">
+                                    品牌：<%= guide.car_brand %>
+                                </div>
+                                <div class="col span_1_of_3">
+                                    年份：<%= guide.car_year %>
+                                </div>
+                                <div class="col span_1_of_3">
+                                    型号：<%= guide.car_model %>
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <p class="guide-car-title">私人用车：不提供 </p>
+                            <% } %>
+                        </div>
+                        <hr>
+                        <div id="self-intro-panel">
+                            <h2>自我介绍</h2>
+                            <div id="self-intro-box">
+                                <p><%= guide.intro1 %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="path-intro-panel">
+                            <h2>个人路线介绍</h2>
+                            <div id="path-intro-box">
+                                <p><%= guide.intro2 %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="review-panel">
+                            <div>
+                                <h2>评价</h2>
+                                <input id="review-rating-avg" type="hidden" value="<%= avgRating %>"></input>
+                                <div id="review-star"></div>
+                            </div>
+                            <hr>
+                            <div id="review-box">
+                                <% for (var i = 0; i < reviewList.length; i++) { %>
+                                <div class="single-review">
+                                    <div class="review-icon">
+                                        <!-- Need to change to reviewer's portrait later !!! -->
+                                        <img id="reviewer-icon" src="/img/anonymous.png">
+                                    </div>
+                                    <div class="review-text">
+                                        <%= reviewList[i].review_text %>
+                                    </div>
+                                    <div class="review-date">
+                                        <%= reviewList[i].reviewer_name %> - <%= reviewList[i].date %>
+                                    </div>
+                                </div>
+                                <hr>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=691829944211730";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    </body>
 </html>
