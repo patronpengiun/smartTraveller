@@ -2,35 +2,20 @@
 <html>
     <head>
         <title>Guide Page</title>
-        <!-- Just for nav bar, some may be useless ??? -->
         <link rel="stylesheet" href="/style/bootstrap.min.css">
-        <link rel="stylesheet" href="/style/index.css">
+        <link rel="stylesheet" href="/style/common.css">
+        <link rel="stylesheet" href="/style/bootstrap-datepicker.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/home.js"></script>
+        <script src="/js/bootstrap-datepicker.min.js"></script>
         <!-- For guide page -->
         <link rel="stylesheet" href="/style/guide_page.css">
         <script src="/js/guidepage.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <div class="navbar-brand">旅橙网</div>
-            </div>
-            <div id="login-control">
-                <button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">注册</button>
-                <button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">登陆</button>
-            </div>
-            <ul id="user-control" class="nav navbar-nav pull-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                    <span id="user-display"></span>
-                    <span class="caret"></span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <% include parts/nav %>
         <div id="page">
             <div id="content">
                 <div id="guide-listing">
@@ -189,7 +174,7 @@
                                 <div class="single-review">
                                     <div class="review-icon">
                                         <!-- Need to change to reviewer's portrait later !!! -->
-                                        <img id="reviewer-icon" src="/img/anonymous.png">
+                                        <img id="reviewer-icon" src="/icon/anonymous.png">
                                     </div>
                                     <div class="review-text">
                                         <%= reviewList[i].review_text %>

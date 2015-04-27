@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>    
+
+<body>
+    <div id="review-area">
+        <h1>Review from Tourists</h1>
+        <hr>
+
+        <div class="star-section">
+            <h2>评分：</h2>
+            <input id="review-rating-avg" type="hidden" value="<%= avgRating %>"></input>
+            <div id="review-star"></div>
+            <div class="star-score">
+                分数：<%= avgRating %>
+            </div>
+        </div>
+        <hr>
+
+        <div id="review-box">
+            <% for (var i = 0; i < reviewList.length; i++) { %>
+            <div class="single-review">
+                <div class="review-icon">
+                    <!-- Change to users' avatar in the future ! -->
+                    <img id="reviewer-icon" src="/icon/anonymous.png">
+                </div>
+                <div class="review-text">
+                    <%= reviewList[i].review_text %>
+                </div>
+
+                <div class="review-date">
+                    <%= reviewList[i].reviewer_name %> - <%= reviewList[i].date %>
+                </div>
+            </div>
+            <hr>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
