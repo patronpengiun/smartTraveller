@@ -196,8 +196,27 @@ module.exports = function(passport) {
 	
 
 	// Dashboard page
-	router.get('/guide/dashboard', function(req, res) {
-		res.render('guide_dashboard');
+	router.get('/guide/dashboard/:guide_id', function(req, res) {
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+			// guides is an array with guide objects
+			if (err || guides.length == 0) {
+				res.send("Oops...No such page, perhaps wrong guide id >_<");
+			} else {
+				// Query review information
+				Review.find({reviewee_id:req.params.guide_id}, function(err, reviews) {
+					if (err) {
+						res.send("Oops...No such page, perhaps wrong guide id >_<");
+					} else {
+						var sum = 0;
+						for (var i = reviews.length - 1; i >= 0; i--) {
+							sum += reviews[i].rating;
+						};
+						var avg = sum / reviews.length;	
+						res.render('guide_dashboard', {guide: guides[0], reviewList: reviews, avgRating: avg});
+					}
+				});
+			} 
+		});
 	});
 
 	return router;
