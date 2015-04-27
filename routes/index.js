@@ -202,20 +202,26 @@ module.exports = function(passport) {
 			if (err || guides.length == 0) {
 				res.send("Oops...No such page, perhaps wrong guide id >_<");
 			} else {
-				// Query review information
-				Review.find({reviewee_id:req.params.guide_id}, function(err, reviews) {
-					if (err) {
-						res.send("Oops...No such page, perhaps wrong guide id >_<");
-					} else {
-						var sum = 0;
-						for (var i = reviews.length - 1; i >= 0; i--) {
-							sum += reviews[i].rating;
-						};
-						var avg = sum / reviews.length;	
-						res.render('guide_dashboard', {guide: guides[0], reviewList: reviews, avgRating: avg});
-					}
-				});
-			} 
+
+				// guideList hasn't been used yet, maybe useful for other nav sections.......
+				res.render('guide_dashboard', {guideList: guides, guideId: req.params.guide_id});
+			}
+		})
+	});
+
+	// For dashboard nav sections
+	router.get('/dashboard_review/:guide_id', function(req, res) {
+		Review.find({reviewee_id:req.params.guide_id}, function(err, reviews) {
+			if (err) {
+				res.send("Oops...No such page, perhaps wrong guide id >_<");
+			} else {
+				var sum = 0;
+				for (var i = reviews.length - 1; i >= 0; i--) {
+					sum += reviews[i].rating;
+				};
+				var avg = (sum / reviews.length).toPrecision(3);	
+				res.render('dashboard_nav_page/dashboard_review', {reviewList: reviews, avgRating: avg});
+			}
 		});
 	});
 

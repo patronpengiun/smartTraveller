@@ -42,16 +42,16 @@
                     <p>
                 </li>
                 <li>
-                    <a href="#">Overall</a>
+                    <a id="nav-overall" href="#">Overall</a>
                 </li>
                 <li>
-                    <a href="#">Orders</a>
+                    <a id="nav-order" href="#">Orders</a>
                 </li>
                 <li>
-                    <a href="#">Reviews</a>
+                    <a id="nav-review" href="#">Reviews</a>
                 </li>
                 <li>
-                    <a href="#">Settings</a>
+                    <a id="nav-setting" href="#">Settings</a>
                 </li>
             </ul>
         </div>
@@ -62,43 +62,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                        <input id="guide-id" type="hidden" value="<%= guideId %>"></input>
                         <div class="control-panel">
                             <a class="btn btn-default hide-btn" id="menu-toggle"></a>
                         </div>
-                        <div class="display-area">
-                            <h1>Review from Tourists</h1>
-                            <hr>
-
-                            <div class="star-section">
-                                <h2>评分：</h2>
-                                <input id="review-rating-avg" type="hidden" value="<%= avgRating %>"></input>
-                                <div id="review-star"></div>
-                                <div class="star-score">
-                                    分数：<%= avgRating %>
-                                </div>
-                            </div>
-                            <hr>
-
-                            <div id="review-box">
-                            <% for (var i = 0; i < reviewList.length; i++) { %>
-                            <div class="single-review">
-                                <div class="review-icon">
-                                    <!-- Need to change to reviewer's portrait later !!! -->
-                                    <img id="reviewer-icon" src="/icon/anonymous.png">
-                                </div>
-                                <div class="review-text">
-                                    <%= reviewList[i].review_text %>
-                                </div>
-
-                                <div class="review-date">
-                                    <%= reviewList[i].reviewer_name %> - <%= reviewList[i].date %>
-                                </div>
-                            </div>
-                            <hr>
-                            <% } %>
-                        </div>
-
-                        </div>
+                        <div id="display-area"></div>
                     </div>
                 </div>
             </div>
