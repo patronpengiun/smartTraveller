@@ -8,8 +8,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/home.js"></script>
         <script src="/js/bootstrap-datepicker.min.js"></script>
+		 <script src="/js/navbar.js"></script>
         <!-- For guide page -->
         <link rel="stylesheet" href="/style/guide_page.css">
         <script src="/js/guidepage.js"></script>
@@ -39,11 +39,6 @@
                                 data-target="#requestWindow">
                                 提交请求
                                 </a>
-                            </div>
-                            <div class="modal fade" id="requestWindow" tabindex="-1" role="dialog" aria-labelledby="requestWindow" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <iframe src="/request/<%= guide._id %>"></iframe>
-                                </div>
                             </div>
                             <hr>
                             <div id="in-mail">
@@ -192,6 +187,35 @@
             </div>
         </div>
         <div id="fb-root"></div>
+        <div class="modal fade" id="requestWindow" tabindex="-1" role="dialog" aria-labelledby="requestWindow" aria-hidden="true">
+            <div class="modal-dialog">
+				<div class="modal-content">
+			        <div class='container'>
+			            <form id='request-form' method="post" action='/request/<%= guide._id %>'>
+			                <div class='date-range'>
+			                    <div class="form-group">
+			                        <input class="form-control" name="startDate" placeholder="Start Date" type="text" id="request-start-date">
+			                    </div>
+			                    <div class="form-group">
+			                        <input class="form-control" name="endDate" placeholder="End Date" type="text" id="request-end-date">
+			                    </div>
+			                </div>
+			                <div class='details'>
+			                    <div class="form-group self-description">
+			                        <textarea class='form-control' name='selfDescription' placeholder="Say something about yourself and your trip" type='text' id='self-descirp' rows="5"></textarea>
+			                    </div>
+			                    <div class="form-group requirements">
+			                        <textarea class='form-control' name='requirements' placeholder="Say some detail requirements about this trip" type='text' id='reqirements' rows="5"></textarea>
+			                    </div>
+			                </div>
+			            </form>
+			            <div class='btn-submit'>
+			                <button type='button' id='submitBtn' class="btn btn-primary">Send Request</button>
+			            </div>
+			        </div>
+				</div>
+            </div>
+        </div>
         <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;

@@ -27,3 +27,49 @@
 		</li>
 	</ul>
 </nav>
+
+<div class="modal fade" id="login-modal">
+	<div class="modal-dialog login-modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="modal-title">请登录</span>
+				<button class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="error-wrapper">
+					您输入的邮箱或密码有误，请重新登录
+				</div>
+				<div id="login-div">
+					<input type="text" id="login-username" class="form-control" placeholder="邮箱"></input>
+					<input type="password" id="login-password" class="form-control" placeholder="密码"></input>
+					<input type="button" id="login-btn" class="btn btn-default" value="登录"></input>
+				</div>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+		
+<div class="modal fade" id="signup-modal">
+	<div class="modal-dialog login-modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="modal-title">请注册</span>
+				<button class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="error-wrapper">
+					您输入的邮箱已注册，请重新注册
+				</div>
+				<div id="signup-div">
+					<input type="text" id="signup-username" class="form-control" placeholder="邮箱"></input>
+					<input type="password" id="signup-password" class="form-control" placeholder="密码"></input>
+					<input type="button" id="signup-btn" class="btn btn-default" value="注册"></input>
+				</div>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>

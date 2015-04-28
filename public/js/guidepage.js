@@ -61,8 +61,18 @@ $(document).ready(function() {
 	}
 	$('#review-star').css('background-position', '0px ' + pixelNum + 'px');
 
-	// For request button
-	$('#reservation-tool').click(function() {
-		
+	// For request modal
+	$('#request-start-date').datepicker({orientation:"top"});
+	$('#request-end-date').datepicker({orientation:"top"});
+
+	$('#submitBtn').click(function() {
+		var query = $('#request-form').serialize();
+		$.ajax($('#request-form').attr("action"), {
+			method: "POST",
+			data: query,
+		}).done(function(response) {
+			$('#requestWindow').modal('hide');
+			alert(response);
+		});
 	});
 });

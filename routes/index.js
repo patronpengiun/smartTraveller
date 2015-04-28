@@ -196,10 +196,6 @@ module.exports = function(passport) {
 	});
 	
 	// ------------ for request page ----------------
-	router.get('/request/:guide_id', function(req, res) {
-		res.render('request', {guideID: req.params.guide_id});
-	});
-
 	router.post('/request/:guide_id', function(req, res) {
 		console.log(req.params.guide_id);
 		// check if the user is loged in, if not, send warning and return
@@ -221,7 +217,7 @@ module.exports = function(passport) {
 				newRequest.customer_Username = req.user.username;	
 				newRequest.guideId = req.params.guide_id;
 				newRequest.save(function(err) {
-				res.render('request');
+					res.send("Request successfully submitted.");
 			});
 			} 
 		});
