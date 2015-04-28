@@ -61,8 +61,11 @@ $(document).ready(function() {
 	}
 	$('#review-star').css('background-position', '0px ' + pixelNum + 'px');
 
-	// For request button
-	$('#reservation-tool').click(function() {
-		
+	// For request modal
+	$('#start-date').datepicker();
+	$('#end-date').datepicker();
+
+	$('#submitBtn').click(function() {
+		$('#request-form').submit();
 	});
 });
