@@ -17,5 +17,15 @@ $(document).ready(function() {
 		});
 	});
 
+	$('#nav-setting').click(function() {
+		$('#display-area').load("/dashboard_setting/" + guideId + " #setting-area", function() {
 
+		});
+	});
+
+	$('#nav-request').click(function() {
+		$('#display-area').load("/dashboard_request/" + guideId + " #request-area", function() {
+			
+		});
+	});
 });

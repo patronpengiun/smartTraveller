@@ -230,15 +230,14 @@ module.exports = function(passport) {
 	// Dashboard page
 	router.get('/guide/dashboard/:guide_id', function(req, res) {
 		Guide.find({_id:req.params.guide_id}, function(err, guides) {
-			// guides is an array with guide objects
 			if (err || guides.length == 0) {
 				res.send("Oops...No such page, perhaps wrong guide id >_<");
 			} else {
 
-				// guideList hasn't been used yet, maybe useful for other nav sections.......
-				res.render('guide_dashboard', {guideList: guides, guideId: req.params.guide_id});
+				// guide hasn't been used yet, maybe useful for other nav sections.......
+				res.render('guide_dashboard', {guide: guides[0], guideId: req.params.guide_id});
 			}
-		})
+		});
 	});
 
 	// For dashboard nav sections
@@ -255,6 +254,20 @@ module.exports = function(passport) {
 				res.render('dashboard_nav_page/dashboard_review', {reviewList: reviews, avgRating: avg});
 			}
 		});
+	});
+
+	router.get('/dashboard_setting/:guide_id', function(req, res) {
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+			if (err || guides.length == 0) {
+				res.send("Oops...No such page, perhaps wrong guide id >_<");
+			} else {
+				res.render('dashboard_nav_page/dashboard_setting', {guide: guides[0]});
+			}
+		});
+	});
+
+	router.get('/dashboard_request/:guide_id', function(req, res) {
+		res.render('dashboard_nav_page/dashboard_request');
 	});
 
 	return router;
