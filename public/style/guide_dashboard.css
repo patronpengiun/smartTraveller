@@ -78,3 +78,16 @@ hr {
 #review-box > hr {
 	clear: both;
 }
+
+
+/* For setting nav section */
+.setting-left-column {
+	float: left;
+	width: 50%;
+}
+
+.setting-right-column {
+	float: left;
+	width: 50%;
+}
+
