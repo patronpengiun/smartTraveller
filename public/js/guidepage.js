@@ -62,10 +62,17 @@ $(document).ready(function() {
 	$('#review-star').css('background-position', '0px ' + pixelNum + 'px');
 
 	// For request modal
-	$('#start-date').datepicker();
-	$('#end-date').datepicker();
+	$('#request-start-date').datepicker({orientation:"top"});
+	$('#request-end-date').datepicker({orientation:"top"});
 
 	$('#submitBtn').click(function() {
-		$('#request-form').submit();
+		var query = $('#request-form').serialize();
+		$.ajax($('#request-form').attr("action"), {
+			method: "POST",
+			data: query,
+		}).done(function(response) {
+			$('#requestWindow').modal('hide');
+			alert(response);
+		});
 	});
 });
