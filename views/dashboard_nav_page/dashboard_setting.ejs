@@ -6,10 +6,83 @@
         <h1>Settings</h1>
         <hr>
         <div class="setting-left-column">
-            
+            <div id="guide-image-box">
+                <div id="guide-avatar">
+                    <img class="photo" src="/<%= guide.photo_portrait %>">
+                </div>
+            </div>
+            <div><a href="#">修改头像</a></div>
+
+
         </div>
         <div class="setting-right-column">
-            
+            <div id="info-panel">
+                <h2>向导信息</h2>
+                <div class="section group">
+                    <div class="col span_1_of_3">
+                        城市：<%= guide.city %>
+                    </div>
+                    <div class="col span_1_of_3">
+                        职业：<%= guide.occupation %>
+                    </div>
+                    <div class="col span_1_of_3">
+                        性别：<%= guide.sex %>
+                    </div>
+                </div>
+                <div class="section group">
+                    <div class="col span_1_of_3">
+                        年龄：<%= guide.age %>
+                    </div>
+                    <div class="col span_1_of_3">
+                        家乡：<%= guide.hometown %>
+                    </div>
+                    <div class="col span_1_of_3">
+                        职业：<%= guide.occupation %>
+                    </div>
+                </div>
+                <br>
+                <% if (guide.car) { %>
+                <p class="guide-car-title">私人用车：提供 </p>
+                <div class="section group">
+                    <div class="col span_1_of_3">
+                        品牌：<%= guide.car_brand %>
+                    </div>
+                    <div class="col span_1_of_3">
+                        年份：<%= guide.car_year %>
+                    </div>
+                    <div class="col span_1_of_3">
+                        型号：<%= guide.car_model %>
+                    </div>
+                </div>
+                <% } else { %>
+                <p class="guide-car-title">私人用车：不提供 </p>
+                <% } %>
+            </div>
+            <div class="guide-tag">
+                <p class="guide-tag-text">
+                    兴趣：
+                    <% for (var i = 0; i < guide.tags.length; i++) { %>
+                    <%= guide.tags[i] %>
+                    <% if (i != guide.tags.length - 1) { %>
+                    /
+                    <% } %>
+                    <% } %>
+                </p>
+            </div>
+            <hr>
+            <div id="self-intro-panel">
+                <h2>自我介绍</h2>
+                <div id="self-intro-box">
+                    <p><%= guide.intro1 %></p>
+                </div>
+            </div>
+            <hr>
+            <div id="path-intro-panel">
+                <h2>个人路线介绍</h2>
+                <div id="path-intro-box">
+                    <p><%= guide.intro2 %></p>
+                </div>
+            </div>
         </div>
         
     </div>
