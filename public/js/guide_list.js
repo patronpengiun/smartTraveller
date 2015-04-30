@@ -1,2 +1,10 @@
-// created by Hongda Jiang
-// 4-19-2015
+$(function() {
+	$("#filter_update").click(function() {
+		$.ajax("/guidelist/list", {
+			type: "GET",
+			data: $('#filter_form').serialize()
+		}).done(function(response) {
+			$('#guidelist').replaceWith(response);
+		});
+	});
+});

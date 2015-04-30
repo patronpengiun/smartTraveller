@@ -12,12 +12,13 @@
 		<script src="/js/bootstrap.min.js"></script>
 		<script src="/js/bootstrap-datepicker.min.js"></script>
 		<script src="/js/navbar.js"></script>
+		<script src="/js/guide_list.js"></script>
         </head>
         <body>
             <% include parts/nav %>
             <div id='content'>
                 <div id='filter_bar'>
-                    <form id='filter_form' method="GET" action="/guidelist">
+                    <form id='filter_form'>
                         <div class='option_wrapper_vertical'>
                             <p class='option'>
                             <img src='../img/icons/drive.png'>
@@ -50,38 +51,40 @@
                         <div class='option_wrapper_horizontal'>
                             <p class='option'>
                             Cantonese
-                            <input type='checkbox' class='filter_checkbox' name='cantonese' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='language' value="cantonese">
                             </p>
                             <p class='option'>
                             Min Nan Yu
-                            <input type='checkbox' class='filter_checkbox' name='min_nan_yu' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='language' value="min_nan_yu">
                             </p>
                         </div>
                         <div class='option_wrapper_horizontal'>
                             <p class='option'>
                             Gentlemen
-                            <input type='checkbox' class='filter_checkbox' name='male' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='sex' value="男">
                             </p>
                             <p class='option'>
                             Lady
-                            <input type='checkbox' class='filter_checkbox' name='female' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='sex' value="女">
                             </p>
                         </div>
+						<!-- commented because age should be replaced by DOB in guide model>
                         <div class='option_wrapper_horizontal'>
                             <p class='option'>
                             70s'
-                            <input type='checkbox' class='filter_checkbox' name='70s' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='age' value="1970">
                             </p>
                             <p class='option'>
                             80s'
-                            <input type='checkbox' class='filter_checkbox' name='80s' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='age' value="1980">
                             </p>
                             <p class='option'>
                             90s'
-                            <input type='checkbox' class='filter_checkbox' name='90s' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='age' value="1990">
                             </p>
                         </div>
-	                    <button type="submit" id='filter_update' class="btn btn-primary">Update</button>
+						<-->
+	                    <button type="button" id='filter_update' class="btn btn-primary">Update</button>
                     </form>
                 </div>
             </div>
