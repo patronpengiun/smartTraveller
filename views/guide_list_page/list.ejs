@@ -1,0 +1,33 @@
+<div id = "guidelist">
+    <% for(var i=0; i<guideList.length; i++) {%>
+    <a href='/guidepage/<%= guideList[i].id %>'>
+    <div class='divide_line'>
+    </div>
+    <div class='guide_card'>
+        <div class='guide_portrait'>
+            <img src='/<%= guideList[i].photo_portrait %>' >
+        </div>
+        <div class='guide_info'>
+            <div class='info_section1'>
+                <span class='name'><%= guideList[i].name %></span>
+                <span class='city'><%= guideList[i].city %></span>
+            </div>
+            <div class='info_section2'>
+            	<% for(var j=0; j<guideList[i].tags.length; j++) { %>
+                	<span class='tag'><%= guideList[i].tags[j] %></span>
+
+                <% } %>
+            </div>
+            <div class='info_section3'>
+                <%if(guideList[i].car) {%>
+                	<span class='icon'>
+                		<img src='../img/icons/drive.png'>
+                	</span>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    </a>
+    <% } %>
+    <div class='divide_line'>
+</div>

@@ -17,39 +17,34 @@
             <% include parts/nav %>
             <div id='content'>
                 <div id='filter_bar'>
-                    <form id='filter_form' method="post" action="/guidelist/filter">
+                    <form id='filter_form' method="GET" action="/guidelist">
                         <div class='option_wrapper_vertical'>
-                            <p class='option'>
-                            <img src='../img/icons/walk.png'>
-                            Walking Guide
-                            <input type='checkbox' class='filter_checkbox' name='walk' value="0">
-                            </p>
                             <p class='option'>
                             <img src='../img/icons/drive.png'>
                             Driving Guide
-                            <input type='checkbox' class='filter_checkbox' name='drive' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='drive' value="true">
                             </p>
                             <p class='option'>
                             <img src='../img/icons/airport_pickup.png'>
                             Airport Pickup
-                            <input type='checkbox' class='filter_checkbox' name='pickup' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='pickup' value="true">
                             </p>
                         </div>
                         <div class='option_wrapper_vertical'>
                             <p class='option'>
                             <img src='../img/icons/student.png'>
                             Student
-                            <input type='checkbox' class='filter_checkbox' name='student' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='occupation' value="学生">
                             </p>
                             <p class='option'>
                             <img src='../img/icons/professional.png'>
                             Young Professional
-                            <input type='checkbox' class='filter_checkbox' name='employee' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='occupation' value="在职">
                             </p>
                             <p class='option'>
                             <img src='../img/icons/people.png'>
                             Foreigner
-                            <input type='checkbox' class='filter_checkbox' name='forenginer' value="0">
+                            <input type='checkbox' class='filter_checkbox' name='occupation' value="外国人">
                             </p>
                         </div>
                         <div class='option_wrapper_horizontal'>
@@ -86,46 +81,10 @@
                             <input type='checkbox' class='filter_checkbox' name='90s' value="0">
                             </p>
                         </div>
+	                    <button type="submit" id='filter_update' class="btn btn-primary">Update</button>
                     </form>
-                  
-                    <button type="button" id='filter_update' class="btn btn-primary">
-                    	Update
-                    </button>
-                
-                </div>
-                <div id = "guidelist">
-                    <% for(var i=0; i<guideList.length; i++) {%>
-                    <a href='/guidepage/<%= guideList[i].id %>'>
-                    <div class='divide_line'>
-                    </div>
-                    <div class='guide_card'>
-                        <div class='guide_portrait'>
-                            <img src='/<%= guideList[i].photo_portrait %>' >
-                        </div>
-                        <div class='guide_info'>
-                            <div class='info_section1'>
-                                <span class='name'><%= guideList[i].name %></span>
-                                <span class='city'><%= guideList[i].city %></span>
-                            </div>
-                            <div class='info_section2'>
-                            	<% for(var j=0; j<guideList[i].tags.length; j++) { %>
-                                	<span class='tag'><%= guideList[i].tags[j] %></span>
-
-                                <% } %>
-                            </div>
-                            <div class='info_section3'>
-                                <%if(guideList[i].car) {%>
-                                	<span class='icon'>
-                                		<img src='../img/icons/drive.png'>
-                                	</span>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
-                    </a>
-                    <% } %>
-                    <div class='divide_line'>
                 </div>
             </div>
+			<% include guide_list_page/list %>
         </body>
     </html>
