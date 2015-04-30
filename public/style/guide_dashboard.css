@@ -11,9 +11,20 @@ hr {
 .hide-btn {
 	background: url('/icon/back.png');
 	/*background-size: 90px;*/
-	width: 50px;
-	height: 50px;
+	width: 48px;
+	height: 48px;
+	border: 0px;
 	border-radius: 50%;
+}
+
+.edit-btn {
+	float: right;
+	background: url('/icon/edit.png');
+	/*background-size: 90px;*/
+	width: 48px;
+	height: 48px;
+	border: 0px;
+	border-radius: 50%;	
 }
 
 .control-panel {
@@ -84,15 +95,29 @@ hr {
 .setting-left-column {
 	float: left;
 	width: 50%;
+	padding-right: 10px;
 }
 
 .setting-right-column {
 	float: right;
 	width: 50%;
+	padding-left: 10px;
 }
 
 .photo {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 	max-width: 100%;
 	max-height: 450px;
+}
+
+.info-title {
+	clear: both;
+}
+
+.info-section {
+	clear: both;
+}
+
+.info-title-text {
+	float: left;
 }

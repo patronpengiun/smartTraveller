@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+	/****** For Navigation side bar ******/
 	var guideId = $('#guide-id').val();
 
 	$('#nav-review').click(function() {
@@ -19,7 +21,30 @@ $(document).ready(function() {
 
 	$('#nav-setting').click(function() {
 		$('#display-area').load("/dashboard_setting/" + guideId + " #setting-area", function() {
+			// Bundle with edit info button
+			$('#guide-info-edit').click(function() {
+				$('#right-column-info-area').load("/dashboard_setting/" + guideId + " #setting-edit-form", function() {
+					// Set default value for edit info blank
+					var rawData = $('#guide-info-hidden-input').val();
+					var guideInfo = jQuery.parseJSON(rawData);			
+					$('#name-input').attr("value", guideInfo.name);
+					
 
+					// For edit form submit
+					$('#btn-submit').click(function(e) {
+						$.ajax({
+							type:'POST', 
+							url: "/dashboard/settings/updateinfo", 
+							data:$('#edit-info-form').serialize(), 
+							success: function(response) {
+								$('#nav-setting').trigger("click");
+							}
+						});
+						
+						e.preventDefault();
+					});
+				});
+			});
 		});
 	});
 

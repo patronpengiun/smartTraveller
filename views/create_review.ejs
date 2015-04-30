@@ -4,6 +4,7 @@
 		<title>Review Test</title>
 	</head>
 	<body>
+	<div id="test">
 		<form id="review_form" method="post" action="/review/create">
 			Reviewer_Id:
 			<br>
@@ -32,11 +33,13 @@
 			<button id="btn-submit" onclick="submit()">Submit</button>
 			<br>
 		</form>
-
+	
 		<script>
 			function submit() {
 				$('#review_form').submit();
 			}
 		</script>
+
+	</div>
 	</body>
 </html>
