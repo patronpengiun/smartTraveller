@@ -2,10 +2,11 @@ $(document).ready(function() {
 
 	/****** For Navigation side bar ******/
 	var guideId = $('#guide-id').val();
+	var userId = $('#user-id').val();
 
 	$('#nav-review').click(function() {
 		// For review section
-		$('#display-area').load("/dashboard_review/" + guideId + " #review-area", function() {
+		$('#display-area').load("/dashboard_review/" + userId + " #review-area", function() {
 			var rating = parseInt(parseFloat($('#review-rating-avg').val()) * 2);
 
 			var pixelNum;
@@ -20,10 +21,10 @@ $(document).ready(function() {
 	});
 
 	$('#nav-setting').click(function() {
-		$('#display-area').load("/dashboard_setting/" + guideId + " #setting-area", function() {
+		$('#display-area').load("/dashboard_setting/" + userId + " #setting-area", function() {
 			// Bundle with edit info button
 			$('#guide-info-edit').click(function() {
-				$('#right-column-info-area').load("/dashboard_setting/" + guideId + " #setting-edit-form", function() {
+				$('#right-column-info-area').load("/dashboard_setting/" + userId + " #setting-edit-form", function() {
 
 					// Requst to get guide object
 					$.ajax({
@@ -125,7 +126,7 @@ $(document).ready(function() {
 	});
 
 	$('#nav-request').click(function() {
-		$('#display-area').load("/dashboard_request/" + guideId + " #request-area", function() {
+		$('#display-area').load("/dashboard_request/" + userId + " #request-area", function() {
 
 		});
 	});

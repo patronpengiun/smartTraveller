@@ -226,22 +226,33 @@ module.exports = function(passport) {
 	});
 
 	// Dashboard page
-	router.get('/guide/dashboard/:guide_id', function(req, res) {
-		Guide.find({_id:req.params.guide_id}, function(err, guides) {
-			if (err || guides.length == 0) {
-				res.send("Oops...No such page, perhaps wrong guide id >_<");
+	router.get('/guide/dashboard/:user_id', function(req, res) {
+		User.find({_id: req.params.user_id}, function(err, users) {
+			if (err || users.length == 0) {
+				res.send("Oops...No such page, perhaps wrong user id >_<");
+				return;
+			}
+			
+			var user = users[0];
+			if (user.role == 'guide') {
+				Guide.find({username:user.username}, function(err, guides) {
+					if (err || guides.length == 0) {
+						res.send("Oops...No such page, perhaps wrong user id >_<");
+						return;
+					}
+					res.render('guide_dashboard', {user: user, guide: guides[0]});
+				});
 			} else {
-				// // guide hasn't been used yet, maybe useful for other nav sections.......
-				res.render('guide_dashboard', {guide: guides[0], guideId: req.params.guide_id});
+				res.render('guide_dashboard', {user: user, guide: null});
 			}
 		});
 	});
 
 	// For dashboard nav sections
-	router.get('/dashboard_review/:guide_id', function(req, res) {
-		Review.find({reviewee_id:req.params.guide_id}, function(err, reviews) {
+	router.get('/dashboard_review/:user_id', function(req, res) {
+		Review.find({reviewee_id:req.params.user_id}, function(err, reviews) {
 			if (err) {
-				res.send("Oops...No such page, perhaps wrong guide id >_<");
+				res.send("Oops...No such page, perhaps wrong user id >_<");
 			} else {
 				var sum = 0;
 				for (var i = reviews.length - 1; i >= 0; i--) {
@@ -253,17 +264,30 @@ module.exports = function(passport) {
 		});
 	});
 
-	router.get('/dashboard_setting/:guide_id', function(req, res) {
-		Guide.find({_id:req.params.guide_id}, function(err, guides) {
-			if (err || guides.length == 0) {
-				res.send("Oops...No such page, perhaps wrong guide id >_<");
+	router.get('/dashboard_setting/:user_id', function(req, res) {
+		User.find({_id:req.params.user_id}, function(err, users) {
+			if (err || users.length == 0) {
+				res.send("Oops...No such page, perhaps wrong user id >_<");
+				return;
+			} 
+			
+			var user = users[0];
+			if (user.role == 'guide') {
+				Guide.find({username:user.username}, function(err, guides) {
+					if (err || guides.length == 0) {
+						res.send("Oops...No such page, perhaps wrong user id >_<");
+						return;
+					}
+					console.log(guides[0]);
+					res.render('dashboard_nav_page/dashboard_setting', {user: user, guide: guides[0]});
+				});
 			} else {
-				res.render('dashboard_nav_page/dashboard_setting', {guide: guides[0]});
+				res.render('dashboard_nav_page/dashboard_setting', {user: user, guide: null});
 			}
 		});
 	});
 
-	router.get('/dashboard_request/:guide_id', function(req, res) {
+	router.get('/dashboard_request/:user_id', function(req, res) {
 		res.render('dashboard_nav_page/dashboard_request');
 	});
 

@@ -42,12 +42,12 @@ function loginCallback(data) {
 		$("#login-modal").modal("hide");
 		$('#login-control').addClass("hidden");
 		$('#user-display').text(data.user.username);
-		$('#user-control').removeClass("hidden")
+		$('#user-control').removeClass("hidden");
+		$('#dashboard-tab a').attr("href","/guide/dashboard/"+data.user._id);
 	} else {
 		$("#login-modal .error-wrapper").show();
 		$('#login-username').val("");
 		$('#login-password').val("");
-		$('#dashboard-tab a').attr("href","/guide/dashboard/"+data.user._id);
 	}
 }
 
