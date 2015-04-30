@@ -230,8 +230,7 @@ module.exports = function(passport) {
 			if (err || guides.length == 0) {
 				res.send("Oops...No such page, perhaps wrong guide id >_<");
 			} else {
-
-				// guide hasn't been used yet, maybe useful for other nav sections.......
+				// // guide hasn't been used yet, maybe useful for other nav sections.......
 				res.render('guide_dashboard', {guide: guides[0], guideId: req.params.guide_id});
 			}
 		});
@@ -266,6 +265,21 @@ module.exports = function(passport) {
 	router.get('/dashboard_request/:guide_id', function(req, res) {
 		res.render('dashboard_nav_page/dashboard_request');
 	});
+
+
+	// For dashboard settings edit info
+	router.post('/dashboard/settings/updateinfo', _multer, function(req, res) {
+		console.log("Submit edit info to update guide...");
+		console.log(req.body);
+		var query = {_id: req.body.id};
+		Guide.update(query, {name: req.body.name}, function(err){
+			// perhaps use AJAX to return some respond and then use 
+			// javascript to click settings-nav-bar
+			res.send(200);
+		});
+		
+	});
+
 
 	return router;
 }

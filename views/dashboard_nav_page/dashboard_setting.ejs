@@ -11,80 +11,290 @@
                     <img class="photo" src="/<%= guide.photo_portrait %>">
                 </div>
             </div>
-            <div><a href="#">修改头像</a></div>
+            <div><a href="#">Edit Avatar</a></div>
 
 
         </div>
         <div class="setting-right-column">
-            <div id="info-panel">
-                <h2>向导信息</h2>
-                <div class="section group">
-                    <div class="col span_1_of_3">
-                        城市：<%= guide.city %>
+            <div id="right-column-info-area">
+                <div id="info-panel">
+                    <div class="info-title">
+                        <h2 class="info-title-text">Guide Info</h2>
+                        <a id="guide-info-edit" class="btn btn-default edit-btn"></a>
                     </div>
-                    <div class="col span_1_of_3">
-                        职业：<%= guide.occupation %>
+                    <div class="info-section">
+                        <div class="info-item">
+                            Name：<%= guide.name %>
+                        </div>
+                        <div class="info-item">
+                            City：<%= guide.city %>
+                        </div>
+                        <div class="info-item">
+                            Occupation：<%= guide.occupation %>
+                        </div>
+                        <div class="info-item">
+                            性别：<%= guide.sex %>
+                        </div>
+                        <div class="info-item">
+                            年龄：<%= guide.age %>
+                        </div>
+                        <div class="info-item">
+                            家乡：<%= guide.hometown %>
+                        </div>
+                        <div class="info-item">
+                            电话：<%= guide.phone %>
+                        </div>
+                        <div class="info-item">
+                            语言：<%= guide.language %>
+                        </div>
                     </div>
-                    <div class="col span_1_of_3">
-                        性别：<%= guide.sex %>
+                    <br>
+                    <% if (guide.car) { %>
+                    <p class="guide-car-title">私人用车：提供 </p>
+                    <div class="section group">
+                        <div class="info-item">
+                            品牌：<%= guide.car_brand %>
+                        </div>
+                        <div class="info-item">
+                            年份：<%= guide.car_year %>
+                        </div>
+                        <div class="info-item">
+                            型号：<%= guide.car_model %>
+                        </div>
                     </div>
-                </div>
-                <div class="section group">
-                    <div class="col span_1_of_3">
-                        年龄：<%= guide.age %>
-                    </div>
-                    <div class="col span_1_of_3">
-                        家乡：<%= guide.hometown %>
-                    </div>
-                    <div class="col span_1_of_3">
-                        职业：<%= guide.occupation %>
-                    </div>
-                </div>
-                <br>
-                <% if (guide.car) { %>
-                <p class="guide-car-title">私人用车：提供 </p>
-                <div class="section group">
-                    <div class="col span_1_of_3">
-                        品牌：<%= guide.car_brand %>
-                    </div>
-                    <div class="col span_1_of_3">
-                        年份：<%= guide.car_year %>
-                    </div>
-                    <div class="col span_1_of_3">
-                        型号：<%= guide.car_model %>
-                    </div>
-                </div>
-                <% } else { %>
-                <p class="guide-car-title">私人用车：不提供 </p>
-                <% } %>
-            </div>
-            <div class="guide-tag">
-                <p class="guide-tag-text">
-                    兴趣：
-                    <% for (var i = 0; i < guide.tags.length; i++) { %>
-                    <%= guide.tags[i] %>
-                    <% if (i != guide.tags.length - 1) { %>
-                    /
+                    <% } else { %>
+                    <p class="guide-car-title">私人用车：不提供 </p>
                     <% } %>
-                    <% } %>
-                </p>
-            </div>
-            <hr>
-            <div id="self-intro-panel">
-                <h2>自我介绍</h2>
-                <div id="self-intro-box">
-                    <p><%= guide.intro1 %></p>
+                </div>
+                <div class="guide-tag">
+                    <p class="guide-tag-text">
+                        兴趣：
+                        <% for (var i = 0; i < guide.tags.length; i++) { %>
+                        <%= guide.tags[i] %>
+                        <% if (i != guide.tags.length - 1) { %>
+                        /
+                        <% } %>
+                        <% } %>
+                    </p>
+                </div>
+                <hr>
+                <div id="self-intro-panel">
+                    <div class="info-title">
+                        <h2 class="info-title-text">Self Intro</h2>
+                    </div>
+                    <div class="info-section">
+                        <p><%= guide.intro1 %></p>
+                    </div>
+                </div>
+                <hr>
+                <div id="path-intro-panel">
+                    <div class="info-title">
+                        <h2 class="info-title-text">Path Intro</h2>
+                    </div>
+                    <div class="info-section">
+                        <p><%= guide.intro2 %></p>
+                    </div>
                 </div>
             </div>
-            <hr>
-            <div id="path-intro-panel">
-                <h2>个人路线介绍</h2>
-                <div id="path-intro-box">
-                    <p><%= guide.intro2 %></p>
-                </div>
-            </div>
-        </div>
+        </div>   
+    </div>
+
+    <div id="setting-edit-form">
         
+        <input id="guide-info-hidden-input" type="hidden" value='<%- JSON.stringify(guide) %>' >
+
+        <form id="edit-info-form" method="post" action="/dashboard/settings/updateinfo" enctype="multipart/form-data" data-parsley-required-message="此项为必填项">
+            <div class="form-step1 show">
+                <div class="form-record">
+                    <div class="form-label">姓名</div>
+                    <div class="input-container">
+                        <input id="name-input" required name="name" type="text">
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">性别</div>
+                    <div class="input-container">
+                        <div>
+                            <input name="sex" value="男" type="radio" data-parsley-group="step1" required>&nbsp;男 &nbsp;&nbsp;
+                            <input name="sex" value="女" type="radio">&nbsp;女
+                        </div>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">年龄</div>
+                    <div class="input-container">
+                        <input data-parsley-group="step1" required name="age" value="<%= guide.age %>" type="text">
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">所在城市</div>
+                    <div class="input-container">
+                        <select name="city" data-parsley-group="step1" required>
+                            <option></option>
+                            <option value="波士顿">波士顿</option>
+                            <option value="费城">费城</option>
+                            <option value="华盛顿">华盛顿</option>
+                            <option value="旧金山">旧金山</option>
+                            <option value="洛杉矶">洛杉矶</option>
+                            <option value="迈阿密">迈阿密</option>
+                            <option value="纽约">纽约</option>
+                            <option value="匹兹堡">匹兹堡</option>
+                            <option value="西雅图">西雅图</option>
+                            <option value="休斯顿">休斯顿</option>
+                            <option value="芝加哥">芝加哥</option>
+                            <option value="其它">其它</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">家乡</div>
+                    <div class="input-container">
+                        <select name="hometown" data-parsley-group="step1" required>
+                            <option></option>
+                            <option value="北京">北京市</option>
+                            <option value="浙江省">浙江省</option>
+                            <option value="天津市">天津市</option>
+                            <option value="安徽省">安徽省</option>
+                            <option value="上海市">上海市</option>
+                            <option value="福建省">福建省</option>
+                            <option value="重庆市">重庆市</option>
+                            <option value="江西省">江西省</option>
+                            <option value="山东省">山东省</option>
+                            <option value="河南省">河南省</option>
+                            <option value="湖北省">湖北省</option>
+                            <option value="湖南省">湖南省</option>
+                            <option value="广东省">广东省</option>
+                            <option value="海南省">海南省</option>
+                            <option value="山西省">山西省</option>
+                            <option value="青海省">青海省</option>
+                            <option value="江苏省">江苏省</option>
+                            <option value="辽宁省">辽宁省</option>
+                            <option value="吉林省">吉林省</option>
+                            <option value="台湾省">台湾省</option>
+                            <option value="河北省">河北省</option>
+                            <option value="贵州省">贵州省</option>
+                            <option value="四川省">四川省</option>
+                            <option value="云南省">云南省</option>
+                            <option value="陕西省">陕西省</option>
+                            <option value="甘肃省">甘肃省</option>
+                            <option value="黑龙江省">黑龙江省</option>
+                            <option value="香港特别行政区">香港特别行政区</option>
+                            <option value="澳门特别行政区">澳门特别行政区</option>
+                            <option value="广西壮族自治区">广西壮族自治区</option>
+                            <option value="宁夏回族自治区">宁夏回族自治区</option>
+                            <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                            <option value="内蒙古自治区">内蒙古自治区</option>
+                            <option value="西藏自治区">西藏自治区</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">职业</div>
+                    <div class="input-container">
+                        <div>
+                            <input name="occupation" value="学生" type="radio" data-parsley-group="step1" required>
+                            &nbsp;学生&nbsp;&nbsp;
+                            <input name="occupation" value="在职" type="radio" data-parsley-group="step1" required>
+                            &nbsp;在职&nbsp;&nbsp;
+                            <input name="occupation" value="其他" type="radio">&nbsp;<span>其他</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">电话号码</div>
+                    <div class="input-container">
+                        <input name="phone" type="text" required data-parsley-group="step1"></input>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">邮箱地址</div>
+                    <div class="input-container">
+                        <input name="email" type="text" required data-parsley-type="email" data-parsley-group="step1"></input>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">是否有车</div>
+                    <div class="input-container">
+                        <div>
+                            <input name="car" value="true" type="radio" required data-parsley-group="step1">&nbsp;是&nbsp;&nbsp; 
+                            <input name="car" value="false" type="radio">&nbsp;否
+                        </div>
+                    </div>
+                </div>
+                <div class="form-record showup-text-car hidden">
+                    <div class="form-label">汽车品牌</div>
+                    <div class="input-container">
+                        <div>
+                            <input name="car_brand" type="text"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-record showup-text-car hidden">
+                    <div class="form-label">汽车型号</div>
+                    <div class="input-container">
+                        <div>
+                            <input name="car_model" type="text"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-record showup-text-car hidden">
+                    <div class="form-label">汽车年份</div>
+                    <div class="input-container">
+                        <div>
+                            <input name="car_year" type="text"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">语言</div>
+                    <div class="input-container">
+                        <div>
+                            <input type=checkbox name="language" value="english" required data-parsley-group="step1">&nbsp;英文&nbsp;&nbsp;
+                            <input type=checkbox name="language" value="mandarin">&nbsp;普通话&nbsp;&nbsp;
+                            <input type=checkbox name="language" value="cantonese">&nbsp;粤语&nbsp;&nbsp;
+                            <input type=checkbox name="language" value="min_nan_yu">&nbsp;闽南语&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label">兴趣爱好</div>
+                    <div class="input-container">
+                        <div>
+                            <input type=checkbox name="tags" value="摄影" required data-parsley-group="step1">&nbsp;摄影&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="美食">&nbsp;美食&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="历史">&nbsp;历史&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="体育">&nbsp;体育&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="艺术">&nbsp;艺术&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+   
+            </div>
+
+            <div class="form-step2">
+                <div class="form-record">
+                    <div class="form-label v-top">自我介绍</div>
+                    <div class="input-container">
+                        <textarea name="intro1" rows="6" cols="50" required data-parsley-group="step2" placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
+                    </div>
+                </div>
+                <div class="form-record">
+                    <div class="form-label v-top">城市印象</div>
+                    <div class="input-container">
+                        <textarea name="intro2" rows="6" cols="50" required data-parsley-group="step2" placeholder="简单介绍下你对这个城市的感受"></textarea>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="btn-submit" type="button" class="btn btn-default btn-sm btn-submit">提交</button>
+                </div>
+            </div>
+        </form>
+
+
+
+       <script>
+        </script>  
     </div>
 </body>
 
