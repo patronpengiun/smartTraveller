@@ -27,6 +27,10 @@
 				<span id="user-display"><% if (user) {%><%=user.username%><% } %></span>
 				<span class="caret"></span>
 			</a>
+			<ul class="dropdown-menu">
+	            <li id="dashboard-tab"><a<% if (user) {%> href="/guide/dashboard/<%=user._id%>"<% } %>>Dashboard</a></li>
+	            <li id="logout-tab"><a>Logout</a></li>
+			</ul>
 		</li>
 	</ul>
 </nav>
