@@ -9,7 +9,6 @@ module.exports = mongoose.model('Guide',{
 	hometown: String,
 	occupation: String,
 	phone: String,
-	email: String,
 
 	car: Boolean,
 	car_model: String,

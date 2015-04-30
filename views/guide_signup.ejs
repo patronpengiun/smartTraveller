@@ -25,6 +25,20 @@
 				<div class="form-content v-middle">
 					<form id="signup-form" method="post" action="/signup/guide/apply" enctype="multipart/form-data" data-parsley-required-message="此项为必填项">
 						<div class="form-step1 show">
+							<% if (!user) { %>
+							<div class="form-record">
+								<div class="form-label">邮箱地址</div>
+								<div class="input-container">
+									<input name="username" type="text" required data-parsley-type="email" data-parsley-group="step1"></input>
+								</div>
+							</div>
+							<div class="form-record">
+								<div class="form-label">密码</div>
+								<div class="input-container">
+									<input name="password" type="password" required data-parsley-group="step1"></input>
+								</div>
+							</div>
+							<% } %>
 							<div class="form-record">
 								<div class="form-label">姓名</div>
 								<div class="input-container">
@@ -124,12 +138,6 @@
 								<div class="form-label">电话号码</div>
 								<div class="input-container">
 									<input name="phone" type="text" required data-parsley-group="step1"></input>
-								</div>
-							</div>
-							<div class="form-record">
-								<div class="form-label">邮箱地址</div>
-								<div class="input-container">
-									<input name="email" type="text" required data-parsley-type="email" data-parsley-group="step1"></input>
 								</div>
 							</div>
 							<div class="form-record">

@@ -21,15 +21,7 @@ var Request = require('../models/request');
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
-		if (req.isAuthenticated()) {
-			res.render('index', {user: req.user});
-		} else {
-			res.render('index', {user: {username: "旅橙网"}});
-		}
-	});
-	
-	router.get('/login', function(req, res) {
-		res.render('login');
+		res.render('index', {user: req.user});
 	});
 	
 	router.post('/login', function(req, res, next) {
@@ -45,10 +37,6 @@ module.exports = function(passport) {
 				});
 			}
 		})(req, res, next);
-	});
-	
-	router.get('/signup', function(req, res) {
-		res.render('signup');
 	});
 	
 	router.post('/signup', function(req, res, next) {
@@ -76,7 +64,7 @@ module.exports = function(passport) {
 	});
 
 	router.get('/signup/guide/apply', function(req, res){
-		res.render('guide_signup');
+		res.render('guide_signup', {user: req.user});
 	});
 	
 	var _multer;
@@ -114,10 +102,23 @@ module.exports = function(passport) {
 	}
 	
 	router.post('/signup/guide/apply', _multer, 
-		function(req, res) {
-			console.log(req.files);
+		function(req, res, next) {
 			var temp = req.body;
-			//temp.username = req.user.username;
+			if (!req.isAuthenticated()) {
+				passport.authenticate('signup', function(err, user, info) {
+					if (err) {
+						return next(err);
+					} else if (!user) {
+						return res.send(info);
+					} else {
+						req.login(user, function(err) {
+							if (err) { return next(err); }
+						});
+					}
+				})(req, res, next);
+			} else {
+				temp.username = req.user.username;
+			}
 			
 			// TODO: refactor
 			temp.photo_portrait = req.files.photo_portrait.name;
@@ -141,7 +142,7 @@ module.exports = function(passport) {
 				res.render('signup_complete');
 			});
 		}
-		);
+	);
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
@@ -160,7 +161,7 @@ module.exports = function(passport) {
 							sum += reviews[i].rating;
 						};
 						var avg = sum / reviews.length;	
-						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg});
+						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg, user:req.user});
 					}
 				});
 			} 
