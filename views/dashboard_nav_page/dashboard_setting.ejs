@@ -6,13 +6,19 @@
         <h1>Settings</h1>
         <hr>
         <div class="setting-left-column">
-            <div id="guide-image-box">
-                <div id="guide-avatar">
-                    <img class="photo" src="/<%= guide.photo_portrait %>">
+            <form id="picture-form" enctype="multipart/form-data">
+                <div id="guide-image-box" class="image-section">
+                    <div id="guide-avatar">
+                        <img class="photo" src="/<%= guide.photo_portrait %>">
+                    </div>
+                    <input type="file" name="photo_portrait" required accept=".gif,.jpg,.png">
                 </div>
-            </div>
-            <div><a href="#">Edit Avatar</a></div>
 
+
+                <div class="image-section">
+                    <button id="picture-btn-submit">Change Picture</button>
+                </div>
+            </form>
 
         </div>
         <div class="setting-right-column">
@@ -100,8 +106,6 @@
     </div>
 
     <div id="setting-edit-form">
-        
-        <input id="guide-info-hidden-input" type="hidden" value='<%- JSON.stringify(guide) %>' >
 
         <form id="edit-info-form" method="post" action="/dashboard/settings/updateinfo" enctype="multipart/form-data" data-parsley-required-message="此项为必填项">
             <div class="form-step1 show">
@@ -115,7 +119,7 @@
                     <div class="form-label">性别</div>
                     <div class="input-container">
                         <div>
-                            <input name="sex" value="男" type="radio" data-parsley-group="step1" required>&nbsp;男 &nbsp;&nbsp;
+                            <input name="sex" value="男" type="radio" required>&nbsp;男 &nbsp;&nbsp;
                             <input name="sex" value="女" type="radio">&nbsp;女
                         </div>
                     </div>
@@ -123,13 +127,13 @@
                 <div class="form-record">
                     <div class="form-label">年龄</div>
                     <div class="input-container">
-                        <input data-parsley-group="step1" required name="age" value="<%= guide.age %>" type="text">
+                        <input required name="age" type="text">
                     </div>
                 </div>
                 <div class="form-record">
                     <div class="form-label">所在城市</div>
                     <div class="input-container">
-                        <select name="city" data-parsley-group="step1" required>
+                        <select name="city" required>
                             <option></option>
                             <option value="波士顿">波士顿</option>
                             <option value="费城">费城</option>
@@ -149,7 +153,7 @@
                 <div class="form-record">
                     <div class="form-label">家乡</div>
                     <div class="input-container">
-                        <select name="hometown" data-parsley-group="step1" required>
+                        <select name="hometown" required>
                             <option></option>
                             <option value="北京">北京市</option>
                             <option value="浙江省">浙江省</option>
@@ -192,9 +196,9 @@
                     <div class="form-label">职业</div>
                     <div class="input-container">
                         <div>
-                            <input name="occupation" value="学生" type="radio" data-parsley-group="step1" required>
+                            <input name="occupation" value="学生" type="radio" required>
                             &nbsp;学生&nbsp;&nbsp;
-                            <input name="occupation" value="在职" type="radio" data-parsley-group="step1" required>
+                            <input name="occupation" value="在职" type="radio" required>
                             &nbsp;在职&nbsp;&nbsp;
                             <input name="occupation" value="其他" type="radio">&nbsp;<span>其他</span>
                         </div>
@@ -203,20 +207,14 @@
                 <div class="form-record">
                     <div class="form-label">电话号码</div>
                     <div class="input-container">
-                        <input name="phone" type="text" required data-parsley-group="step1"></input>
-                    </div>
-                </div>
-                <div class="form-record">
-                    <div class="form-label">邮箱地址</div>
-                    <div class="input-container">
-                        <input name="email" type="text" required data-parsley-type="email" data-parsley-group="step1"></input>
+                        <input name="phone" type="text" required></input>
                     </div>
                 </div>
                 <div class="form-record">
                     <div class="form-label">是否有车</div>
                     <div class="input-container">
                         <div>
-                            <input name="car" value="true" type="radio" required data-parsley-group="step1">&nbsp;是&nbsp;&nbsp; 
+                            <input name="car" value="true" type="radio" required>&nbsp;是&nbsp;&nbsp; 
                             <input name="car" value="false" type="radio">&nbsp;否
                         </div>
                     </div>
@@ -249,7 +247,7 @@
                     <div class="form-label">语言</div>
                     <div class="input-container">
                         <div>
-                            <input type=checkbox name="language" value="english" required data-parsley-group="step1">&nbsp;英文&nbsp;&nbsp;
+                            <input type=checkbox name="language" value="english" required>&nbsp;英文&nbsp;&nbsp;
                             <input type=checkbox name="language" value="mandarin">&nbsp;普通话&nbsp;&nbsp;
                             <input type=checkbox name="language" value="cantonese">&nbsp;粤语&nbsp;&nbsp;
                             <input type=checkbox name="language" value="min_nan_yu">&nbsp;闽南语&nbsp;&nbsp;
@@ -260,7 +258,7 @@
                     <div class="form-label">兴趣爱好</div>
                     <div class="input-container">
                         <div>
-                            <input type=checkbox name="tags" value="摄影" required data-parsley-group="step1">&nbsp;摄影&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="摄影" required>&nbsp;摄影&nbsp;&nbsp;
                             <input type=checkbox name="tags" value="美食">&nbsp;美食&nbsp;&nbsp;
                             <input type=checkbox name="tags" value="历史">&nbsp;历史&nbsp;&nbsp;
                             <input type=checkbox name="tags" value="体育">&nbsp;体育&nbsp;&nbsp;
@@ -268,20 +266,20 @@
                         </div>
                     </div>
                 </div>
-   
+
             </div>
 
-            <div class="form-step2">
+            <div>
                 <div class="form-record">
                     <div class="form-label v-top">自我介绍</div>
                     <div class="input-container">
-                        <textarea name="intro1" rows="6" cols="50" required data-parsley-group="step2" placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
+                        <textarea name="intro1" rows="6" cols="50" required placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
                     </div>
                 </div>
                 <div class="form-record">
                     <div class="form-label v-top">城市印象</div>
                     <div class="input-container">
-                        <textarea name="intro2" rows="6" cols="50" required data-parsley-group="step2" placeholder="简单介绍下你对这个城市的感受"></textarea>
+                        <textarea name="intro2" rows="6" cols="50" required placeholder="简单介绍下你对这个城市的感受"></textarea>
                     </div>
                 </div>
                 
@@ -293,7 +291,7 @@
 
 
 
-       <script>
+        <script>
         </script>  
     </div>
 </body>

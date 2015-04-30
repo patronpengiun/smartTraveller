@@ -41,6 +41,9 @@ app.use('/', routes);
 var guideList_route = require('./routes/guideList_route')();
 app.use('/guidelist', guideList_route);
 
+var api_route = require('./routes/api')();
+app.use('/api', api_route);
+
 var server = app.listen((process.env.PORT || 5000), function() {
 	var host = server.address().address;
     var port = server.address().port;
