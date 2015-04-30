@@ -1,0 +1,143 @@
+﻿body {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+#content {
+    margin: 0 auto 0 auto;
+    height: 1500px;
+    width: 1000px;
+}
+
+#contact-panel {
+    margin-top: 20px;
+    width: 20%;
+    min-height: 200px;
+    border: solid 1px #ddd;
+    float: left;
+    padding: 1%;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 17px;
+    line-height: 1.43;
+    color: #999;
+}
+
+    #contact-panel ul {
+        list-style: none;
+        align-content: center;
+        vertical-align: central;
+        padding: 0;
+        margin: 0 auto 0 auto;
+    }
+
+        #contact-panel ul li {
+            border: solid 1px #ddd;
+            margin: 5px auto 5px auto;
+            padding: 5px 0;
+            align-content: center;
+            vertical-align: central;
+            display: block;
+            text-align: center;
+        }
+
+            #contact-panel ul li:hover {
+                background-color: #ddd;
+            }
+
+#message-panel {
+    width: 70%;
+    float: left;
+    padding: 1%;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 17px;
+    line-height: 1.43;
+    color: #999;
+}
+
+#message-post {
+    float: right;
+    width: 80%;
+    border: solid 1px #ddd;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+    #message-post textarea {
+        border: solid 1px #AAA;
+        padding: 10px;
+    }
+
+.wrap {
+    margin-top: 70px;
+}
+
+.message-container {
+    float: right;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 80%;
+    border: solid 1px #ddd;
+    min-height: 80px;
+}
+
+
+
+.time-container {
+    float: right;
+    width: 80%;
+    height: 30px;
+    padding-top: 10px;
+    color: #82888a;
+    margin-right: 40px;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    border-radius: 2px;
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    line-height: 1.43;
+    cursor: pointer;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 7px 21px;
+    font-size: 14px;
+    border: none;
+    background-color: #7fbf4d;
+    color: #fff;
+}
+
+    .btn:hover {
+        background-color: #AAA;
+    }
+
+.me, .other {
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+}
+
+.me {
+    background-color: #7fbf4d;
+}
+
+.other {
+    background-color: #ff7e82;
+}
+
+.icon-container {
+    border: solid 1px #ddd;
+    border-radius: 2px;
+    height: 60px;
+    line-height: 60px;
+    width: 60px;
+    vertical-align: central;
+    align-items: center;
+    margin-left: 15px;
+    text-align: center;
+}

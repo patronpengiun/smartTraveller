@@ -16,7 +16,9 @@ var s3 = new AWS.S3();
 var Guide = require('../models/guide');
 var Place = require('../models/place');
 var Review = require('../models/review');
-var User = require('../models/user')
+var User = require('../models/user');
+var Message = require('../models/message');
+var Request = require('../models/request');
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
@@ -116,31 +118,31 @@ module.exports = function(passport) {
 		function(req, res) {
 			console.log(req.files);
 			var temp = req.body;
-				//temp.username = req.user.username;
-				
-				// TODO: refactor
-				temp.photo_portrait = req.files.photo_portrait.name;
-				temp.photo_view = [];
-				for (var i=0;i<req.files.photo_view.length;i++) {
-					temp.photo_view.push(req.files.photo_view[i].name);
-				}
-				if (req.files.photo_view.name) {
-					temp.photo_view.push(req.files.photo_view.name);
-				}
-				temp.photo_life = [];
-				for (var i=0;i<req.files.photo_life.length;i++) {
-					temp.photo_life.push(req.files.photo_life[i].name);
-				}
-				if (req.files.photo_life.name) {
-					temp.photo_life.push(req.files.photo_life.name);
-				}
-				
-				var newGuide = new Guide(temp);
-				newGuide.save(function(err) {
-					res.render('signup_complete');
-				});
+			//temp.username = req.user.username;
+			
+			// TODO: refactor
+			temp.photo_portrait = req.files.photo_portrait.name;
+			temp.photo_view = [];
+			for (var i=0;i<req.files.photo_view.length;i++) {
+				temp.photo_view.push(req.files.photo_view[i].name);
 			}
-			);
+			if (req.files.photo_view.name) {
+				temp.photo_view.push(req.files.photo_view.name);
+			}
+			temp.photo_life = [];
+			for (var i=0;i<req.files.photo_life.length;i++) {
+				temp.photo_life.push(req.files.photo_life[i].name);
+			}
+			if (req.files.photo_life.name) {
+				temp.photo_life.push(req.files.photo_life.name);
+			}
+			
+			var newGuide = new Guide(temp);
+			newGuide.save(function(err) {
+				res.render('signup_complete');
+			});
+		}
+		);
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
@@ -194,5 +196,160 @@ module.exports = function(passport) {
 		});
 	});
 	
+	// ------------ for request page ----------------
+	router.post('/request/:guide_id', function(req, res) {
+		console.log(req.params.guide_id);
+		// check if the user is loged in, if not, send warning and return
+		if(req.user == undefined){
+			res.send('Please login first.');
+			return;
+		}
+
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+			// check if the guide can be found with guide id
+			// if not, send warning and return
+			if (err || guides.length == 0) {
+				res.send("Oops...No such guide, perhaps wrong guide id >_<");
+				return;
+			} 
+			// 
+			else {
+				var newRequest = new Request(req.body);
+				newRequest.customer_Username = req.user.username;	
+				newRequest.guideId = req.params.guide_id;
+				newRequest.save(function(err) {
+					res.send("Request successfully submitted.");
+			});
+			} 
+		});
+	});
+
+	// Dashboard page
+	router.get('/guide/dashboard/:guide_id', function(req, res) {
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+			if (err || guides.length == 0) {
+				res.send("Oops...No such page, perhaps wrong guide id >_<");
+			} else {
+
+				// guide hasn't been used yet, maybe useful for other nav sections.......
+				res.render('guide_dashboard', {guide: guides[0], guideId: req.params.guide_id});
+			}
+		});
+	});
+
+	// For dashboard nav sections
+	router.get('/dashboard_review/:guide_id', function(req, res) {
+		Review.find({reviewee_id:req.params.guide_id}, function(err, reviews) {
+			if (err) {
+				res.send("Oops...No such page, perhaps wrong guide id >_<");
+			} else {
+				var sum = 0;
+				for (var i = reviews.length - 1; i >= 0; i--) {
+					sum += reviews[i].rating;
+				};
+				var avg = (sum / reviews.length).toPrecision(3);	
+				res.render('dashboard_nav_page/dashboard_review', {reviewList: reviews, avgRating: avg});
+			}
+		});
+	});
+
+	router.get('/dashboard_setting/:guide_id', function(req, res) {
+		Guide.find({_id:req.params.guide_id}, function(err, guides) {
+			if (err || guides.length == 0) {
+				res.send("Oops...No such page, perhaps wrong guide id >_<");
+			} else {
+				res.render('dashboard_nav_page/dashboard_setting', {guide: guides[0]});
+			}
+		});
+	});
+
+	router.get('/dashboard_request/:guide_id', function(req, res) {
+		res.render('dashboard_nav_page/dashboard_request');
+	});
+	
+/*************routers for inbox*****************************************************************/
+	router.get('/inbox', function(req, res){
+		if (req.isAuthenticated()){
+			Message.find({user:req.user._id}, function(err, messages) {
+				if(err){
+					res.send("inbox error");
+				} else{
+					var contactTable = [];
+					var me = req.user._id.valueOf();
+					for(var i = 0; i < messages.length; i++){
+						message = messages[i];
+						if(!contactTable[message.guide] || contactTable[message.guide][1] < message.timeStamp){
+								contactTable[message.guide] = [message.guideName, message.timeStamp];
+							}
+					}
+					var contacts = [];
+					for(var rec in contactTable){
+						contacts.push([contactTable[rec][0], contactTable[rec][1], rec]);
+					}
+					console.log(contacts);
+					contacts.sort(function(a, b){return b[1] - a[1]});
+					res.render('inbox', {contacts : contacts});
+				}
+			});
+		} else {
+			res.redirect('/');
+		}
+	});
+	router.get('/inbox/:mailee_id', function(req, res){
+		if (req.isAuthenticated()){
+			Guide.find({_id:req.params.mailee_id}, function(err, usr) {
+				if (err || usr === 'undefined') {
+					res.send("Oops...No such person can be mailed");
+				} else {
+					var mailee = usr[0];
+					Message.find({user:req.user._id.valueOf()}, function(err, messages) {
+						if(err){
+							res.send("inbox error");
+						} else{
+							var contactTable = [];
+							var theMessages = [];
+							for(var i = 0; i < messages.length; i++){
+								message = messages[i];
+								if(message.guide === req.params.mailee_id){
+									if(message.sender === mailee.id.valueOf()){
+										theMessages.push([mailee.name, false, message.content, message.timeStamp]);
+									}
+									else{
+										theMessages.push([req.user.username, true, message.content, message.timeStamp]);
+									}
+								}
+								if(!contactTable[message.guide] || contactTable[message.guide][1] < message.timeStamp){
+										contactTable[message.guide] = [message.guideName, message.timeStamp];
+									}
+							}
+							var contacts = [];
+							for(var rec in contactTable){
+								contacts.push([contactTable[rec][0], contactTable[rec][1], rec]);
+							}
+							contacts.sort(function(a, b){return b[1] - a[1]});
+							res.render('inbox', {contacts: contacts, messages: theMessages, mailee_id : req.params.mailee_id, mailee_name:mailee.name})
+						}
+					}).sort( { timeStamp: -1 } );
+				}
+			});
+		} else {
+			res.redirect('/');
+		}
+	});
+	router.post('/inbox/send/', function(req, res) {
+		if (req.isAuthenticated()){
+			var temp = req.body;
+			temp["user"] = req.user._id;
+			temp["sender"] = req.user._id;
+			var newMsg = new Message(temp);
+			newMsg.save(function(err) {
+				res.redirect('/inbox/'+temp["guide"]);
+			});
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
 	return router;
 }

@@ -1,0 +1,79 @@
+<nav class="navbar navbar-default" id="nav-top">
+	<div class="navbar-header">
+		<div class="navbar-brand">Smart Traveller</div>
+	</div>
+	<form class="navbar-form navbar-left" method="GET" action="/guidelist">
+		<div class="form-group">
+			<input class="form-control" name="city" placeholder="Destination" type="text" id="destination">
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="startDate" placeholder="Start Date" type="text" id="start-date">
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="endDate" placeholder="End Date" type="text" id="end-date">
+		</div>
+		<button class="btn btn-default" type="submit">Submit</button>
+	</form>
+	<div id="login-control">
+		<a href="/signup/guide/qa">
+		<button class="btn btn-default navbar-btn pull-right">Apply To Be Guide</button>
+		</a>
+		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">Sign Up</button>
+		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">Log In</button>
+		
+	</div>
+	<ul id="user-control" class="nav navbar-nav pull-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+				<span id="user-display"></span>
+				<span class="caret"></span>
+			</a>
+		</li>
+	</ul>
+</nav>
+
+<div class="modal fade" id="login-modal">
+	<div class="modal-dialog login-modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="modal-title">Please Log In</span>
+				<button class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="error-wrapper">
+					Your email and password don't match, please try again.
+				</div>
+				<div id="login-div">
+					<input type="text" id="login-username" class="form-control" placeholder="Email"></input>
+					<input type="password" id="login-password" class="form-control" placeholder="password"></input>
+					<input type="button" id="login-btn" class="btn btn-default" value="Log In"></input>
+				</div>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+		
+<div class="modal fade" id="signup-modal">
+	<div class="modal-dialog login-modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="modal-title">Please sign up</span>
+				<button class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="error-wrapper">
+					The email exists.
+				</div>
+				<div id="signup-div">
+					<input type="text" id="signup-username" class="form-control" placeholder="Email"></input>
+					<input type="password" id="signup-password" class="form-control" placeholder="password"></input>
+					<input type="button" id="signup-btn" class="btn btn-default" value="sign up"></input>
+				</div>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>

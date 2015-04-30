@@ -1,0 +1,98 @@
+h2 {
+	margin-top: 10px;
+	color: #fc7c1a;
+	font-size: 26px;
+}
+
+hr {
+	clear: both;
+}
+
+.hide-btn {
+	background: url('/icon/back.png');
+	/*background-size: 90px;*/
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.control-panel {
+	float: left;
+	width: 5%;
+}
+
+#display-area {
+	float: left;
+	padding-top: 40px;
+	padding-right: 5%;
+	width: 95%;
+}
+
+/* For star section */
+.star-section > h2 {
+	float: left;
+}
+
+.star-section #review-star {
+	float: left;
+}
+
+.star-section #review-star {
+	background-image: url('/icon/rating_stars.png');
+	/*float: left;*/
+  	width: 200px;
+  	height: 40px;
+  	/*position: relative;*/
+  	top: 2px;
+}
+
+.star-score {
+	clear: both;
+	font-size: 22px;
+	color: #4a4a4a;
+}
+
+
+/* For review text section */
+.single-review > .review-icon {
+	float: left;
+}
+
+.review-icon > #reviewer-icon {
+	width:70px;
+	height:70px;
+	border-radius: 50%;
+}
+
+.single-review > .review-text {
+	margin-left: 10%;
+}
+
+.single-review > .review-date {
+	clear: both;
+	float: right;
+	font-size: 11px;
+	margin-bottom: 10px;
+}
+
+#review-box > hr {
+	clear: both;
+}
+
+
+/* For setting nav section */
+.setting-left-column {
+	float: left;
+	width: 50%;
+}
+
+.setting-right-column {
+	float: right;
+	width: 50%;
+}
+
+.photo {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	max-width: 100%;
+	max-height: 450px;
+}
