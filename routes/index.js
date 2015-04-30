@@ -271,10 +271,8 @@ module.exports = function(passport) {
 	router.post('/dashboard/settings/updateinfo', _multer, function(req, res) {
 		console.log("Submit edit info to update guide...");
 		console.log(req.body);
-		var query = {_id: req.body.id};
-		Guide.update(query, {name: req.body.name}, function(err){
-			// perhaps use AJAX to return some respond and then use 
-			// javascript to click settings-nav-bar
+		var query = {username: req.user.username};
+		Guide.update(query, req.body, function(err) {
 			res.send(200);
 		});
 		
