@@ -29,9 +29,7 @@ $(function() {
 
 });
 
-
-
-$(document).ready( function() {
+$(document).ready(function() {
   	$('#signup-form input[name=occupation]').on('change', function() {
   		if($('input[name=occupation]:checked').val() == '其他'){
 			$(this).parent().append($('<input class="showup-text-occupation" id="occupation_input" type="text" required data-parsley-group="step1">'));

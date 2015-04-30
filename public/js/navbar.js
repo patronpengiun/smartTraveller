@@ -27,6 +27,14 @@ $(function() {
 
 	$('#start-date').datepicker();
 	$('#end-date').datepicker();
+	
+	$('#logout-tab').click(function() {
+		$.ajax("/logout", {
+			type: "POST"
+		}).done(function(res) {
+			alert(res.message);
+		})
+	})
 });
 
 function loginCallback(data) {
@@ -34,7 +42,8 @@ function loginCallback(data) {
 		$("#login-modal").modal("hide");
 		$('#login-control').addClass("hidden");
 		$('#user-display').text(data.user.username);
-		$('#user-control').removeClass("hidden")
+		$('#user-control').removeClass("hidden");
+		$('#dashboard-tab a').attr("href","/guide/dashboard/"+data.user._id);
 	} else {
 		$("#login-modal .error-wrapper").show();
 		$('#login-username').val("");
@@ -49,6 +58,7 @@ function signupCallback(data) {
 		$('#login-control').addClass("hidden");
 		$('#user-display').text(data.user.username);
 		$('#user-control').removeClass("hidden");
+		$('#dashboard-tab a').attr("href","/guide/dashboard/"+data.user._id);
 	} else if (data.message == "exist") {
 		$("#signup-modal .error-wrapper").show();
 		$('#signup-username').val("");
