@@ -108,6 +108,19 @@ $(document).ready(function() {
 					});
 				});
 			});
+
+			$('#picture-btn-submit').click(function(e) {
+				$.ajax({
+					type: 'POST',
+					contentType: false,
+					processData: false,
+					url: "/dashboard/settings/updateinfo",
+					data: new FormData($('#picture-form')[0]),
+					success: function(response) {
+						$('#nav-setting').trigger("click");		// !!! Hasn't been triggered !!! 
+					}
+				});
+			});
 		});
 	});
 
@@ -117,6 +130,4 @@ $(document).ready(function() {
 		});
 	});
 
-
-	
 });

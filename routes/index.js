@@ -12,6 +12,7 @@ AWS.config.update({
 	secretAccessKey: AWS_SECRET_KEY,
 });
 var s3 = new AWS.S3();
+var fs = require('fs');
 
 var Guide = require('../models/guide');
 var Place = require('../models/place');
@@ -142,7 +143,7 @@ module.exports = function(passport) {
 				res.render('signup_complete');
 			});
 		}
-	);
+		);
 
 	// guide page, with guide_id given by guide list page
 	router.get('/guidepage/:guide_id', function(req, res) {
@@ -219,7 +220,7 @@ module.exports = function(passport) {
 				newRequest.guideId = req.params.guide_id;
 				newRequest.save(function(err) {
 					res.send("Request successfully submitted.");
-			});
+				});
 			} 
 		});
 	});
@@ -270,11 +271,26 @@ module.exports = function(passport) {
 	// For dashboard settings edit info
 	router.post('/dashboard/settings/updateinfo', _multer, function(req, res) {
 		console.log("Submit edit info to update guide...");
-		console.log(req.body);
+		console.log(req.files);
 		var query = {username: req.user.username};
-		Guide.update(query, req.body, function(err) {
-			res.send(200);
-		});
+		var update = req.body;
+		if (req.files && req.files.photo_portrait) {
+			update.photo_portrait = req.files.photo_portrait.name;
+			Guide.find(query, function(err, guides) {
+				var oldName = guides[0].photo_portrait;
+				Guide.update(query, update, function(err) {
+					fs.unlink('/upload/' + oldName, function(err) {
+  						console.log('successfully deleted old avatar: ' + oldName);
+					});
+				});
+
+			});
+
+		} else {
+			Guide.update(query, update, function(err) {
+				res.send(200);
+			});
+		}
 		
 	});
 

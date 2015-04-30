@@ -6,13 +6,19 @@
         <h1>Settings</h1>
         <hr>
         <div class="setting-left-column">
-            <div id="guide-image-box">
-                <div id="guide-avatar">
-                    <img class="photo" src="/<%= guide.photo_portrait %>">
+            <form id="picture-form" enctype="multipart/form-data">
+                <div id="guide-image-box" class="image-section">
+                    <div id="guide-avatar">
+                        <img class="photo" src="/<%= guide.photo_portrait %>">
+                    </div>
+                    <input type="file" name="photo_portrait" required accept=".gif,.jpg,.png">
                 </div>
-            </div>
-            <div><a href="#">Edit Avatar</a></div>
 
+
+                <div class="image-section">
+                    <button id="picture-btn-submit">Change Picture</button>
+                </div>
+            </form>
 
         </div>
         <div class="setting-right-column">
@@ -260,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-   
+
             </div>
 
             <div>
@@ -285,7 +291,7 @@
 
 
 
-       <script>
+        <script>
         </script>  
     </div>
 </body>
