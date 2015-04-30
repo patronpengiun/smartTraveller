@@ -29,6 +29,11 @@ module.exports = function(passport){
                         // set the user's local credentials
                         newUser.username = username;
                         newUser.password = createHash(password);
+						if (req.url == '/signup/guide/apply') {
+							newUser.role = 'guide';
+						} else {
+							newUser.role = 'user';
+						}
 
                         // save the user
                         newUser.save(function(err) {
