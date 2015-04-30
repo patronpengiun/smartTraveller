@@ -14,14 +14,14 @@
 		</div>
 		<button class="btn btn-default" type="submit">Submit</button>
 	</form>
-	<div id="login-control">
+	<div id="login-control" <% if (user) {%> class="hidden" <% } %>>
 		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">注册</button>
 		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">登陆</button>
 	</div>
-	<ul id="user-control" class="nav navbar-nav pull-right">
+	<ul id="user-control" class="nav navbar-nav pull-right <% if (!user) {%>hidden<% } %>">
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-				<span id="user-display"></span>
+				<span id="user-display"><% if (user) {%><%=user.username%><% } %></span>
 				<span class="caret"></span>
 			</a>
 		</li>

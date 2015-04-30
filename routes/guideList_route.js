@@ -20,7 +20,7 @@ module.exports = function() {
 	    guides.forEach(function(guide) {
 	      guideMap.push(guide);
 	    });
-	    res.render('guide_list', {guideList: guideMap});
+	    res.render('guide_list', {guideList: guideMap, user: req.user});
 	  });
 	});
 
