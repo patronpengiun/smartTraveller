@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default" id="nav-top">
 	<div class="navbar-header">
-		<div class="navbar-brand">旅橙网</div>
+		<div class="navbar-brand">Smart Traveller</div>
 	</div>
 	<form class="navbar-form navbar-left" method="GET" action="/guidelist">
 		<div class="form-group">
@@ -15,8 +15,11 @@
 		<button class="btn btn-default" type="submit">Submit</button>
 	</form>
 	<div id="login-control" <% if (user) {%> class="hidden" <% } %>>
-		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">注册</button>
-		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">登陆</button>
+		<a href="/signup/guide/qa">
+			<button class="btn btn-default navbar-btn pull-right">Apply To Be Guide</button>
+		</a>
+		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#signup-modal">Sign Up</button>
+		<button class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#login-modal">Log In</button>
 	</div>
 	<ul id="user-control" class="nav navbar-nav pull-right <% if (!user) {%>hidden<% } %>">
 		<li class="dropdown">
@@ -32,17 +35,17 @@
 	<div class="modal-dialog login-modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<span class="modal-title">请登录</span>
+				<span class="modal-title">Please Log In</span>
 				<button class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<div class="error-wrapper">
-					您输入的邮箱或密码有误，请重新登录
+					Your email and password don't match, please try again.
 				</div>
 				<div id="login-div">
-					<input type="text" id="login-username" class="form-control" placeholder="邮箱"></input>
-					<input type="password" id="login-password" class="form-control" placeholder="密码"></input>
-					<input type="button" id="login-btn" class="btn btn-default" value="登录"></input>
+					<input type="text" id="login-username" class="form-control" placeholder="Email"></input>
+					<input type="password" id="login-password" class="form-control" placeholder="password"></input>
+					<input type="button" id="login-btn" class="btn btn-default" value="Log In"></input>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -55,17 +58,17 @@
 	<div class="modal-dialog login-modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<span class="modal-title">请注册</span>
+				<span class="modal-title">Please sign up</span>
 				<button class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<div class="error-wrapper">
-					您输入的邮箱已注册，请重新注册
+					The email exists.
 				</div>
 				<div id="signup-div">
-					<input type="text" id="signup-username" class="form-control" placeholder="邮箱"></input>
-					<input type="password" id="signup-password" class="form-control" placeholder="密码"></input>
-					<input type="button" id="signup-btn" class="btn btn-default" value="注册"></input>
+					<input type="text" id="signup-username" class="form-control" placeholder="Email"></input>
+					<input type="password" id="signup-password" class="form-control" placeholder="password"></input>
+					<input type="button" id="signup-btn" class="btn btn-default" value="sign up"></input>
 				</div>
 			</div>
 			<div class="modal-footer">
