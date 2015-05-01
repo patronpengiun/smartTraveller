@@ -279,13 +279,13 @@ module.exports = function(passport) {
 					for(var i = 0; i < messages.length; i++){
 						message = messages[i];
 						if(!contactTable[message.guide]){
-								contactTable[message.guide] = [message.guideName, message.timeStamp, message.isRead];
+								contactTable[message.guide] = [message.guideName, message.timeStamp, 0];
 						}
 						else if(contactTable[message.guide][1] < message.timeStamp){
 								contactTable[message.guide][1] = message.timeStamp;
 						}
-						else if(!message.isRead){
-							contactTable[message.guide][2] = false;
+						else if(!message.isRead && message.sender !== req.user._id.valueOf()){
+							contactTable[message.guide][2] = contactTable[message.guide][2] + 1;
 						}
 					}
 					var contacts = [];
@@ -316,7 +316,17 @@ module.exports = function(passport) {
 							var theMessages = [];
 							for(var i = 0; i < messages.length; i++){
 								message = messages[i];
+								if(!contactTable[message.guide]){
+									contactTable[message.guide] = [message.guideName, message.timeStamp, 0];
+								}
+								else if(contactTable[message.guide][1] < message.timeStamp){
+										contactTable[message.guide][1] = message.timeStamp;
+								}
+								else if(!message.isRead && message.sender !== req.user._id.valueOf()){
+									contactTable[message.guide][2] = contactTable[message.guide][2] + 1;
+								}
 								if(message.guide === req.params.mailee_id){
+									contactTable[message.guide][2] == 0;
 									if(!message.isRead){
 										message.isRead = true;
 										message.save(function(err) {});
@@ -328,13 +338,10 @@ module.exports = function(passport) {
 										theMessages.push([req.user.username, true, message.content, message.timeStamp]);
 									}
 								}
-								if(!contactTable[message.guide] || contactTable[message.guide][1] < message.timeStamp){
-										contactTable[message.guide] = [message.guideName, message.timeStamp];
-									}
 							}
 							var contacts = [];
 							for(var rec in contactTable){
-								contacts.push([contactTable[rec][0], contactTable[rec][1], rec]);
+								contacts.push([contactTable[rec][0], contactTable[rec][1], rec, contactTable[rec][2]]);
 							}
 							contacts.sort(function(a, b){return b[1] - a[1]});
 							res.render('inbox', {contacts: contacts, messages: theMessages, mailee_id : req.params.mailee_id, mailee_name:mailee.name})
