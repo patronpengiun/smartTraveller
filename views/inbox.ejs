@@ -2,54 +2,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Inbox</title>
-        <link rel="stylesheet" href="/style/bootstrap.min.css">
-        <link rel="stylesheet" href="/style/common.css">
-        <link rel="stylesheet" href="/style/bootstrap-datepicker.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/bootstrap-datepicker.min.js"></script>
-		 <script src="/js/navbar.js"></script>
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/common.css">
+    <link rel="stylesheet" href="/style/bootstrap-datepicker.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/navbar.js"></script>
     <link rel="stylesheet" href="/style/inbox.css">
 </head>
 <body>
-	<% include parts/nav %>
-    <div id="content">
-        <div id="contact-panel">
-            <ul>
-            	<% for(var i = 0; i < contacts.length; i++) {%>
-                <li><span><a class="reserve-button button" href='/inbox/<%= contacts[i][2] %>'><%= contacts[i][0] %></span></a></li>
-				<% } %>
-            </ul>
-        </div>
-        <% if(typeof mailee_id != 'undefined') {%>
-        <form id="sendMessage-form" method="post" action="/inbox/send/">
+<% include parts/nav %>
+<div id="content">
+    <div id="contact-panel">
+        <ul>
+            <% for(var i = 0; i < contacts.length; i++) { %>
+            <li><span><a class="reserve-button button"
+                         href='/inbox/<%= contacts[i][2] %>'> <%= contacts[i][0] %></a></span></li>
+            <% } %>
+        </ul>
+    </div>
+
+    <% if(typeof mailee_id != 'undefined') { %>
+    <form id="sendMessage-form" method="post" action="/inbox/send/">
         <input id="maileeId" type="hidden" name="guide" value="<%= mailee_id %>">
         <input id="maileeName" type="hidden" name="guideName" value="<%= mailee_name %>">
+
         <div id="message-panel">
             <div>
                 <div id="message-post">
                     <textarea cols="64" rows="4" name="content"></textarea>
-                    <input type="submit" value="Send Message" class="btn" />
+                    <input type="submit" value="Send Message" class="btn"/>
                 </div>
                 <div style="clear:both"></div>
             </div>
-            <% for(var i = 0; i < messages.length; i++) {%>
+            <% for(var i = 0; i < messages.length; i++) { %>
             <div class="wrap">
                 <div class="message-container">
                     <p><%= messages[i][2] %></p>
                 </div>
-                <% if (messages[i][1]) {%>
-                	<div class="icon-container me"><span></span><%= messages[i][0] %></div>
+                <% if (messages[i][1]) { %>
+                <div class="icon-container me">Me</div>
                 <% } else { %>
-                	<div class="icon-container other"><span>Jo</span><%= messages[i][0] %></div>
+                <div class="icon-container other">><%= messages[i][0] %></div>
                 <% } %>
                 <div style="clear:both"></div>
                 <div class="time-container"><%= messages[i][3] %></div>
             </div>
             <% } %>
         </div>
-        </form>
-        <% } %>
+    </form>
+    <% } %>
+</div>
 </body>
 </html>

@@ -16,39 +16,45 @@
     border: solid 1px #ddd;
     float: left;
     padding: 1%;
-    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 17px;
     line-height: 1.43;
     color: #999;
 }
 
-    #contact-panel ul {
-        list-style: none;
-        align-content: center;
-        vertical-align: central;
-        padding: 0;
-        margin: 0 auto 0 auto;
-    }
+#contact-panel ul {
+    list-style: none;
+    align-content: center;
+    vertical-align: central;
+    padding: 0;
+    margin: 0 auto 0 auto;
+}
 
-        #contact-panel ul li {
-            border: solid 1px #ddd;
-            margin: 5px auto 5px auto;
-            padding: 5px 0;
-            align-content: center;
-            vertical-align: central;
-            display: block;
-            text-align: center;
-        }
+#contact-panel ul li {
+    border: solid 1px #ddd;
+    margin: 5px auto 5px auto;
+    padding: 5px 0;
+    align-content: center;
+    vertical-align: central;
+    display: block;
+    text-align: center;
+}
 
-            #contact-panel ul li:hover {
-                background-color: #ddd;
-            }
+#contact-panel ul li:hover {
+    background-color: #ddd;
+}
+
+.contact-select {
+    background-color: #999;
+    color: #fff;
+    font-weight: bold;
+}
 
 #message-panel {
     width: 70%;
     float: left;
     padding: 1%;
-    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 17px;
     line-height: 1.43;
     color: #999;
@@ -56,17 +62,17 @@
 
 #message-post {
     float: right;
-    width: 80%;
+    width: 87%;
     border: solid 1px #ddd;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 20px;
 }
 
-    #message-post textarea {
-        border: solid 1px #AAA;
-        padding: 10px;
-    }
+#message-post textarea {
+    border: solid 1px #AAA;
+    padding: 10px;
+}
 
 .wrap {
     margin-top: 70px;
@@ -74,14 +80,11 @@
 
 .message-container {
     float: right;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 80%;
+    padding: 8px 8px;
+    width: 87%;
     border: solid 1px #ddd;
     min-height: 80px;
 }
-
-
 
 .time-container {
     float: right;
@@ -90,9 +93,10 @@
     padding-top: 10px;
     color: #82888a;
     margin-right: 40px;
+    font-size: 14px;
 }
 
-.btn {
+#message-panel .btn {
     display: inline-block;
     margin-bottom: 0;
     border-radius: 2px;
@@ -102,7 +106,7 @@
     font-weight: bold;
     line-height: 1.43;
     cursor: pointer;
-    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 7px 21px;
     font-size: 14px;
     border: none;
@@ -110,12 +114,12 @@
     color: #fff;
 }
 
-    .btn:hover {
-        background-color: #AAA;
-    }
+#message-panel .btn:hover {
+    background-color: #AAA;
+}
 
 .me, .other {
-    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     color: #fff;
     font-size: 25px;
