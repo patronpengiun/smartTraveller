@@ -278,13 +278,19 @@ module.exports = function(passport) {
 					var me = req.user._id.valueOf();
 					for(var i = 0; i < messages.length; i++){
 						message = messages[i];
-						if(!contactTable[message.guide] || contactTable[message.guide][1] < message.timeStamp){
-								contactTable[message.guide] = [message.guideName, message.timeStamp];
-							}
+						if(!contactTable[message.guide]){
+								contactTable[message.guide] = [message.guideName, message.timeStamp, message.isRead];
+						}
+						else if(contactTable[message.guide][1] < message.timeStamp){
+								contactTable[message.guide][1] = message.timeStamp;
+						}
+						else if(!message.isRead){
+							contactTable[message.guide][2] = false;
+						}
 					}
 					var contacts = [];
 					for(var rec in contactTable){
-						contacts.push([contactTable[rec][0], contactTable[rec][1], rec]);
+						contacts.push([contactTable[rec][0], contactTable[rec][1], rec, contactTable[rec][2]]);
 					}
 					console.log(contacts);
 					contacts.sort(function(a, b){return b[1] - a[1]});
@@ -311,6 +317,10 @@ module.exports = function(passport) {
 							for(var i = 0; i < messages.length; i++){
 								message = messages[i];
 								if(message.guide === req.params.mailee_id){
+									if(!message.isRead){
+										message.isRead = true;
+										message.save(function(err) {});
+									}
 									if(message.sender === mailee.id.valueOf()){
 										theMessages.push([mailee.name, false, message.content, message.timeStamp]);
 									}
