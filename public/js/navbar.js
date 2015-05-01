@@ -32,9 +32,11 @@ $(function() {
 		$.ajax("/logout", {
 			type: "POST"
 		}).done(function(res) {
-			alert(res.message);
-		})
-	})
+			$('#login-control').removeClass("hidden");
+			$('#user-display').text("");
+			$('#user-control').addClass("hidden");
+		});
+	});
 });
 
 function loginCallback(data) {
@@ -44,6 +46,11 @@ function loginCallback(data) {
 		$('#user-display').text(data.user.username);
 		$('#user-control').removeClass("hidden");
 		$('#dashboard-tab a').attr("href","/guide/dashboard/"+data.user._id);
+		if (data.user.role == "guide") {
+			$('#guide-apply-tab').addClass("hidden");
+		} else {
+			$('#guide-apply-tab').removeClass("hidden");
+		}
 	} else {
 		$("#login-modal .error-wrapper").show();
 		$('#login-username').val("");
@@ -59,6 +66,11 @@ function signupCallback(data) {
 		$('#user-display').text(data.user.username);
 		$('#user-control').removeClass("hidden");
 		$('#dashboard-tab a').attr("href","/guide/dashboard/"+data.user._id);
+		if (data.user.role == "guide") {
+			$('#guide-apply-tab').addClass("hidden");
+		} else {
+			$('#guide-apply-tab').removeClass("hidden");
+		}
 	} else if (data.message == "exist") {
 		$("#signup-modal .error-wrapper").show();
 		$('#signup-username').val("");
