@@ -140,8 +140,16 @@ module.exports = function(passport) {
 			
 			var newGuide = new Guide(temp);
 			newGuide.save(function(err) {
-				res.render('signup_complete');
+				User.update({username: newGuide.username}, {role: "guide"}, function(err) {
+					if (err) {
+						res.sendStatus(500);
+					} else {
+						res.render('signup_complete');
+					}
+				});
 			});
+			
+			
 		}
 		);
 

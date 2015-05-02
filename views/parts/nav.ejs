@@ -28,8 +28,15 @@
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu">
-	            <li id="dashboard-tab"><a<% if (user) {%> href="/guide/dashboard/<%=user._id%>"<% } %>>Dashboard</a></li>
-	            <li id="logout-tab"><a>Logout</a></li>
+	            <li id="dashboard-tab">
+					<a<% if (user) {%> href="/guide/dashboard/<%=user._id%>"<% } %>>Dashboard</a>
+				</li>
+				<li id="guide-apply-tab" <% if (user && user.role == "guide") { %>class="hidden"<% } %>>
+					<a href="/signup/guide/qa">Become Guide</a>
+				</li>
+	            <li id="logout-tab">
+					<a>Logout</a>
+				</li>
 			</ul>
 		</li>
 	</ul>
