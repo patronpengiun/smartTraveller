@@ -30,58 +30,58 @@
                     </div>
                     <div class="info-section">
                         <div class="info-item">
-                            Name：<%= guide.name %>
+                            <b>Name：</b><%= guide.name %>
                         </div>
                         <div class="info-item">
-                            City：<%= guide.city %>
+                            <b>City：</b><%= guide.city %>
                         </div>
                         <div class="info-item">
-                            Occupation：<%= guide.occupation %>
+                            <b>Occupation：</b><%= guide.occupation %>
                         </div>
                         <div class="info-item">
-                            性别：<%= guide.sex %>
+                            <b>Sex：</b><%= guide.sex %>
                         </div>
                         <div class="info-item">
-                            年龄：<%= guide.age %>
+                            <b>Age：</b><%= guide.age %>
                         </div>
                         <div class="info-item">
-                            家乡：<%= guide.hometown %>
+                            <b>Hometown：</b><%= guide.hometown %>
                         </div>
                         <div class="info-item">
-                            电话：<%= guide.phone %>
+                            <b>Phone：</b><%= guide.phone %>
                         </div>
                         <div class="info-item">
-                            语言：<%= guide.language %>
+                            <b>Language：</b><%= guide.language %>
                         </div>
                     </div>
                     <br>
                     <% if (guide.car) { %>
-                    <p class="guide-car-title">私人用车：提供 </p>
+                    <div class="info-item"><b>Personal Car:</b> Provide </div>
                     <div class="section group">
                         <div class="info-item">
-                            品牌：<%= guide.car_brand %>
+                            <b>Brand：</b><%= guide.car_brand %>
                         </div>
                         <div class="info-item">
-                            年份：<%= guide.car_year %>
+                            <b>Year：</b><%= guide.car_year %>
                         </div>
                         <div class="info-item">
-                            型号：<%= guide.car_model %>
+                            <b>Model：</b><%= guide.car_model %>
                         </div>
                     </div>
                     <% } else { %>
-                    <p class="guide-car-title">私人用车：不提供 </p>
+                    <div class="info-item"><b>Personal Car:</b> Not Provide </div>
                     <% } %>
                 </div>
                 <div class="guide-tag">
-                    <p class="guide-tag-text">
-                        兴趣：
+                    <div class="info-item">
+                        <b>Tags：</b>
                         <% for (var i = 0; i < guide.tags.length; i++) { %>
                         <%= guide.tags[i] %>
                         <% if (i != guide.tags.length - 1) { %>
                         /
                         <% } %>
                         <% } %>
-                    </p>
+                    </div>
                 </div>
                 <hr>
                 <div id="self-intro-panel">
@@ -111,13 +111,13 @@
         <form id="edit-info-form" method="post" action="/dashboard/settings/updateinfo" enctype="multipart/form-data" data-parsley-required-message="此项为必填项">
             <div>
                 <div class="form-record">
-                    <div class="form-label">姓名</div>
+                    <div class="form-label">Name</div>
                     <div class="input-container">
                         <input id="name-input" required name="name" type="text">
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">性别</div>
+                    <div class="form-label">Sex</div>
                     <div class="input-container">
                         <div>
                             <input name="sex" value="男" type="radio" required>&nbsp;男 &nbsp;&nbsp;
@@ -126,17 +126,17 @@
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">年龄</div>
+                    <div class="form-label">Age</div>
                     <div class="input-container">
                         <input required name="age" type="text">
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">所在城市</div>
+                    <div class="form-label">City</div>
                     <div class="input-container">
                         <select name="city" required>
                             <option></option>
-                            <option value="波士顿">波士顿</option>
+                            <option value="波士顿">Boston</option>
                             <option value="费城">费城</option>
                             <option value="华盛顿">华盛顿</option>
                             <option value="旧金山">旧金山</option>
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">家乡</div>
+                    <div class="form-label">Hometown</div>
                     <div class="input-container">
                         <select name="hometown" required>
                             <option></option>
@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">职业</div>
+                    <div class="form-label">Occupation</div>
                     <div class="input-container">
                         <div>
                             <input name="occupation" value="学生" type="radio" required>
@@ -206,13 +206,13 @@
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">电话号码</div>
+                    <div class="form-label">Phone</div>
                     <div class="input-container">
                         <input name="phone" type="text" required></input>
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">是否有车</div>
+                    <div class="form-label">Personal Car</div>
                     <div class="input-container">
                         <div>
                             <input name="car" value="true" type="radio" required>&nbsp;是&nbsp;&nbsp; 
@@ -221,7 +221,7 @@
                     </div>
                 </div>
                 <div class="form-record showup-text-car hidden">
-                    <div class="form-label">汽车品牌</div>
+                    <div class="form-label">Car Brand</div>
                     <div class="input-container">
                         <div>
                             <input name="car_brand" type="text"></input>
@@ -229,7 +229,7 @@
                     </div>
                 </div>
                 <div class="form-record showup-text-car hidden">
-                    <div class="form-label">汽车型号</div>
+                    <div class="form-label">Car Model</div>
                     <div class="input-container">
                         <div>
                             <input name="car_model" type="text"></input>
@@ -237,7 +237,7 @@
                     </div>
                 </div>
                 <div class="form-record showup-text-car hidden">
-                    <div class="form-label">汽车年份</div>
+                    <div class="form-label">Car Year</div>
                     <div class="input-container">
                         <div>
                             <input name="car_year" type="text"></input>
@@ -245,7 +245,7 @@
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">语言</div>
+                    <div class="form-label">Language</div>
                     <div class="input-container">
                         <div>
                             <input type=checkbox name="language" value="english" required>&nbsp;英文&nbsp;&nbsp;
@@ -256,7 +256,7 @@
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label">兴趣爱好</div>
+                    <div class="form-label">Hobby</div>
                     <div class="input-container">
                         <div>
                             <input type=checkbox name="tags" value="摄影" required>&nbsp;摄影&nbsp;&nbsp;
@@ -272,20 +272,20 @@
 
             <div>
                 <div class="form-record">
-                    <div class="form-label v-top">自我介绍</div>
+                    <div class="form-label v-top">Self Introduction</div>
                     <div class="input-container">
                         <textarea name="intro1" rows="6" cols="50" required placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label v-top">城市印象</div>
+                    <div class="form-label v-top">City Introduction</div>
                     <div class="input-container">
                         <textarea name="intro2" rows="6" cols="50" required placeholder="简单介绍下你对这个城市的感受"></textarea>
                     </div>
                 </div>
                 
                 <div class="button-container">
-                    <button id="btn-submit" type="button" class="btn btn-default btn-sm btn-submit">提交</button>
+                    <button id="btn-submit" type="button" class="btn btn-default btn-sm btn-submit">Submit</button>
                 </div>
             </div>
         </form>

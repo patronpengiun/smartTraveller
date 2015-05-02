@@ -20,6 +20,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// For Navigation Setting Bar
 	$('#nav-setting').click(function() {
 		$('#display-area').load("/dashboard_setting/" + userId + " #setting-area", function() {
 			// Bundle with edit info button
@@ -125,6 +126,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// For Navigation Request Bar
 	$('#nav-request').click(function() {
 		$('#display-area').load("/dashboard_request/" + userId + " #request-area", function() {
 
