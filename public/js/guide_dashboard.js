@@ -129,7 +129,35 @@ $(document).ready(function() {
 	// For Navigation Request Bar
 	$('#nav-request').click(function() {
 		$('#display-area').load("/dashboard_request/" + userId + " #request-area", function() {
-
+			$('#nav-request a[href="' + $('#nav-request').data("activeTab") + '"]').trigger("click");
+			
+			$('.btn-accept').click(function() {
+				var requestId = $(this).siblings("input").val();
+				$.ajax("/request/update/accept", {
+					method: "POST",
+					data: {
+						id: requestId
+					}
+				}).done(function(response) {
+					$('#nav-request').trigger("click");
+				});
+			});
+			
+			$('.btn-deny').click(function() {
+				var requestId = $(this).siblings("input").val();
+				$.ajax("/request/update/deny", {
+					method: "POST",
+					data: {
+						id: requestId
+					}
+				}).done(function(response) {
+					$('#nav-request').trigger("click");
+				});
+			});
+			
+			$('#nav-request a').click(function() {
+				$('#nav-request').data("activeTab",$(this).attr("href"));
+			});
 		});
 	});
 
