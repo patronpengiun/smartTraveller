@@ -181,9 +181,8 @@ module.exports = function(passport) {
 	router.get('/review/create', function(req, res) {
 		res.render('create_review');
 	});
+	
 	router.post('/review/create', _multer, function(req, res) {
-		console.log("submit create review request!");
-		console.log(req.body);
 		var info = req.body;
 		var newReview = new Review(info);
 		newReview.save(function(err) {
@@ -207,8 +206,6 @@ module.exports = function(passport) {
 	
 	// ------------ for request page ----------------
 	router.post('/request/:guide_id', function(req, res) {
-		console.log(req.params.guide_id);
-		// check if the user is loged in, if not, send warning and return
 		if(req.user == undefined){
 			res.send('Please login first.');
 			return;
@@ -220,16 +217,28 @@ module.exports = function(passport) {
 			if (err || guides.length == 0) {
 				res.send("Oops...No such guide, perhaps wrong guide id >_<");
 				return;
-			} 
-			// 
-			else {
+			} else {
 				var newRequest = new Request(req.body);
-				newRequest.customer_Username = req.user.username;	
+				newRequest.customerId = req.user._id;	
 				newRequest.guideId = req.params.guide_id;
+				newRequest.status = "pending";
 				newRequest.save(function(err) {
 					res.send("Request successfully submitted.");
 				});
 			} 
+		});
+	});
+
+	router.post('/request/update/accept', function(req, res) {
+		Request.update({_id: req.body.id}, {status: "accepted"}, function(err) {
+			res.sendStatus(200);
+		});
+		
+	});
+	
+	router.post('/request/update/deny', function(req, res) {
+		Request.update({_id: req.body.id}, {status: "denied"}, function(err) {
+			res.sendStatus(200);
 		});
 	});
 
@@ -296,7 +305,33 @@ module.exports = function(passport) {
 	});
 
 	router.get('/dashboard_request/:user_id', function(req, res) {
-		res.render('dashboard_nav_page/dashboard_request');
+		var uid = req.params.user_id;
+		Request.find({customerId:uid, status:{$in: ["pending", "denied", "accepted"]}}, function(err, upcomingRequests) {
+			Request.find({customerId:uid, status:{$in: ["completed", "reviewed"]}}, function(err, previousRequests) {
+				User.find({_id:uid}, function(err, users) {
+					Guide.find({username:users[0].username}, function(err, guides) {
+						if (guides.length == 0) {
+							guides = [{_id:null}];
+						}
+						Request.find({guideId:guides[0]._id, status:"pending"}, function(err, pendingRequests) {
+							mapRequests(upcomingRequests, function(upcomingReqs) {
+								mapRequests(previousRequests, function(previousReqs) {
+									mapRequests(pendingRequests, function(pendingReqs) {
+										res.render("dashboard_nav_page/dashboard_request", {
+											upcomingRequests: upcomingReqs,
+											previousRequests: previousReqs,
+											pendingRequests: pendingReqs
+										});
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+		
+		
 	});
 
 
@@ -325,6 +360,34 @@ module.exports = function(passport) {
 		}
 		
 	});
+	
+	var mapRequests = function(requests, callback) {
+		var ret = [];
+		
+		var helper = function(index) {
+			if (index == requests.length) {
+				callback(ret);
+			} else {
+				User.find({_id:requests[index].customerId}, function(err, users) {
+					Guide.find({_id:requests[index].guideId}, function(err, guides) {
+						var result = {
+							id: requests[index]._id,
+							guestName: users[0].username,
+							guideName: guides[0].name,
+							guideId: guides[0]._id,
+							dates: requests[index].startDate.toDateString() + " to " + requests[index].endDate.toDateString(),
+							status: requests[index].status,
+							destination: guides[0].city
+						};
+						ret.push(result);
+						helper(index+1);
+					});
+				});
+			}
+		}
+		
+		helper(0);
+	};
 
 
 	return router;

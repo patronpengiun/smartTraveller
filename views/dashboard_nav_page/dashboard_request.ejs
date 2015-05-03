@@ -3,10 +3,82 @@
 
 <body>
     <div id="request-area">
-        <h1>Past Requests</h1>
-        <hr>
-        
-        
+		<div id="trip-wrapper">
+			<ul class="nav nav-tabs" id="nav-request">
+				<li class="active"><a href="#upcoming-trips" data-toggle="tab">Your Trips</a></li>
+				<li><a href="#previous-trips" data-toggle="tab">Previous Trips</a></li>
+				<li><a href="#requests" data-toggle="tab">Pending Requests</a></li>
+			</ul>
+			
+			<div class="tab-content">
+				<div class="tab-pane active" id="upcoming-trips">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>Status</th>
+								<th>Destination</th>
+								<th>Guide</th>
+								<th>Dates</th>
+							</tr>
+							<% for (var i=0; i<upcomingRequests.length; i++) { %>
+							<tr>
+								<th><%=upcomingRequests[i].status%></th>
+								<th><%=upcomingRequests[i].destination%></th>
+								<th><%=upcomingRequests[i].guideName%></th>
+								<th><%=upcomingRequests[i].dates%></th>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane" id="previous-trips">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>Status</th>
+								<th>Destination</th>
+								<th>Guide</th>
+								<th>Dates</th>
+								<th>Review</th>
+							</tr>
+							<% for (var i=0; i<previousRequests.length; i++) { %>
+							<tr>
+								<th><%=previousRequests[i].status%></th>
+								<th><%=previousRequests[i].destination%></th>
+								<th><%=previousRequests[i].guideName%></th>
+								<th><%=previousRequests[i].dates%></th>
+								<th>review...</th>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane" id="requests">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>Status</th>
+								<th>Guest</th>
+								<th>Dates</th>
+								<th></th>
+							</tr>
+							<% for (var i=0; i<pendingRequests.length; i++) { %>
+							<tr>
+								<th><%=pendingRequests[i].status%></th>
+								<th><%=pendingRequests[i].guestName%></th>
+								<th><%=pendingRequests[i].dates%></th>
+								<th>
+									<button class="btn-accept">Accept</button>
+									<button class="btn-deny">Deny</button>
+									<input type="hidden" value="<%=pendingRequests[i].id%>">
+								</th>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
     </div>
 </body>
 
