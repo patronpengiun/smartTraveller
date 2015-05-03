@@ -20,6 +20,9 @@ var Review = require('../models/review');
 var User = require('../models/user');
 var Request = require('../models/request');
 
+var path = require('path');
+var root_dir = path.dirname(require.main.filename);	// '..../smartTraveller'
+
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
 		res.render('index', {user: req.user});
@@ -317,11 +320,14 @@ module.exports = function(passport) {
 				Guide.find(query, function(err, guides) {
 					var oldName = guides[0].photo_portrait;
 					Guide.update(query, update, function(err) {
-						fs.unlink('/upload/' + oldName, function(err) {
+
+						fs.unlink(root_dir + '/upload/' + oldName, function(err) {
+							// If file path doesn't exist, throws error here
+							// If delete fail, old pic still exits, but page will only display new pic user just uploaded
+							if (err) throw err;		
 	  						console.log('successfully deleted old avatar: ' + oldName);
 						});
 					});
-
 				});
 
 			} else {
