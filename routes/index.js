@@ -20,6 +20,9 @@ var Review = require('../models/review');
 var User = require('../models/user');
 var Request = require('../models/request');
 
+var path = require('path');
+var root_dir = path.dirname(require.main.filename);	// '..../smartTraveller'
+
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
 		res.render('index', {user: req.user});
@@ -239,6 +242,9 @@ module.exports = function(passport) {
 			if (err || users.length == 0) {
 				res.send("Oops...No such page, perhaps wrong user id >_<");
 				return;
+			} else if (typeof req.user == 'undefined') {
+				res.send("Please go to main page and log in first :)");
+				return;
 			}
 			
 			var user = users[0];
@@ -286,7 +292,7 @@ module.exports = function(passport) {
 						res.send("Oops...No such page, perhaps wrong user id >_<");
 						return;
 					}
-					console.log(guides[0]);
+					// console.log(guides[0]);
 					res.render('dashboard_nav_page/dashboard_setting', {user: user, guide: guides[0]});
 				});
 			} else {
@@ -303,27 +309,33 @@ module.exports = function(passport) {
 	// For dashboard settings edit info
 	router.post('/dashboard/settings/updateinfo', _multer, function(req, res) {
 		console.log("Submit edit info to update guide...");
-		console.log(req.files);
-		var query = {username: req.user.username};
-		var update = req.body;
-		if (req.files && req.files.photo_portrait) {
-			update.photo_portrait = req.files.photo_portrait.name;
-			Guide.find(query, function(err, guides) {
-				var oldName = guides[0].photo_portrait;
-				Guide.update(query, update, function(err) {
-					fs.unlink('/upload/' + oldName, function(err) {
-  						console.log('successfully deleted old avatar: ' + oldName);
+
+		if (!req.user) {
+			res.send("Please log in first.");
+		} else {
+			var query = {username: req.user.username};
+			var update = req.body;
+			if (req.files && req.files.photo_portrait) {
+				update.photo_portrait = req.files.photo_portrait.name;
+				Guide.find(query, function(err, guides) {
+					var oldName = guides[0].photo_portrait;
+					Guide.update(query, update, function(err) {
+
+						fs.unlink(root_dir + '/upload/' + oldName, function(err) {
+							// If file path doesn't exist, throws error here
+							// If delete fail, old pic still exits, but page will only display new pic user just uploaded
+							if (err) throw err;		
+	  						console.log('successfully deleted old avatar: ' + oldName);
+						});
 					});
 				});
 
-			});
-
-		} else {
-			Guide.update(query, update, function(err) {
-				res.send(200);
-			});
+			} else {
+				Guide.update(query, update, function(err) {
+					res.send(200);
+				});
+			}
 		}
-		
 	});
 
 
