@@ -81,6 +81,27 @@
 
     </div>
     <!-- /#wrapper -->
+	
+	<div class="modal fade" id="review-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="modal-title">Write Your Review</span>
+					<button class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<span>Review:</span>
+					<textarea id="review_text" rows="5" cols="50" required></textarea>
+					<br /><br />
+					Rating: (Integer Range -> 0 ~ 5)
+					<input type="number" id="rating" required min="1" max="5">
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" id="btn-submit-review">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
     <!-- Menu Toggle Script -->
     <script>

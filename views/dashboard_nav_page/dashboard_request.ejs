@@ -47,7 +47,13 @@
 								<th><%=previousRequests[i].destination%></th>
 								<th><%=previousRequests[i].guideName%></th>
 								<th><%=previousRequests[i].dates%></th>
-								<th>review...</th>
+								<th>
+									<% if (previousRequests[i].status == 'completed') { %>
+									<button class="btn-review" data-reviewerid="<%=previousRequests[i].guestId%>" data-revieweeid="<%=previousRequests[i].guideId%>" data-reviewername="<%=previousRequests[i].guestName%>" data-requestid="<%=previousRequests[i].id%>">Write Review</button>
+									<% } else { %>
+									<%= previousRequests[i].review %>
+									<% } %>
+								</th>
 							</tr>
 							<% } %>
 						</tbody>
