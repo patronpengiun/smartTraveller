@@ -192,4 +192,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// Dashboard display settings page first
+	$('#nav-setting').trigger("click");
+
 });

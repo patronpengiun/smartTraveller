@@ -67,7 +67,11 @@
                                 </div>
                                 <div class="info-item">
                                     <div class="item-title"><b>Language：</b></div>
-                                    <div class="info-text"><%= guide.language %></div>
+                                    <div class="info-text" style="width: 100px">
+                                        <% for (var i = 0; i < guide.language.length; i++) { %>
+                                            <%= guide.language[i] %>
+                                        <% } %>
+                                    </div>
                                 </div>
                             </div>
                         
@@ -152,8 +156,8 @@
                     <div class="form-label">Sex</div>
                     <div class="input-container">
                         <div>
-                            <input name="sex" value="男" type="radio" required>&nbsp;男 &nbsp;&nbsp;
-                            <input name="sex" value="女" type="radio">&nbsp;女
+                            <input name="sex" value="男" type="radio" required>&nbsp;Male &nbsp;&nbsp;
+                            <input name="sex" value="女" type="radio">&nbsp;Female
                         </div>
                     </div>
                 </div>
@@ -169,17 +173,17 @@
                         <select name="city" required>
                             <option></option>
                             <option value="波士顿">Boston</option>
-                            <option value="费城">费城</option>
-                            <option value="华盛顿">华盛顿</option>
-                            <option value="旧金山">旧金山</option>
-                            <option value="洛杉矶">洛杉矶</option>
-                            <option value="迈阿密">迈阿密</option>
-                            <option value="纽约">纽约</option>
-                            <option value="匹兹堡">匹兹堡</option>
-                            <option value="西雅图">西雅图</option>
-                            <option value="休斯顿">休斯顿</option>
-                            <option value="芝加哥">芝加哥</option>
-                            <option value="其它">其它</option>
+                            <option value="费城">Philadelphia</option>
+                            <option value="华盛顿">Washington</option>
+                            <option value="旧金山">San Francisco</option>
+                            <option value="洛杉矶">Los Angeles</option>
+                            <option value="迈阿密">Miami</option>
+                            <option value="纽约">New York</option>
+                            <option value="匹兹堡">Pittsburg</option>
+                            <option value="西雅图">Seattle</option>
+                            <option value="休斯顿">Huston</option>
+                            <option value="芝加哥">Chicago</option>
+                            <option value="其它">Others</option>
                         </select>
                     </div>
                 </div>
@@ -230,10 +234,10 @@
                     <div class="input-container">
                         <div>
                             <input name="occupation" value="学生" type="radio" required>
-                            &nbsp;学生&nbsp;&nbsp;
+                            &nbsp;Student&nbsp;&nbsp;
                             <input name="occupation" value="在职" type="radio" required>
-                            &nbsp;在职&nbsp;&nbsp;
-                            <input name="occupation" value="其他" type="radio">&nbsp;<span>其他</span>
+                            &nbsp;Professional&nbsp;&nbsp;
+                            <input name="occupation" value="其他" type="radio">&nbsp;<span>Other</span>
                         </div>
                     </div>
                 </div>
@@ -247,8 +251,8 @@
                     <div class="form-label">Personal Car</div>
                     <div class="input-container">
                         <div>
-                            <input name="car" value="true" type="radio" required>&nbsp;是&nbsp;&nbsp; 
-                            <input name="car" value="false" type="radio">&nbsp;否
+                            <input name="car" value="true" type="radio" required>&nbsp;Yes&nbsp;&nbsp; 
+                            <input name="car" value="false" type="radio">&nbsp;No
                         </div>
                     </div>
                 </div>
@@ -291,11 +295,11 @@
                     <div class="form-label">Hobby</div>
                     <div class="input-container">
                         <div>
-                            <input type=checkbox name="tags" value="摄影" required>&nbsp;摄影&nbsp;&nbsp;
-                            <input type=checkbox name="tags" value="美食">&nbsp;美食&nbsp;&nbsp;
-                            <input type=checkbox name="tags" value="历史">&nbsp;历史&nbsp;&nbsp;
-                            <input type=checkbox name="tags" value="体育">&nbsp;体育&nbsp;&nbsp;
-                            <input type=checkbox name="tags" value="艺术">&nbsp;艺术&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="摄影" required>&nbsp;Photograph&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="美食">&nbsp;Gourmet&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="历史">&nbsp;History&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="体育">&nbsp;Sports&nbsp;&nbsp;
+                            <input type=checkbox name="tags" value="艺术">&nbsp;Art&nbsp;&nbsp;
                         </div>
                     </div>
                 </div>
@@ -306,13 +310,13 @@
                 <div class="form-record">
                     <div class="v-top">Self Introduction</div>
                     <div>
-                        <textarea name="intro1" rows="6" cols="80" required placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
+                        <textarea class="text-input" name="intro1" rows="6" cols="80" required placeholder="Tell us why you come to this city"></textarea>
                     </div>
                 </div>
                 <div class="form-record">
                     <div class="v-top">City Introduction</div>
                     <div>
-                        <textarea name="intro2" rows="6" cols="80" required placeholder="简单介绍下你对这个城市的感受"></textarea>
+                        <textarea class="text-input" name="intro2" rows="6" cols="80" required placeholder="give us your feelings about this city"></textarea>
                     </div>
                 </div>
                 
