@@ -188,8 +188,11 @@ module.exports = function(passport) {
 	router.post('/review/create', _multer, function(req, res) {
 		var info = req.body;
 		var newReview = new Review(info);
+		newReview.date = new Date();
 		newReview.save(function(err) {
-			res.render('create_review');
+			Request.update({_id: req.body.request_id}, {status: "reviewed"}, function(err) {
+				res.sendStatus(200);
+			})
 		});
 	});
 
@@ -386,17 +389,21 @@ module.exports = function(passport) {
 			} else {
 				User.find({_id:requests[index].customerId}, function(err, users) {
 					Guide.find({_id:requests[index].guideId}, function(err, guides) {
-						var result = {
-							id: requests[index]._id,
-							guestName: users[0].username,
-							guideName: guides[0].name,
-							guideId: guides[0]._id,
-							dates: requests[index].startDate.toDateString() + " to " + requests[index].endDate.toDateString(),
-							status: requests[index].status,
-							destination: guides[0].city
-						};
-						ret.push(result);
-						helper(index+1);
+						Review.find({request_id: requests[index]._id}, function(err, reviews) {
+							var result = {
+								id: requests[index]._id,
+								guestName: users[0].username,
+								guideName: guides[0].name,
+								guideId: guides[0]._id,
+								guestId: users[0]._id,
+								dates: requests[index].startDate.toDateString() + " to " + requests[index].endDate.toDateString(),
+								status: requests[index].status,
+								destination: guides[0].city,
+								review: reviews.length == 0 ? null : reviews[0].review_text
+							};
+							ret.push(result);
+							helper(index+1);
+						});
 					});
 				});
 			}

@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	var reviewer_id;
+    var reviewer_name;
+    var reviewee_id;
+	var request_id;
 
 	/****** For Navigation side bar ******/
 	var guideId = $('#guide-id').val();
@@ -158,6 +162,33 @@ $(document).ready(function() {
 			$('#nav-request a').click(function() {
 				$('#nav-request').data("activeTab",$(this).attr("href"));
 			});
+			
+			$('.btn-review').click(function() {
+				$('#review-modal').modal('show');
+				reviewer_id = $(this).data("reviewerid");
+			    reviewer_name = $(this).data("reviewername");
+			    reviewee_id = $(this).data("revieweeid");
+				request_id = $(this).data("requestid");
+			});
+		});
+	});
+	
+	$('#btn-submit-review').click(function() {
+		$.ajax('/review/create', {
+			method: "POST",
+			data: {
+    			reviewer_id: reviewer_id,
+    			reviewer_name: reviewer_name,
+    			reviewee_id: reviewee_id,
+    			review_text: $("#review_text").val(),
+    			rating: $("#rating").val(),
+				request_id: request_id
+			}
+		}).done(function(response) {
+			$("#review_text").val("");
+			$("#rating").val("");
+			$('#review-modal').modal('hide');
+			$('#nav-request').trigger("click");
 		});
 	});
 

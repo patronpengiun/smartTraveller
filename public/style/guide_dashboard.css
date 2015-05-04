@@ -191,6 +191,10 @@ hr {
     filter: alpha(opacity=0);
 }
 
+#review-modal .modal-body * {
+	vertical-align: top;
+}
+
 .text-input {
 	width: 100%;
 }
