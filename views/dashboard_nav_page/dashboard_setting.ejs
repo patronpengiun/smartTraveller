@@ -12,96 +12,128 @@
                     <div id="guide-avatar">
                         <img class="photo" src="/<%= guide.photo_portrait %>">
                     </div>
-                    <input type="file" name="photo_portrait" required accept=".gif,.jpg,.png">
+
+                    <div class="fileUpload btn btn-primary">
+                        <span>Upload</span>
+                        <input type="file" class="upload" name="photo_portrait" required accept=".gif,.jpg,.png"/>
+                    </div>
+                    <div id="picture-btn-submit" class="fileUpload btn btn-primary">
+                        <span>Submit</span>
+                    </div>
                 </div>
-                <div class="image-section">
-                    <button id="picture-btn-submit">Change Picture</button>
-                </div>
+                
             </form>
 			<% } %>
         </div>
         <div class="setting-right-column">
 			<% if (guide) { %>
-            <div id="right-column-info-area">
-                <div id="info-panel">
-                    <div class="info-title">
-                        <h2 class="info-title-text">Guide Info</h2>
-                        <a id="guide-info-edit" class="btn btn-default edit-btn"></a>
+                <div id="right-column-info-area">
+                    <div class="info-panel">
+                        <div class="info-title">
+                            <h2 class="info-title-text">Guide Info</h2>
+                            <a id="guide-info-edit" class="btn btn-default edit-btn"></a>
+                        </div>
+                        <div class="info-section">
+                            <div class="info-section-part1">
+                                <div class="info-item">
+                                    <div class="item-title"><b>Name：</b></div>
+                                    <div class="info-text"><%= guide.name %></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="item-title"><b>City：</b></div>
+                                    <div class="info-text"><%= guide.city %></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="item-title"><b>Occupation：</b></div>
+                                    <div class="info-text"><%= guide.occupation %></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="item-title"><b>Sex：</b></div>
+                                    <div class="info-text"><%= guide.sex %></div>
+                                </div>
+                            </div>
+                            <div class="info-section-part2">
+                                <div class="info-item">
+                                    <div class="item-title"><b>Age：</b></div>
+                                    <div class="info-text"><%= guide.age %></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="item-title"><b>Hometown：</b></div>
+                                    <div class="info-text"><%= guide.hometown %></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="item-title"><b>Phone：</b></div>
+                                    <div class="info-text"><%= guide.phone %></div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="item-title"><b>Language：</b></div>
+                                    <div class="info-text"><%= guide.language %></div>
+                                </div>
+                            </div>
+                        
+                            <div class="info-section-part3">
+                                <br>
+                                <div class="info-car">
+                                    <% if (guide.car) { %>
+                                    <div class="info-item">
+                                        <div class="item-title"><b>Personal Car:</b></div> 
+                                        <div class="info-text">Provide</div>
+                                    </div>
+                                    <div class="section group">
+                                        <div class="info-item">
+                                            <div class="item-title"><b>Brand：</b></div>
+                                            <div class="info-text"><%= guide.car_brand %></div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="item-title"><b>Year：</b></div>
+                                            <div class="info-text"><%= guide.car_year %></div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="item-title"><b>Model：</b></div>
+                                            <div class="info-text"><%= guide.car_model %></div>
+                                        </div>
+                                    </div>
+                                    <% } else { %>
+                                        <div class="item-title"><b>Personal Car:</b></div> 
+                                        <div class="info-text">Not Provide</div>
+                                    <% } %>
+                                </div>
+                        
+                                <br><br>
+                                <div class="info-item">
+                                    <div class="item-title"><b>Tags：</b></div>
+                                    <div class="info-text">
+                                        <% for (var i = 0; i < guide.tags.length; i++) { %>
+                                            <%= guide.tags[i] %>
+                                            <% if (i != guide.tags.length - 1) { %>
+                                            /
+                                            <% } %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <br>
+                                <hr>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-section">
-                        <div class="info-item">
-                            <b>Name：</b><%= guide.name %>
+                    <div class="info-panel">
+                        <div class="info-title">
+                            <h2 class="info-title-text">Self Intro</h2>
                         </div>
-                        <div class="info-item">
-                            <b>City：</b><%= guide.city %>
-                        </div>
-                        <div class="info-item">
-                            <b>Occupation：</b><%= guide.occupation %>
-                        </div>
-                        <div class="info-item">
-                            <b>Sex：</b><%= guide.sex %>
-                        </div>
-                        <div class="info-item">
-                            <b>Age：</b><%= guide.age %>
-                        </div>
-                        <div class="info-item">
-                            <b>Hometown：</b><%= guide.hometown %>
-                        </div>
-                        <div class="info-item">
-                            <b>Phone：</b><%= guide.phone %>
-                        </div>
-                        <div class="info-item">
-                            <b>Language：</b><%= guide.language %>
+                        <div class="info-section">
+                            <p><%= guide.intro1 %></p>
                         </div>
                     </div>
-                    <br>
-                    <% if (guide.car) { %>
-                    <div class="info-item"><b>Personal Car:</b> Provide </div>
-                    <div class="section group">
-                        <div class="info-item">
-                            <b>Brand：</b><%= guide.car_brand %>
+                    <hr>
+                    <div class="info-panel">
+                        <div class="info-title">
+                            <h2 class="info-title-text">Path Intro</h2>
                         </div>
-                        <div class="info-item">
-                            <b>Year：</b><%= guide.car_year %>
-                        </div>
-                        <div class="info-item">
-                            <b>Model：</b><%= guide.car_model %>
+                        <div class="info-section">
+                            <p><%= guide.intro2 %></p>
                         </div>
                     </div>
-                    <% } else { %>
-                    <div class="info-item"><b>Personal Car:</b> Not Provide </div>
-                    <% } %>
                 </div>
-                <div class="guide-tag">
-                    <div class="info-item">
-                        <b>Tags：</b>
-                        <% for (var i = 0; i < guide.tags.length; i++) { %>
-                        <%= guide.tags[i] %>
-                        <% if (i != guide.tags.length - 1) { %>
-                        /
-                        <% } %>
-                        <% } %>
-                    </div>
-                </div>
-                <hr>
-                <div id="self-intro-panel">
-                    <div class="info-title">
-                        <h2 class="info-title-text">Self Intro</h2>
-                    </div>
-                    <div class="info-section">
-                        <p><%= guide.intro1 %></p>
-                    </div>
-                </div>
-                <hr>
-                <div id="path-intro-panel">
-                    <div class="info-title">
-                        <h2 class="info-title-text">Path Intro</h2>
-                    </div>
-                    <div class="info-section">
-                        <p><%= guide.intro2 %></p>
-                    </div>
-                </div>
-            </div>
 			<% } %>
         </div>   
     </div>
@@ -272,15 +304,15 @@
 
             <div>
                 <div class="form-record">
-                    <div class="form-label v-top">Self Introduction</div>
-                    <div class="input-container">
-                        <textarea name="intro1" rows="6" cols="50" required placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
+                    <div class="v-top">Self Introduction</div>
+                    <div>
+                        <textarea name="intro1" rows="6" cols="80" required placeholder="写下你的个人经历，你为什么会来到这个城市"></textarea>
                     </div>
                 </div>
                 <div class="form-record">
-                    <div class="form-label v-top">City Introduction</div>
-                    <div class="input-container">
-                        <textarea name="intro2" rows="6" cols="50" required placeholder="简单介绍下你对这个城市的感受"></textarea>
+                    <div class="v-top">City Introduction</div>
+                    <div>
+                        <textarea name="intro2" rows="6" cols="80" required placeholder="简单介绍下你对这个城市的感受"></textarea>
                     </div>
                 </div>
                 

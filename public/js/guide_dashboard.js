@@ -119,7 +119,7 @@ $(document).ready(function() {
 					url: "/dashboard/settings/updateinfo",
 					data: new FormData($('#picture-form')[0]),
 					success: function(response) {
-						$('#nav-setting').trigger("click");		// !!! Hasn't been triggered !!! 
+						$('#nav-setting').trigger("click");	
 					}
 				});
 			});

@@ -359,8 +359,12 @@ module.exports = function(passport) {
 						fs.unlink(root_dir + '/upload/' + oldName, function(err) {
 							// If file path doesn't exist, throws error here
 							// If delete fail, old pic still exits, but page will only display new pic user just uploaded
-							if (err) throw err;		
-	  						console.log('successfully deleted old avatar: ' + oldName);
+							if (err) {
+								console.log('Delete fail, maybe no such avatar: ' + oldName);
+							} else {		
+	  							console.log('successfully deleted old avatar: ' + oldName);
+	  						}
+	  						res.send(200);
 						});
 					});
 				});

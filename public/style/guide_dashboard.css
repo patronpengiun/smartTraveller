@@ -118,12 +118,39 @@ hr {
 	clear: both;
 }
 
+.info-panel {
+
+}
+
+.info-section-part1 {
+	float: left;
+}
+
+.info-section-part2 {
+	float: left;
+	padding-left: 30%;
+}
+
+.info-section-part3 {
+	clear: both;
+}
+
 .info-title-text {
 	float: left;
 }
 
 .info-item {
+	clear: both;
 	font-size: 15px;
+}
+
+.item-title {
+	float: left;
+}
+.info-text {
+	float: left;
+  	padding-left: 120px;
+  	position: absolute;
 }
 
 #setting-edit-form {
@@ -132,5 +159,34 @@ hr {
 }
 
 .form-record {
-	padding-bottom: 10px;
+	clear: both;
+	padding-bottom: 40px;
+}
+
+.form-label {
+	float: left;
+}
+
+.input-container {
+	float: left;
+  	padding-left: 140px;
+  	position: absolute;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
