@@ -19,7 +19,11 @@
         <ul>
             <% for(var i = 0; i < contacts.length; i++) { %>
             	<% if(typeof mailee_id != 'undefined' && contacts[i][2] === mailee_id) { %>
-            		<li class="contact-select"><span><a class="reserve-button button" href='/inbox/<%= contacts[i][2] %>'> <%= contacts[i][0] %></a></span></li>
+            		<% if(typeof user_mailee_name != 'undefined') { %>
+            			<li class="contact-select"><span><a class="reserve-button button" href='/inbox_guide/<%= contacts[i][2] %>'> <%= contacts[i][0] %></a></span></li>
+            		<% } else { %>
+            			<li class="contact-select"><span><a class="reserve-button button" href='/inbox/<%= contacts[i][2] %>'> <%= contacts[i][0] %></a></span></li>
+            		<% } %>
             	<% } else { %>
             		<li><span><a class="reserve-button button" href='/inbox/<%= contacts[i][2] %>'> <%= contacts[i][0] %></a></span></li>
             	<% } %>
@@ -28,9 +32,15 @@
     </div>
 
     <% if(typeof mailee_id != 'undefined') { %>
-    <form id="sendMessage-form" method="post" action="/inbox/send/">
-        <input id="maileeId" type="hidden" name="guide" value="<%= mailee_id %>">
-        <input id="maileeName" type="hidden" name="guideName" value="<%= mailee_name %>">
+    	<% if(typeof user_mailee_name != 'undefined') { %>
+    		<form id="sendMessage-form" method="post" action="/inbox_guide/send/">
+        		<input id="maileeId" type="hidden" name="user" value="<%= mailee_id %>">
+        		<input id="maileeName" type="hidden" name="userName" value="<%= user_mailee_name %>">
+        <% } else { %>
+        	<form id="sendMessage-form" method="post" action="/inbox/send/">
+        		<input id="maileeId" type="hidden" name="guide" value="<%= mailee_id %>">
+        		<input id="maileeName" type="hidden" name="guideName" value="<%= mailee_name %>">
+        <% } %>
         <div id="message-panel">
             <div>
                 <div id="message-post">

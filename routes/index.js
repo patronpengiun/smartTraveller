@@ -268,6 +268,11 @@ module.exports = function(passport) {
 	});
 	
 /*************routers for inbox*****************************************************************/
+	//inbox for user account and inbox for guide account is designed to be separated
+	//inbox messages are always between one user and one guide
+	//use the router /inbox for the portal to user's inbox on USER's dashboard and
+	//use the router /inbox_guide for the portal to guide's inbox on GUIDE's dashboard
+	//use router /inbox/:mailee for the portal to sending guide message by user on guide_page, sample connection was setup in inbox branch for reference
 	router.get('/inbox', function(req, res){
 		if (req.isAuthenticated()){
 			Message.find({user:req.user._id}, function(err, messages) {
@@ -358,6 +363,109 @@ module.exports = function(passport) {
 			var temp = req.body;
 			temp["user"] = req.user._id;
 			temp["sender"] = req.user._id;
+			temp["userName"] = req.user.username;
+			var newMsg = new Message(temp);
+			newMsg.save(function(err) {
+				res.redirect('/inbox/'+temp["guide"]);
+			});
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+	/********************************Following routers are for guide inbox******************************************/
+	router.get('/inbox_guide', function(req, res){
+		if (req.isAuthenticated()){
+			Message.find({guide:req.user._id}, function(err, messages) {
+				if(err){
+					res.send("inbox error");
+				} else{
+					var contactTable = [];
+					var me = req.user._id.valueOf();
+					for(var i = 0; i < messages.length; i++){
+						message = messages[i];
+						if(!contactTable[message.user]){
+								contactTable[message.user] = [message.userName, message.timeStamp, 0];
+						}
+						else if(contactTable[message.user][1] < message.timeStamp){
+								contactTable[message.user][1] = message.timeStamp;
+						}
+						else if(!message.isRead && message.sender !== req.user._id.valueOf()){
+							contactTable[message.user][2] = contactTable[message.user][2] + 1;
+						}
+					}
+					var contacts = [];
+					for(var rec in contactTable){
+						contacts.push([contactTable[rec][0], contactTable[rec][1], rec, contactTable[rec][2]]);
+					}
+					console.log(contacts);
+					contacts.sort(function(a, b){return b[1] - a[1]});
+					res.render('inbox', {contacts : contacts});
+				}
+			});
+		} else {
+			res.redirect('/');
+		}
+	});
+	
+	router.get('/inbox_guide/:mailee_id', function(req, res){
+		if (req.isAuthenticated()){
+			User.find({_id:req.params.mailee_id}, function(err, usr) {
+				if (err || usr === 'undefined') {
+					res.send("Oops...No such person can be mailed");
+				} else {
+					var mailee = usr[0];
+					Message.find({guide:req.user._id.valueOf()}, function(err, messages) {
+						if(err){
+							res.send("inbox error");
+						} else{
+							var contactTable = [];
+							var theMessages = [];
+							for(var i = 0; i < messages.length; i++){
+								message = messages[i];
+								if(!contactTable[message.user]){
+									contactTable[message.user] = [message.userName, message.timeStamp, 0];
+								}
+								else if(contactTable[message.user][1] < message.timeStamp){
+										contactTable[message.user][1] = message.timeStamp;
+								}
+								else if(!message.isRead && message.sender !== req.user._id.valueOf()){
+									contactTable[message.user][2] = contactTable[message.user][2] + 1;
+								}
+								if(message.user === req.params.mailee_id){
+									contactTable[message.user][2] == 0;
+									if(!message.isRead){
+										message.isRead = true;
+										message.save(function(err) {});
+									}
+									if(message.sender === mailee.id.valueOf()){
+										theMessages.push([mailee.name, false, message.content, message.timeStamp]);
+									}
+									else{
+										theMessages.push([req.user.username, true, message.content, message.timeStamp]);
+									}
+								}
+							}
+							var contacts = [];
+							for(var rec in contactTable){
+								contacts.push([contactTable[rec][0], contactTable[rec][1], rec, contactTable[rec][2]]);
+							}
+							contacts.sort(function(a, b){return b[1] - a[1]});
+							res.render('inbox', {contacts: contacts, messages: theMessages, mailee_id : req.params.mailee_id, user_mailee_name:mailee.name})
+						}
+					}).sort( { timeStamp: -1 } );
+				}
+			});
+		} else {
+			res.redirect('/');
+		}
+	});
+	router.post('/inbox_guide/send/', function(req, res) {
+		if (req.isAuthenticated()){
+			var temp = req.body;
+			temp["guide"] = req.user._id;
+			temp["sender"] = req.user._id;
+			temp["guideName"] = req.user.username;
 			var newMsg = new Message(temp);
 			newMsg.save(function(err) {
 				res.redirect('/inbox/'+temp["guide"]);
