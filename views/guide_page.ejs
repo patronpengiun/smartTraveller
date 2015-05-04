@@ -25,30 +25,30 @@
                     <div class="right-column">
                         <div id="reservation-panel">
                             <div class="rates">
-                                <p>价格</p>
+                                <p>Pricing</p>
                                 <p>
-                                <p>每天徒步（单独导游，公共交通出行）</p>
-                                <p>费用=定金 50 美元 + 现付 100美元</p>
-                                <p>每天包车</p>
-                                <p>费用=定金 50 美元 + 现付 230美元</p>
-                                <p>接送机费用请见向导附加费</p>
+                                <p>Hiking with single guide</p>
+                                <p>Fee = Deposit $50 + $100</p>
+                                <p>Travel with Car</p>
+                                <p>Fee = $50 + $230</p>
+                                <p>Airport shuttle fee: see instructions</p>
                                 </p>
                             </div>
                             <hr>
                             <div id="reservation-tool">
                                 <a class="reserve-button button green" data-toggle="modal"
                                 data-target="#requestWindow">
-                                提交请求
+                                Submit Request
                                 </a>
                             </div>
                             <hr>
                             <div id="in-mail">
                                 <a class="reserve-button button">
-                                站内信
+                                Inmail
                                 </a>
                             </div>
                         </div>
-                        <div class="photo-album-title">个人相簿</div>
+                        <div class="photo-album-title">Guide Album</div>
                         <div id="guide-photo-panel" >
                             <input id="photo-life-count" type="hidden" value="<%= guide.photo_life.length %>">
                             <% for (var i = 0; i < guide.photo_life.length; i++) {%>
@@ -61,7 +61,7 @@
                             </div>
                             <% } %>
                         </div>
-                        <div class="photo-album-title">城市相簿</div>
+                        <div class="photo-album-title">City Album</div>
                         <div id="guide-photo-panel" >
                             <input id="photo-view-count" type="hidden" value="<%= guide.photo_view.length %>">
                             <% for (var i = 0; i < guide.photo_view.length; i++) {%>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="guide-tag">
                                 <h1 class="guide-tag-text">
-                                兴趣：
+                                Hobby：
                                 <% for (var i = 0; i < guide.tags.length; i++) { %>
                                 <%= guide.tags[i] %>
                                 <% if (i != guide.tags.length - 1) { %>
@@ -102,57 +102,54 @@
                         </div>
                         <div id="info-panel">
                             <hr>
-                            <h2>向导信息</h2>
+                            <h2>Guide Info</h2>
                             <div class="section group">
                                 <div class="col span_1_of_3">
-                                    城市：<%= guide.city %>
+                                    City：<%= guide.city %>
                                 </div>
                                 <div class="col span_1_of_3">
-                                    职业：<%= guide.occupation %>
+                                    Occupation：<%= guide.occupation %>
                                 </div>
                                 <div class="col span_1_of_3">
-                                    性别：<%= guide.sex %>
+                                    Sex：<%= guide.sex %>
                                 </div>
                             </div>
                             <div class="section group">
                                 <div class="col span_1_of_3">
-                                    年龄：<%= guide.age %>
+                                    Age：<%= guide.age %>
                                 </div>
                                 <div class="col span_1_of_3">
-                                    家乡：<%= guide.hometown %>
-                                </div>
-                                <div class="col span_1_of_3">
-                                    职业：<%= guide.occupation %>
+                                    Hometown：<%= guide.hometown %>
                                 </div>
                             </div>
                             <br>
                             <% if (guide.car) { %>
-                            <p class="guide-car-title">私人用车：提供 </p>
+                            <p class="guide-car-title">Personal Car: Provide</p>
                             <div class="section group">
                                 <div class="col span_1_of_3">
-                                    品牌：<%= guide.car_brand %>
+                                    Car Brand：<%= guide.car_brand %>
                                 </div>
                                 <div class="col span_1_of_3">
-                                    年份：<%= guide.car_year %>
+                                    Car Year：<%= guide.car_year %>
                                 </div>
                                 <div class="col span_1_of_3">
-                                    型号：<%= guide.car_model %>
+                                    Car Model：<%= guide.car_model %>
                                 </div>
                             </div>
                             <% } else { %>
-                            <p class="guide-car-title">私人用车：不提供 </p>
+                            <p class="guide-car-title">Personal Car: Not Provide</p>
                             <% } %>
                         </div>
                         <hr>
                         <div id="self-intro-panel">
-                            <h2>自我介绍</h2>
+                            <h2>Self Introduction</h2>
                             <div id="self-intro-box">
                                 <p><%= guide.intro1 %></p>
                             </div>
                         </div>
                         <hr>
                         <div id="path-intro-panel">
-                            <h2>个人路线介绍</h2>
+                            <h2>City Introduction</h2>
                             <div id="path-intro-box">
                                 <p><%= guide.intro2 %></p>
                             </div>
@@ -160,7 +157,7 @@
                         <hr>
                         <div id="review-panel">
                             <div>
-                                <h2>评价</h2>
+                                <h2>Review</h2>
                                 <input id="review-rating-avg" type="hidden" value="<%= avgRating %>"></input>
                                 <div id="review-star"></div>
                             </div>
