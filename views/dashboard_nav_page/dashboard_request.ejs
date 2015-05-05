@@ -24,7 +24,7 @@
 							<tr>
 								<th><%=upcomingRequests[i].status%></th>
 								<th><%=upcomingRequests[i].destination%></th>
-								<th><%=upcomingRequests[i].guideName%></th>
+								<th><a href="/guidepage/<%=previousRequests[i].guideId%>" target="_blank"><%=upcomingRequests[i].guideName%></a></th>
 								<th><%=upcomingRequests[i].dates%></th>
 							</tr>
 							<% } %>
@@ -45,7 +45,7 @@
 							<tr>
 								<th><%=previousRequests[i].status%></th>
 								<th><%=previousRequests[i].destination%></th>
-								<th><%=previousRequests[i].guideName%></th>
+								<th><a href="/guidepage/<%=previousRequests[i].guideId%>" target="_blank"><%=previousRequests[i].guideName%></a></th>
 								<th><%=previousRequests[i].dates%></th>
 								<th>
 									<% if (previousRequests[i].status == 'completed') { %>

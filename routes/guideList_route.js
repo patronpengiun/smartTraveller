@@ -5,6 +5,7 @@ var express = require('express');
 var guideList_router = express.Router();
 
 var Guide = require('../models/guide');
+var url = require('url');
 
 module.exports = function() {
 	guideList_router.get('/', function(req, res) {
@@ -14,7 +15,7 @@ module.exports = function() {
 		    guides.forEach(function(guide) {
 		      guideMap.push(guide);
 		    });
-		    res.render('guide_list', {guideList: guideMap, user: req.user});
+		    res.render('guide_list', {guideList: guideMap, user: req.user, city: req.query.city});
 	 	});
 	});
 	
@@ -50,6 +51,14 @@ module.exports = function() {
 		if (query.sex) {
 			filter.sex = Array.isArray(query.sex) ? {$in: query.sex} : query.sex;
 		}
+		
+		if (query.url) {
+			var city = url.parse(query.url,true).query.city;
+			if (city) {
+				query.city = city
+			}
+		}
+		
 		return filter;
 	}
 
