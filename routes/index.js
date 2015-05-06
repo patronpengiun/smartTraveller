@@ -276,18 +276,23 @@ module.exports = function(passport) {
 
 	// For dashboard nav sections
 	router.get('/dashboard_review/:user_id', function(req, res) {
-		Review.find({reviewee_id:req.params.user_id}, function(err, reviews) {
-			if (err) {
-				res.send("Oops...No such page, perhaps wrong user id >_<");
-			} else {
-				var sum = 0;
-				for (var i = reviews.length - 1; i >= 0; i--) {
-					sum += reviews[i].rating;
-				};
-				var avg = (sum / reviews.length).toPrecision(3);	
-				res.render('dashboard_nav_page/dashboard_review', {reviewList: reviews, avgRating: avg});
-			}
-		});
+		User.find({_id:req.params.user_id}, function(err, users){
+			Guide.find({username: users[0].username}, function(err, guides) {
+				var guideid = guides[0]._id;
+				Review.find({reviewee_id:guideid}, function(err, reviews) {
+					if (err) {
+						res.send("Oops...No such page, perhaps wrong user id >_<");
+					} else {
+						var sum = 0;
+						for (var i = reviews.length - 1; i >= 0; i--) {
+							sum += reviews[i].rating;
+						};
+						var avg = (sum / reviews.length).toPrecision(3);	
+						res.render('dashboard_nav_page/dashboard_review', {reviewList: reviews, avgRating: avg});
+					}
+				});
+			});
+		});		
 	});
 
 	router.get('/dashboard_setting/:user_id', function(req, res) {
