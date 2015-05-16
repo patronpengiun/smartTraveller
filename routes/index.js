@@ -279,7 +279,8 @@ module.exports = function(passport) {
 		User.find({_id:req.params.user_id}, function(err, users){
 			Guide.find({username: users[0].username}, function(err, guides) {
 				if (guides.length == 0) {
-					res.send("Review not supported for normal user");	
+					res.send("Review not supported for normal user");
+					return;	
 				}
 				var guideid = guides[0]._id;
 				Review.find({reviewee_id:guideid}, function(err, reviews) {
