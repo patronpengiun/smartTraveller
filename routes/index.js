@@ -96,7 +96,7 @@ module.exports = function(passport) {
 				var params = {
 					Bucket: S3_BUCKET,
 					Key: file.name,
-					Body: 'hello',
+					Body: data,
 				};
 				s3.upload(params, function(err, data) {
 	    			if (err) {
