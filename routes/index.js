@@ -87,15 +87,16 @@ module.exports = function(passport) {
 	} else {
 		_multer = multer({
 			dest: './upload', 
+			limits : { fileSize:10000000 },
 			rename: function (fieldname, filename, req, res) {	
 						//return req.user.username + '_' + filename + '_' + Date.now();
 						return filename + '_' + Date.now();
 					},
-			onFileUploadStart: function (file, req, res) {
+			onFileUploadData: function (file, data, req, res) {
 				var params = {
 					Bucket: S3_BUCKET,
 					Key: file.name,
-					Body: file.getAsBinary()
+					Body: data
 				};
 
 				s3.putObject(params, function (perr, pres) {
