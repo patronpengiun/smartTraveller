@@ -192,17 +192,18 @@ module.exports = function(passport) {
 							//generate new aws url to access picture
 							targetGuide.photo_portrait = reGenerateUrl(myS3Account.readPolicy(targetGuide.photo_portrait, 'lvcheng', 60));
 							for(var i=0; i<targetGuide.photo_view.length; i++){
-								targetGuide.photo_view[i] = myS3Account.readPolicy(targetGuide.photo_view[i], 'lvcheng', 60);
+								targetGuide.photo_view[i] = reGenerateUrl(myS3Account.readPolicy(targetGuide.photo_view[i], 'lvcheng', 60));
 							}
 							for(var i=0; i<targetGuide.photo_life.length; i++){
-								targetGuide.photo_life[i] = myS3Account.readPolicy(targetGuide.photo_life[i], 'lvcheng', 60);
+								targetGuide.photo_life[i] = reGenerateUrl(myS3Account.readPolicy(targetGuide.photo_life[i], 'lvcheng', 60));
 							}
 						}
 						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg, user:req.user});
 					}
 
 					function reGenerateUrl(url){
-   						return url.replace('s3.amazonaws.com/lvcheng', 'lvcheng.s3.amazonaws.com');
+   						var newNRL = url.replace('s3.amazonaws.com/lvcheng', 'lvcheng.s3.amazonaws.com');
+   						return newNRL;
    					}
 				});
 			} 
