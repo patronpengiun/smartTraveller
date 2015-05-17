@@ -30,7 +30,7 @@ module.exports = function() {
 
 		    function generateImageUrl(guideMap){
 		    	for(var i=0; i < guideMap.length; i++){
-		    		guideMap[i].photo_portrait = myS3Account.readPolicy(guideMap[i].photo_portrait, 'lvcheng', 60);
+		    		guideMap[i].photo_portrait = myS3Account.readPolicy(guideMap[i].photo_portrait, 'lvcheng', 60).replace('s3.amazonaws.com/lvcheng', 'lvcheng.s3.amazonaws.com');
 		    	}
 		    	return guideMap;
 		    }
