@@ -190,7 +190,7 @@ module.exports = function(passport) {
 						}
 						else {
 							//generate new aws url to access picture
-							targetGuide.photo_portrait = myS3Account.readPolicy(targetGuide.photo_portrait, 'lvcheng', 60);
+							targetGuide.photo_portrait = reGenerateUrl(myS3Account.readPolicy(targetGuide.photo_portrait, 'lvcheng', 60));
 							for(var i=0; i<targetGuide.photo_view.length; i++){
 								targetGuide.photo_view[i] = myS3Account.readPolicy(targetGuide.photo_view[i], 'lvcheng', 60);
 							}
@@ -200,6 +200,10 @@ module.exports = function(passport) {
 						}
 						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg, user:req.user});
 					}
+
+					function reGenerateUrl(url){
+   						return url;
+   					}
 				});
 			} 
 		});
