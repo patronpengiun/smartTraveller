@@ -95,7 +95,7 @@ module.exports = function(passport) {
 				var params = {
 					Bucket: S3_BUCKET,
 					Key: file.name,
-					Body: file
+					Body: file.getAsBinary()
 				};
 
 				s3.putObject(params, function (perr, pres) {
