@@ -10,6 +10,7 @@ var S3_BUCKET = process.env.S3_BUCKET;
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY,
 	secretAccessKey: AWS_SECRET_KEY,
+	region: 'us-west-2',
 });
 var s3 = new AWS.S3();
 var s3Policy = require('s3policy');
