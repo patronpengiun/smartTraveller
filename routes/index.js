@@ -87,7 +87,7 @@ module.exports = function(passport) {
 	} else {
 		_multer = multer({
 			dest: './upload', 
-			limits : { fileSize:10000000 },
+			limits : { fileSize:100000 },
 			rename: function (fieldname, filename, req, res) {	
 						//return req.user.username + '_' + filename + '_' + Date.now();
 						return filename + '_' + Date.now();
@@ -103,7 +103,7 @@ module.exports = function(passport) {
 	      				console.log("Error uploading data: ", err);
 	    			} else {
 	      				console.log("Successfully uploaded data to myBucket/myKey");
-	    				}
+	    			}
   				});
 
 				// s3.putObject(params, function (perr, pres) {
