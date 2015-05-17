@@ -202,7 +202,7 @@ module.exports = function(passport) {
 					}
 
 					function reGenerateUrl(url){
-   						return url;
+   						return url.replace('s3.amazonaws.com/lvcheng', 'lvcheng.s3.amazonaws.com');
    					}
 				});
 			} 
