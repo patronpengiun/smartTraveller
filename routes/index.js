@@ -87,22 +87,22 @@ module.exports = function(passport) {
 						//return req.user.username + '_' + filename + '_' + Date.now();
 						return filename + '_' + Date.now();
 					},
-					onFileUploadData: function (file, data, req, res) {
-						var params = {
-							Bucket: S3_BUCKET,
-							Key: file.name,
-							Body: data
-						};
+			onFileUploadData: function (file, data, req, res) {
+				var params = {
+					Bucket: S3_BUCKET,
+					Key: file.name,
+					Body: data
+				};
 
-						s3.putObject(params, function (perr, pres) {
-							if (perr) {
-								console.log("Error uploading data: ", perr);
-							} else {
-								console.log("Successfully uploaded data");
-							}
-						});
-					},
+				s3.putObject(params, function (perr, pres) {
+					if (perr) {
+						console.log("Error uploading data: ", perr);
+					} else {
+						console.log("Successfully uploaded data");
+					}
 				});
+			},
+		});
 	}
 	
 	router.post('/signup/guide/apply', _multer, 
@@ -172,7 +172,28 @@ module.exports = function(passport) {
 						for (var i = reviews.length - 1; i >= 0; i--) {
 							sum += reviews[i].rating;
 						};
-						var avg = sum / reviews.length;	
+						var avg = sum / reviews.length;
+						var targetGuide = guides[0];
+						// update image name to target image path
+						if (process.env.MODE == 'dev'){
+							targetGuide.photo_portrait = "/"+targetGuide.photo_portrait;
+							for(var i=0; i<targetGuide.photo_view.length; i++){
+								targetGuide.photo_view[i] = "/" + targetGuide.photo_view[i];
+							}
+							for(var i=0; i<targetGuide.photo_life.length; i++){
+								targetGuide.photo_life[i] = "/" + targetGuide.photo_life[i];
+							}
+						}
+						else {
+							//generate new aws url to access picture
+							targetGuide.photo_portrait = s3.readPolicy(targetGuide.photo_portrait, 'lvcheng', 60);
+							for(var i=0; i<targetGuide.photo_view.length; i++){
+								targetGuide.photo_view[i] = s3.readPolicy(targetGuide.photo_view[i], 'lvcheng', 60);
+							}
+							for(var i=0; i<targetGuide.photo_life.length; i++){
+								targetGuide.photo_life[i] = s3.readPolicy(targetGuide.photo_life[i], 'lvcheng', 60);
+							}
+						}
 						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg, user:req.user});
 					}
 				});
