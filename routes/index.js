@@ -12,7 +12,7 @@ AWS.config.update({
 	secretAccessKey: AWS_SECRET_KEY,
 	region: 'us-west-2',
 });
-var s3 = new AWS.S3();
+var s3 = new AWS.S3({params: {Bucket: S3_BUCKET}});
 var s3Policy = require('s3policy');
 var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);
 
