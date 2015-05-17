@@ -1,6 +1,7 @@
 // created by Hongda Jiang
 // 4-19-2015
 // may be merged to index.js later
+var AWS = require('aws-sdk');
 var express = require('express');
 var guideList_router = express.Router();
 
