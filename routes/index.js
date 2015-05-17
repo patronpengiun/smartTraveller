@@ -96,16 +96,22 @@ module.exports = function(passport) {
 				var params = {
 					Bucket: S3_BUCKET,
 					Key: file.name,
-					Body: data
 				};
+				s3.upload(params, function(err, data) {
+	    			if (err) {
+	      				console.log("Error uploading data: ", err);
+	    			} else {
+	      				console.log("Successfully uploaded data to myBucket/myKey");
+	    				}
+  				});
 
-				s3.putObject(params, function (perr, pres) {
-					if (perr) {
-						console.log("Error uploading data: ", perr);
-					} else {
-						console.log("Successfully uploaded data");
-					}
-				});
+				// s3.putObject(params, function (perr, pres) {
+				// 	if (perr) {
+				// 		console.log("Error uploading data: ", perr);
+				// 	} else {
+				// 		console.log("Successfully uploaded data");
+				// 	}
+				// });
 			},
 		});
 	}
