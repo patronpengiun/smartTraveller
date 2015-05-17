@@ -91,11 +91,11 @@ module.exports = function(passport) {
 						//return req.user.username + '_' + filename + '_' + Date.now();
 						return filename + '_' + Date.now();
 					},
-			onFileUploadData: function (file, data, req, res) {
+			onFileUploadStart: function (file, req, res) {
 				var params = {
 					Bucket: S3_BUCKET,
 					Key: file.name,
-					Body: data
+					Body: file
 				};
 
 				s3.putObject(params, function (perr, pres) {
