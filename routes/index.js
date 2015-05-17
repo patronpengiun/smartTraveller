@@ -12,6 +12,9 @@ AWS.config.update({
 	secretAccessKey: AWS_SECRET_KEY,
 });
 var s3 = new AWS.S3();
+var s3Policy = require('s3policy');
+var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);
+
 var fs = require('fs');
 
 var Guide = require('../models/guide');
@@ -186,12 +189,12 @@ module.exports = function(passport) {
 						}
 						else {
 							//generate new aws url to access picture
-							targetGuide.photo_portrait = s3.readPolicy(targetGuide.photo_portrait, 'lvcheng', 60);
+							targetGuide.photo_portrait = myS3Account.readPolicy(targetGuide.photo_portrait, 'lvcheng', 60);
 							for(var i=0; i<targetGuide.photo_view.length; i++){
-								targetGuide.photo_view[i] = s3.readPolicy(targetGuide.photo_view[i], 'lvcheng', 60);
+								targetGuide.photo_view[i] = myS3Account.readPolicy(targetGuide.photo_view[i], 'lvcheng', 60);
 							}
 							for(var i=0; i<targetGuide.photo_life.length; i++){
-								targetGuide.photo_life[i] = s3.readPolicy(targetGuide.photo_life[i], 'lvcheng', 60);
+								targetGuide.photo_life[i] = myS3Account.readPolicy(targetGuide.photo_life[i], 'lvcheng', 60);
 							}
 						}
 						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg, user:req.user});
