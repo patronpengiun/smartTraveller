@@ -81,7 +81,7 @@ module.exports = function(passport) {
 	});
 	
 	var _multer;
-	if (process.env.MODE == 'dev') {
+	if (process.env.MODE == 'dev_') {
 		_multer = multer({
 			dest: './upload', 
 			rename: function (fieldname, filename, req, res) {	
