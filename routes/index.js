@@ -88,7 +88,7 @@ module.exports = function(passport) {
 	} else {
 		_multer = multer({
 			dest: './upload', 
-			limits : { fileSize: 10*1024*1024 },
+			limits : { fileSize: 100*1024*1024 },
 			rename: function (fieldname, filename, req, res) {	
 						//return req.user.username + '_' + filename + '_' + Date.now();
 						return filename + '_' + Date.now();
@@ -101,7 +101,6 @@ module.exports = function(passport) {
 					ContentType: 'application/octet-stream',
 				};
 
-				console.log("body size: " + data.size);
 				s3.upload(params, function(err, data) {
 	    			if (err) {
 	      				console.log("Error uploading data: ", err);
