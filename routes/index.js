@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
+
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY,
 	secretAccessKey: AWS_SECRET_KEY,
@@ -87,35 +88,27 @@ module.exports = function(passport) {
 	} else {
 		_multer = multer({
 			dest: './upload', 
-			limits : { fileSize:100000 },
+			limits : { fileSize: 10*1024*1024 },
 			rename: function (fieldname, filename, req, res) {	
 						//return req.user.username + '_' + filename + '_' + Date.now();
 						return filename + '_' + Date.now();
 					},
 			onFileUploadData: function (file, data, req, res) {
-				console.log("AWS_ACCESS_KEY: " + AWS_ACCESS_KEY);
-				console.log("AWS_SECRET_KEY: " + AWS_SECRET_KEY);
-				console.log("S3_BUCKET: " + S3_BUCKET);
 				var params = {
 					Bucket: S3_BUCKET,
 					Key: file.name,
-					Body: data,
+					Body: fs.createReadStream(file.path),
+					ContentType: 'application/octet-stream',
 				};
+
+				console.log("body size: " + data.size);
 				s3.upload(params, function(err, data) {
 	    			if (err) {
 	      				console.log("Error uploading data: ", err);
 	    			} else {
-	      				console.log("Successfully uploaded data to myBucket/myKey");
+	      				console.log("Successfully uploaded");
 	    			}
   				});
-
-				// s3.putObject(params, function (perr, pres) {
-				// 	if (perr) {
-				// 		console.log("Error uploading data: ", perr);
-				// 	} else {
-				// 		console.log("Successfully uploaded data");
-				// 	}
-				// });
 			},
 		});
 	}
