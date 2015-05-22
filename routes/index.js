@@ -4,9 +4,13 @@ var multer = require('multer');
 var AWS = require('aws-sdk');
 var mongoose = require('mongoose');
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
-var S3_BUCKET = process.env.S3_BUCKET;
+// var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+// var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+// var S3_BUCKET = process.env.S3_BUCKET;
+
+var AWS_ACCESS_KEY = 'AKIAJBDJJWHOZSRJ3ALA';
+var AWS_SECRET_KEY = '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';
+var S3_BUCKET = 'lvcheng';
 
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY,
