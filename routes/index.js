@@ -93,6 +93,8 @@ module.exports = function(passport) {
 						return filename + '_' + Date.now();
 					},
 			onFileUploadData: function (file, data, req, res) {
+				console.log("AWS_ACCESS_KEY: " + AWS_ACCESS_KEY);
+				console.log("AWS_SECRET_KEY: " + AWS_SECRET_KEY);
 				var params = {
 					Bucket: S3_BUCKET,
 					Key: file.name,
