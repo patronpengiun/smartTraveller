@@ -17,16 +17,81 @@ $(function() {
 		if(!$('#signup-form').parsley().validate('step2')){
 			return;
 		} else {
-			if($('input[name=occupation]:checked').val() == '其他'){
-				$('input[name=occupation]:checked').val($('#occupation_input').val());
-			}
-			$('.two-btn').hide();
-			$('.submit-notice').show();
-			$('#signup-form').submit();
+			 if($('input[name=occupation]:checked').val() == '其他'){
+			 	$('input[name=occupation]:checked').val($('#occupation_input').val());
+			 }
+			 $('.two-btn').hide();
+			 $('.submit-notice').show();
+			 init_upload('portrait_file', false);
+			 init_upload('view_files', false);
+			 init_upload('life_files', true);
 		}
-			
 	});
 
+
+	/*
+    Function to carry out the actual PUT request to S3 using the signed request from the app.
+	*/
+	function upload_file(file, signed_request, url, ifLast){
+		console.log("enter upload_file");
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("PUT", signed_request);
+	    xhr.setRequestHeader('x-amz-acl', 'private');
+	    xhr.onload = function() {
+	        if (xhr.status === 200) {
+	            console.log(file.name + " uploaded!")
+	            if(ifLast){
+	            	$('#signup-form').submit();
+	            }
+	        }
+	    };
+	    xhr.onerror = function() {
+	        alert("Could not upload file."); 
+	    };
+	    xhr.send(file);
+	}
+	/*
+	    Function to get the temporary signed request from the app.
+	    If request successful, continue to upload the file using this signed
+	    request.
+	*/
+	function get_signed_request(file, ifLast){
+		var username = document.getElementById('username').value;
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type+"&username="+username);
+	    xhr.onreadystatechange = function(){
+	        if(xhr.readyState === 4){
+	            if(xhr.status === 200){
+	                var response = JSON.parse(xhr.responseText);
+	                upload_file(file, response.signed_request, response.url, ifLast);
+	            }
+	            else{
+	                alert("Could not get signed URL.");
+	            }
+	        }
+	    };
+	    xhr.send();
+	}
+	/*
+	   Function called when file input updated. If there is a file selected, then
+	   start upload procedure by asking for a signed request from the app.
+	*/
+	function init_upload(id, ifLast){
+	    var files = document.getElementById(id).files;
+    	for(var i = 0; i < files.length; i++){
+	        var file = files[i];
+	        if(file == null){
+	            alert("No file selected.");
+	            return;
+	        }
+	        // if this is the last file of last input element, set ifLast flag
+	        var myIfLast = false;
+	        if(ifLast && i === files.length - 1){
+	        	myIfLast = true;
+	        }
+	        get_signed_request(file, myIfLast);
+		}
+	}
 });
 
 $(document).ready(function() {

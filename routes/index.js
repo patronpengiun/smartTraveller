@@ -13,6 +13,7 @@ AWS.config.update({
 	secretAccessKey: AWS_SECRET_KEY,
 	region: 'us-west-2',
 });
+
 var s3 = new AWS.S3({params: {Bucket: S3_BUCKET}});
 var s3Policy = require('s3policy');
 var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);
@@ -81,38 +82,39 @@ module.exports = function(passport) {
 		_multer = multer({
 			dest: './upload', 
 			rename: function (fieldname, filename, req, res) {	
-    						//return req.user.username + '_' + filename + '_' + Date.now();
-    						return filename + '_' + Date.now();
+    						//console.log(req);
+    						return filename;
     					},
     				});
 	} else {
 		_multer = multer({
 			dest: './upload', 
-			limits : { fileSize: 100*1024*1024 },
+			//limits : { fileSize: 100*1024*1024 },
 			rename: function (fieldname, filename, req, res) {	
 						//return req.user.username + '_' + filename + '_' + Date.now();
-						return filename + '_' + Date.now();
+						return filename;
 					},
-			onFileUploadData: function (file, data, req, res) {
-				var params = {
-					Bucket: S3_BUCKET,
-					Key: file.name,
-					Body: fs.createReadStream(file.path),
-					ContentType: 'application/octet-stream',
-				};
+			// onFileUploadData: function (file, data, req, res) {
+			// 	var params = {
+			// 		Bucket: S3_BUCKET,
+			// 		Key: file.name,
+			// 		Body: fs.createReadStream(file.path),
+			// 		ContentType: 'application/octet-stream',
+			// 	};
 
-				s3.upload(params, function(err, data) {
-	    			if (err) {
-	      				console.log("Error uploading data: ", err);
-	    			} else {
-	      				console.log("Successfully uploaded");
-	    			}
-  				});
-			},
+			// 	s3.upload(params, function(err, data) {
+	  //   			if (err) {
+	  //     				console.log("Error uploading data: ", err);
+	  //   			} else {
+	  //     				console.log("Successfully uploaded");
+	  //   			}
+  	// 			});
+			// },
 		});
 	}
 	
 	router.post('/signup/guide/apply', _multer, 
+	//router.post('/signup/guide/apply', 
 		function(req, res, next) {
 			var temp = req.body;
 			if (!req.isAuthenticated()) {
@@ -130,22 +132,21 @@ module.exports = function(passport) {
 			} else {
 				temp.username = req.user.username;
 			}
-			
-			// TODO: refactor
-			temp.photo_portrait = req.files.photo_portrait.name;
+			//TODO: refactor
+			temp.photo_portrait = temp.username + '_' + req.files.photo_portrait.name;
 			temp.photo_view = [];
 			for (var i=0;i<req.files.photo_view.length;i++) {
-				temp.photo_view.push(req.files.photo_view[i].name);
+				temp.photo_view.push(temp.username + '_' + req.files.photo_view[i].name);
 			}
 			if (req.files.photo_view.name) {
-				temp.photo_view.push(req.files.photo_view.name);
+				temp.photo_view.push(temp.username + '_' + req.files.photo_view.name);
 			}
 			temp.photo_life = [];
 			for (var i=0;i<req.files.photo_life.length;i++) {
-				temp.photo_life.push(req.files.photo_life[i].name);
+				temp.photo_life.push(temp.username + '_' + req.files.photo_life[i].name);
 			}
 			if (req.files.photo_life.name) {
-				temp.photo_life.push(req.files.photo_life.name);
+				temp.photo_life.push(temp.username + '_' + req.files.photo_life.name);
 			}
 			
 			var newGuide = new Guide(temp);
@@ -158,7 +159,6 @@ module.exports = function(passport) {
 					}
 				});
 			});
-			
 			
 		}
 		);
@@ -453,6 +453,35 @@ module.exports = function(passport) {
 		
 		helper(0);
 	};
+
+	/*
+	 * Respond to GET requests to /sign_s3.
+	 * Upon request, return JSON containing the temporarily-signed S3 request and the
+	 * anticipated URL of the image.
+	 */
+	router.get('/sign_s3', function(req, res){
+	    var myS3 = new AWS.S3(); 
+	    var s3_params = { 
+	        Bucket: S3_BUCKET, 
+	        Key: req.query.username + '_' + req.query.file_name, 
+	        Expires: 60, 
+	        ContentType: req.query.file_type, 
+	        ACL: 'private'
+	    }; 
+	    myS3.getSignedUrl('putObject', s3_params, function(err, data){ 
+	        if(err){ 
+	            console.log(err); 
+	        }
+	        else{ 
+	            var return_data = {
+	                signed_request: data,
+	                url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.file_name 
+	            };
+	            res.write(JSON.stringify(return_data));
+	            res.end();
+	        } 
+	    });
+	});
 
 
 	return router;
