@@ -4,8 +4,6 @@ var multer = require('multer');
 var AWS = require('aws-sdk');
 var mongoose = require('mongoose');
 
-
-
 var s3 = new AWS.S3({params: {Bucket: S3_BUCKET}});
 var s3Policy = require('s3policy');
 var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);

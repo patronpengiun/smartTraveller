@@ -25,6 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //configuring AWS S3
+var AWS = require('aws-sdk');
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
