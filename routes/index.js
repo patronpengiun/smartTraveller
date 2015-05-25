@@ -4,15 +4,7 @@ var multer = require('multer');
 var AWS = require('aws-sdk');
 var mongoose = require('mongoose');
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
-var S3_BUCKET = process.env.S3_BUCKET;
 
-AWS.config.update({
-	accessKeyId: AWS_ACCESS_KEY,
-	secretAccessKey: AWS_SECRET_KEY,
-	region: 'us-west-2',
-});
 
 var s3 = new AWS.S3({params: {Bucket: S3_BUCKET}});
 var s3Policy = require('s3policy');
@@ -83,7 +75,7 @@ module.exports = function(passport) {
 			dest: './upload', 
 			rename: function (fieldname, filename, req, res) {	
     						//console.log(req);
-    						return filename;
+    						return replaceAll(' ', '-', filename);
     					},
     				});
 	} else {
@@ -92,7 +84,7 @@ module.exports = function(passport) {
 			//limits : { fileSize: 100*1024*1024 },
 			rename: function (fieldname, filename, req, res) {	
 						//return req.user.username + '_' + filename + '_' + Date.now();
-						return filename;
+						return replaceAll(' ', '-', filename);
 					},
 			// onFileUploadData: function (file, data, req, res) {
 			// 	var params = {
@@ -114,7 +106,6 @@ module.exports = function(passport) {
 	}
 	
 	router.post('/signup/guide/apply', _multer, 
-	//router.post('/signup/guide/apply', 
 		function(req, res, next) {
 			var temp = req.body;
 			if (!req.isAuthenticated()) {
@@ -463,7 +454,7 @@ module.exports = function(passport) {
 	    var myS3 = new AWS.S3(); 
 	    var s3_params = { 
 	        Bucket: S3_BUCKET, 
-	        Key: req.query.username + '_' + req.query.file_name, 
+	        Key: req.query.username + '_' + replaceAll(' ', '-',req.query.file_name), 
 	        Expires: 60, 
 	        ContentType: req.query.file_type, 
 	        ACL: 'private'
@@ -483,6 +474,9 @@ module.exports = function(passport) {
 	    });
 	});
 
+	function replaceAll(find, replace, str) {
+		return str.replace(new RegExp(find, 'g'), replace);
+	}
 
 	return router;
 }

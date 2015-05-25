@@ -8,16 +8,6 @@ var guideList_router = express.Router();
 var Guide = require('../models/guide');
 var url = require('url');
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
-
-
-AWS.config.update({
-	accessKeyId: AWS_ACCESS_KEY,
-	secretAccessKey: AWS_SECRET_KEY,
-	region: 'us-west-2',
-});
-
 var s3Policy = require('s3policy');
 var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);
 
