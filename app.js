@@ -24,18 +24,6 @@ app.use(expressSession({secret: '910723'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//configuring AWS S3
-var AWS = require('aws-sdk');
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
-var S3_BUCKET = process.env.S3_BUCKET;
-
-AWS.config.update({
-	accessKeyId: AWS_ACCESS_KEY,
-	secretAccessKey: AWS_SECRET_KEY,
-	region: 'us-west-2',
-});
-
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

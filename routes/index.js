@@ -4,6 +4,17 @@ var multer = require('multer');
 var AWS = require('aws-sdk');
 var mongoose = require('mongoose');
 
+//configuring AWS S3
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+var S3_BUCKET = process.env.S3_BUCKET;
+
+AWS.config.update({
+	accessKeyId: AWS_ACCESS_KEY,
+	secretAccessKey: AWS_SECRET_KEY,
+	region: 'us-west-2',
+});
+
 var s3 = new AWS.S3({params: {Bucket: S3_BUCKET}});
 var s3Policy = require('s3policy');
 var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);
