@@ -34,6 +34,7 @@ $(function() {
 					send_Notification_email();
 					if(response === 'OK'){
 						alert("您已成功提交申请，谢谢！");
+						$('.submit-notice').text("提交成功！")
 					}
 				}
    	 		});
