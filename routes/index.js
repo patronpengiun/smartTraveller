@@ -288,7 +288,7 @@ module.exports = function(passport) {
                             targetGuide.photo_life[i] = getImageAddress(targetGuide.photo_life[i]);
                         }
                         res.render('guide_page', {
-                            guide: guides[0],
+                            guide: targetGuide,
                             reviewList: reviews,
                             avgRating: avg,
                             user: req.user
@@ -666,8 +666,8 @@ module.exports = function(passport) {
                     return;
                 }
                 var guide_id = guides[0].id;
-                var mailTo = 'hongdajiang690@gmail.com';
-                var mailSub = '[网站测试]New guide signup reminding'; 
+                var mailTo = 'hr@lvcheng.us';
+                var mailSub = 'New Guide Signup Reminding'; 
                 var mailText = "Name: " + req.query.name + " \
                         Email: " + username + " \
                         Phone: " + req.query.phone + " \
@@ -696,7 +696,7 @@ module.exports = function(passport) {
 
     var getImageAddress = function(image_name) {
         if (process.env.MODE == 'dev') {
-            return image_name;
+            return '/'+image_name;
         } else {
             return myS3Account.readPolicy(image_name, 'lvcheng', 60).replace('s3.amazonaws.com/lvcheng', 'lvcheng.s3.amazonaws.com');
         }
