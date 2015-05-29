@@ -9,6 +9,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 		<script src="/js/parsley.min.js"></script>
+		<script src="/js/jquery.form.js"></script>
 		<script src="/js/guide_signup.js"></script>
 	</head>
 	<body>
@@ -43,7 +44,7 @@
 							<div class="form-record">
 								<div class="form-label">姓名</div>
 								<div class="input-container">
-									<input data-parsley-group="step1" required name="name" type="text">
+									<input id='name' data-parsley-group="step1" required name="name" type="text">
 								</div>
 							</div>
 							<div class="form-record">
@@ -138,7 +139,7 @@
 							<div class="form-record">
 								<div class="form-label">电话号码</div>
 								<div class="input-container">
-									<input name="phone" type="text" required data-parsley-group="step1"></input>
+									<input id='phone' name="phone" type="text" required data-parsley-group="step1"></input>
 								</div>
 							</div>
 							<div class="form-record">

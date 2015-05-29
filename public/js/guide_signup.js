@@ -24,10 +24,41 @@ $(function() {
 			 $('.submit-notice').show();
 			 init_upload('portrait_file', false);
 			 init_upload('view_files', false);
-			 init_upload('life_files', true);
+			 init_upload('life_files', false);
+			 //init_upload('portrait_file', true);
+			 console.log("pictures are uploaded");
+
+			 $('#signup-form').ajaxForm({
+			 	url : '/signup/guide/apply',
+				success : function (response) {
+					send_Notification_email();
+					if(response === 'OK'){
+						alert("您已成功提交申请，谢谢！");
+					}
+				}
+   	 		});
+			 $('#signup-form').submit(); 
 		}
 	});
 
+	function send_Notification_email(){
+		var email = $('#username').val();
+		//if this is a logged in user
+		if(email == undefined){
+			email = 'email';
+		}
+		else{
+			email = $('#username').val();
+		}
+		var name = $('#name').val();
+		var phone = $('#phone').val();
+        $.get("/sendmail",{name:name,email:email,phone:phone},function(data){
+	        if(data=="sent")
+	        {
+	        	console.log("Email sent successfully.");
+	        }
+		});
+	}
 
 	/*
     Function to carry out the actual PUT request to S3 using the signed request from the app.
@@ -41,7 +72,7 @@ $(function() {
 	        if (xhr.status === 200) {
 	            console.log(file.name + " uploaded!")
 	            if(ifLast){
-	            	$('#signup-form').submit();
+	            	$('#signup-form').submit(); 
 	            }
 	        }
 	    };
@@ -56,7 +87,14 @@ $(function() {
 	    request.
 	*/
 	function get_signed_request(file, ifLast){
-		var username = document.getElementById('username').value;
+		var username;
+		if(document.getElementById('username') != null){
+			username = document.getElementById('username').value;
+		}
+		else{
+			username = 'username';
+		}
+		
 	    var xhr = new XMLHttpRequest();
 	    xhr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type+"&username="+username);
 	    xhr.onreadystatechange = function(){
