@@ -50,6 +50,11 @@ module.exports = function(passport) {
             user: req.user
         });
     });
+	
+	// test react
+	router.get('/test', function(req, res, next) {
+		res.render('lvcheng/parts/nav');
+	});
 
     router.post('/login', function(req, res, next) {
         passport.authenticate('login', function(err, user, info) {

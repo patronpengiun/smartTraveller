@@ -2,3 +2,4 @@
 /upload
 *.log
 .DS_Store
+/public/js/react/build/.*
