@@ -1,11 +1,25 @@
 // created by Hongda Jiang
 // 4-19-2015
 // may be merged to index.js later
+var AWS = require('aws-sdk');
 var express = require('express');
 var guideList_router = express.Router();
 
 var Guide = require('../models/guide');
 var url = require('url');
+
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+
+
+AWS.config.update({
+	accessKeyId: AWS_ACCESS_KEY,
+	secretAccessKey: AWS_SECRET_KEY,
+	region: 'us-west-2',
+});
+
+var s3Policy = require('s3policy');
+var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);
 
 module.exports = function() {
 	guideList_router.get('/', function(req, res) {
@@ -15,7 +29,14 @@ module.exports = function() {
 		    guides.forEach(function(guide) {
 		      guideMap.push(guide);
 		    });
-		    res.render('guide_list', {guideList: guideMap, user: req.user, city: req.query.city});
+		    res.render('guide_list', {guideList: generateImageUrl(guideMap), user: req.user, city: req.query.city});
+
+		    function generateImageUrl(guideMap){
+		    	for(var i=0; i < guideMap.length; i++){
+		    		guideMap[i].photo_portrait = myS3Account.readPolicy(guideMap[i].photo_portrait, 'lvcheng', 60).replace('s3.amazonaws.com/lvcheng', 'lvcheng.s3.amazonaws.com');
+		    	}
+		    	return guideMap;
+		    }
 	 	});
 	});
 	

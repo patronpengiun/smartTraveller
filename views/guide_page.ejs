@@ -52,7 +52,7 @@
                         <div id="guide-photo-panel" >
                             <input id="photo-life-count" type="hidden" value="<%= guide.photo_life.length %>">
                             <% for (var i = 0; i < guide.photo_life.length; i++) {%>
-                            <img id="photo_life_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_life[i] %>">
+                            <img id="photo_life_<%= i %>" class="photo_album photo hidden" src="<%= guide.photo_life[i] %>">
                             <% } %>
                             <% if (guide.photo_life.length != 1) { %>
                             <div class="photo-navigation">
@@ -65,7 +65,7 @@
                         <div id="guide-photo-panel" >
                             <input id="photo-view-count" type="hidden" value="<%= guide.photo_view.length %>">
                             <% for (var i = 0; i < guide.photo_view.length; i++) {%>
-                            <img id="photo_view_<%= i %>" class="photo_album photo hidden" src="/<%= guide.photo_view[i] %>">
+                            <img id="photo_view_<%= i %>" class="photo_album photo hidden" src="<%= guide.photo_view[i] %>">
                             <% } %>
                             <% if (guide.photo_view.length != 1) { %>
                             <div class="photo-navigation">
@@ -80,7 +80,7 @@
                         <div id="avatar-panel">
                             <div id="guide-image-box">
                                 <div id="guide-avatar">
-                                    <img class="photo" src="/<%= guide.photo_portrait %>">
+                                    <img class="photo" src="<%= guide.photo_portrait %>">
                                 </div>
                             </div>
                             <div class="guide-name">

@@ -4,14 +4,20 @@ var multer = require('multer');
 var AWS = require('aws-sdk');
 var mongoose = require('mongoose');
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
+
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY,
 	secretAccessKey: AWS_SECRET_KEY,
+	region: 'us-west-2',
 });
-var s3 = new AWS.S3();
+
+var s3 = new AWS.S3({params: {Bucket: S3_BUCKET}});
+var s3Policy = require('s3policy');
+var myS3Account = new s3Policy(AWS_ACCESS_KEY, AWS_SECRET_KEY);
+
 var fs = require('fs');
 
 var Guide = require('../models/guide');
@@ -76,36 +82,39 @@ module.exports = function(passport) {
 		_multer = multer({
 			dest: './upload', 
 			rename: function (fieldname, filename, req, res) {	
-    						//return req.user.username + '_' + filename + '_' + Date.now();
-    						return filename + '_' + Date.now();
+    						//console.log(req);
+    						return filename;
     					},
     				});
 	} else {
 		_multer = multer({
 			dest: './upload', 
+			//limits : { fileSize: 100*1024*1024 },
 			rename: function (fieldname, filename, req, res) {	
 						//return req.user.username + '_' + filename + '_' + Date.now();
-						return filename + '_' + Date.now();
+						return filename;
 					},
-					onFileUploadData: function (file, data, req, res) {
-						var params = {
-							Bucket: S3_BUCKET,
-							Key: file.name,
-							Body: data
-						};
+			// onFileUploadData: function (file, data, req, res) {
+			// 	var params = {
+			// 		Bucket: S3_BUCKET,
+			// 		Key: file.name,
+			// 		Body: fs.createReadStream(file.path),
+			// 		ContentType: 'application/octet-stream',
+			// 	};
 
-						s3.putObject(params, function (perr, pres) {
-							if (perr) {
-								console.log("Error uploading data: ", perr);
-							} else {
-								console.log("Successfully uploaded data");
-							}
-						});
-					},
-				});
+			// 	s3.upload(params, function(err, data) {
+	  //   			if (err) {
+	  //     				console.log("Error uploading data: ", err);
+	  //   			} else {
+	  //     				console.log("Successfully uploaded");
+	  //   			}
+  	// 			});
+			// },
+		});
 	}
 	
 	router.post('/signup/guide/apply', _multer, 
+	//router.post('/signup/guide/apply', 
 		function(req, res, next) {
 			var temp = req.body;
 			if (!req.isAuthenticated()) {
@@ -123,22 +132,21 @@ module.exports = function(passport) {
 			} else {
 				temp.username = req.user.username;
 			}
-			
-			// TODO: refactor
-			temp.photo_portrait = req.files.photo_portrait.name;
+			//TODO: refactor
+			temp.photo_portrait = temp.username + '_' + req.files.photo_portrait.name;
 			temp.photo_view = [];
 			for (var i=0;i<req.files.photo_view.length;i++) {
-				temp.photo_view.push(req.files.photo_view[i].name);
+				temp.photo_view.push(temp.username + '_' + req.files.photo_view[i].name);
 			}
 			if (req.files.photo_view.name) {
-				temp.photo_view.push(req.files.photo_view.name);
+				temp.photo_view.push(temp.username + '_' + req.files.photo_view.name);
 			}
 			temp.photo_life = [];
 			for (var i=0;i<req.files.photo_life.length;i++) {
-				temp.photo_life.push(req.files.photo_life[i].name);
+				temp.photo_life.push(temp.username + '_' + req.files.photo_life[i].name);
 			}
 			if (req.files.photo_life.name) {
-				temp.photo_life.push(req.files.photo_life.name);
+				temp.photo_life.push(temp.username + '_' + req.files.photo_life.name);
 			}
 			
 			var newGuide = new Guide(temp);
@@ -151,7 +159,6 @@ module.exports = function(passport) {
 					}
 				});
 			});
-			
 			
 		}
 		);
@@ -172,9 +179,35 @@ module.exports = function(passport) {
 						for (var i = reviews.length - 1; i >= 0; i--) {
 							sum += reviews[i].rating;
 						};
-						var avg = sum / reviews.length;	
+						var avg = sum / reviews.length;
+						var targetGuide = guides[0];
+						// update image name to target image path
+						if (process.env.MODE == 'dev'){
+							targetGuide.photo_portrait = "/"+targetGuide.photo_portrait;
+							for(var i=0; i<targetGuide.photo_view.length; i++){
+								targetGuide.photo_view[i] = "/" + targetGuide.photo_view[i];
+							}
+							for(var i=0; i<targetGuide.photo_life.length; i++){
+								targetGuide.photo_life[i] = "/" + targetGuide.photo_life[i];
+							}
+						}
+						else {
+							//generate new aws url to access picture
+							targetGuide.photo_portrait = reGenerateUrl(myS3Account.readPolicy(targetGuide.photo_portrait, 'lvcheng', 60));
+							for(var i=0; i<targetGuide.photo_view.length; i++){
+								targetGuide.photo_view[i] = reGenerateUrl(myS3Account.readPolicy(targetGuide.photo_view[i], 'lvcheng', 60));
+							}
+							for(var i=0; i<targetGuide.photo_life.length; i++){
+								targetGuide.photo_life[i] = reGenerateUrl(myS3Account.readPolicy(targetGuide.photo_life[i], 'lvcheng', 60));
+							}
+						}
 						res.render('guide_page', {guide: guides[0], reviewList: reviews, avgRating: avg, user:req.user});
 					}
+
+					function reGenerateUrl(url){
+   						var newNRL = url.replace('s3.amazonaws.com/lvcheng', 'lvcheng.s3.amazonaws.com');
+   						return newNRL;
+   					}
 				});
 			} 
 		});
@@ -420,6 +453,35 @@ module.exports = function(passport) {
 		
 		helper(0);
 	};
+
+	/*
+	 * Respond to GET requests to /sign_s3.
+	 * Upon request, return JSON containing the temporarily-signed S3 request and the
+	 * anticipated URL of the image.
+	 */
+	router.get('/sign_s3', function(req, res){
+	    var myS3 = new AWS.S3(); 
+	    var s3_params = { 
+	        Bucket: S3_BUCKET, 
+	        Key: req.query.username + '_' + req.query.file_name, 
+	        Expires: 60, 
+	        ContentType: req.query.file_type, 
+	        ACL: 'private'
+	    }; 
+	    myS3.getSignedUrl('putObject', s3_params, function(err, data){ 
+	        if(err){ 
+	            console.log(err); 
+	        }
+	        else{ 
+	            var return_data = {
+	                signed_request: data,
+	                url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.file_name 
+	            };
+	            res.write(JSON.stringify(return_data));
+	            res.end();
+	        } 
+	    });
+	});
 
 
 	return router;

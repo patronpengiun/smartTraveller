@@ -12,6 +12,7 @@
 		<script src="/js/guide_signup.js"></script>
 	</head>
 	<body>
+		<h1>本页面正在开发中，请勿使用。。。</h1>
 		<div class="form-wrapper">
 			<div class="form-body">
 				<div class="form-nav v-top">
@@ -29,7 +30,7 @@
 							<div class="form-record">
 								<div class="form-label">邮箱地址</div>
 								<div class="input-container">
-									<input name="username" type="text" required data-parsley-type="email" data-parsley-group="step1"></input>
+									<input id='username' name="username" type="text" required data-parsley-type="email" data-parsley-group="step1"></input>
 								</div>
 							</div>
 							<div class="form-record">
@@ -217,19 +218,19 @@
 							<div class="form-record">
 								<div class="form-label">头像</div>
 								<div class="input-container">
-									<input class="upload" type="file" name="photo_portrait" required data-parsley-group="step2" accept=".gif,.jpg,.png">
+									<input id="portrait_file" class="upload" type="file" name="photo_portrait" required data-parsley-group="step2" accept=".gif,.jpg,.png">
 								</div>
 							</div>
 							<div class="form-record">
 								<div class="form-label">城市风景照</div>
 								<div class="input-container">
-									<input class="upload" type="file" multiple name="photo_view" required data-parsley-group="step2" accept=".gif,.jpg,.png">
+									<input id="view_files" class="upload" type="file" multiple name="photo_view" required data-parsley-group="step2" accept=".gif,.jpg,.png">
 								</div>
 							</div>
 							<div class="form-record">
 								<div class="form-label">生活照</div>
 								<div class="input-container">
-									<input class="upload" type="file" multiple name="photo_life" required data-parsley-group="step2" accept=".gif,.jpg,.png">
+									<input id="life_files" class="upload" type="file" multiple name="photo_life" required data-parsley-group="step2" accept=".gif,.jpg,.png">
 								</div>
 							</div>
 							
