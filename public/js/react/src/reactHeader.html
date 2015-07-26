@@ -1,0 +1,116 @@
+<html>
+<head>
+	<title>Lvcheng.us</title>
+	<style type="text/css">
+	#navLogoImage{
+		max-width: 40px;
+		max-height: 40px;
+	}
+
+	</style>
+	<script src = "build/react.js"></script>
+	<script src = "build/JSXTransformer.js"></script>
+</head>
+	<body>
+		<header id = "header" role = "banner"></header>
+		<script type="text/jsx">
+
+			var LogoWrapper = React.createClass({
+				render : function() {
+					return(
+						<div id = "logoWrapper"><LogoImage/></div>
+					)
+				}
+			});
+
+			var LogoImage = React.createClass({
+				render : function() {
+					return (
+						<h1><a href="/"><img src = {'img/index.png'} id = "navLogoImage"></img></a></h1>
+						);
+				}
+			});
+
+			var HeaderNav = React.createClass({
+				render: function() {
+					return (
+						<div id = "headerNav"><Nav data = {this.props.data}/></div>
+						)
+				}
+			});
+
+			var Nav = React.createClass ({
+				render: function() {
+					return(
+						<div id = "mainNavWrapper">
+							<HeaderFolder data = {this.props.data}/>
+							<HeaderCollection/>
+						</div>
+					)
+				}
+			}); 
+
+
+			var HeaderFolder = React.createClass({
+				render: function() {
+					var nameAndUrl = this.props.data.map(function(data){
+						return (
+							<HeaderCollection data = {data}/>
+							);
+					}); 
+
+
+					return(
+						<div className = "folder">
+							<label></label>
+							<div className = "subnav">
+								{nameAndUrl}
+							</div>
+						</div>
+						)
+				}
+			});
+
+			var HeaderCollection = React.createClass({
+				render: function() {
+					return(
+						<div className = "collection">
+							<a>{this.props.data.name}</a>
+						</div>
+						)
+				}
+			});
+
+		
+
+			
+
+			var Header = React.createClass({
+				render: function() {
+					return (
+						<div className = "header-inner">
+						<LogoWrapper/>
+						<HeaderNav data = {this.props.data}/>
+						</div>
+					)
+				}
+			});
+
+
+			React.render(
+				<Header data = {[
+				{name: "East", url: "http://lvcheng.us/index-east"},
+				{name: "West", url: "http://lvcheng.us/west"},
+				{name: "Florida", url: "http://lvcheng.us/index-florida"}
+			]} />,
+				document.getElementById('header')
+				);
+
+			// var data = [
+			// 	{name: "East", url: "http://lvcheng.us/index-east"},
+			// 	{name: "West", url: "http://lvcheng.us/west"},
+			// 	{name: "Florida", url: "http://lvcheng.us/index-florida"}
+			// ];
+		</script>
+	</body>
+</html>
