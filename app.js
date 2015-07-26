@@ -27,8 +27,18 @@ app.use(passport.session());
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 var lessMiddleware = require('less-middleware');
 app.use(lessMiddleware(path.join(__dirname, "public"),{compress : true}));
+/***
+app.use(lessMiddleware({
+    src: __dirname + '/public/style/less',
+    dest: __dirname + '/public/style/css',  
+    prefix: '/style/css',
+    compress: true
+}));
+***/
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'upload')));
 

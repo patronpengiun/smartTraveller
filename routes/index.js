@@ -53,7 +53,7 @@ module.exports = function(passport) {
 	
 	// test react
 	router.get('/test', function(req, res, next) {
-		res.render('lvcheng/parts/nav');
+		res.render('lvcheng/index');
 	});
 
     router.post('/login', function(req, res, next) {

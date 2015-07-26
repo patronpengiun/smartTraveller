@@ -7,7 +7,7 @@ var NavBar = React.createClass({
 		      );
 		    });
 		return (
-			<div className="nav" data={this.props.data}>
+			<div className="nav" id="header-nav" data={this.props.data}>
 				{navs}
 			</div>
 		);
@@ -24,7 +24,7 @@ var NavCell = React.createClass({
 	}
 });
 
-var data = ["旅橙","地陪","活动","关于"];
+var data = ['旅橙', '地陪','活动','关于'];
 
 $(document).ready(function() {
 	React.render(
