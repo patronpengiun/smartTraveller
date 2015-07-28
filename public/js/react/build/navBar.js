@@ -1,11 +1,11 @@
 var NavBar = React.createClass({displayName: "NavBar",
 	render: function() {
-		var navs = this.props.data.map(function (nav) {
-		      return (
-		        React.createElement(NavCell, {content: nav}
+		var navs = this.props.data.map(function (title) {
+            return (
+                React.createElement(NavCell, {content: title}
 		        )
-		      );
-		    });
+            );
+        });
 		return (
 			React.createElement("div", {className: "nav", id: "header-nav", data: this.props.data}, 
 				navs
