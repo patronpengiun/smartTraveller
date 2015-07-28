@@ -11,8 +11,8 @@ var nameUrlData = [
 var LogoWrapper = React.createClass({
 	render : function() {
 		return(
-			<div id ="logoWrapper"><LogoImage/></div>
-			)
+			<div id ="logoWrapper"><LogoImage /></div>
+		);
 	}
 });
 
@@ -20,7 +20,7 @@ var LogoImage = React.createClass({
 	render : function() {
 		return (
 			<h1><a href="/"><img src={'../../icon/favicon.ico'} id="navLogoImage"></img></a></h1>
-			);
+		);
 	}
 });
 
@@ -31,7 +31,7 @@ var HeaderNav = React.createClass({
 			<HeaderFolder data={nameUrlData}/>
 			<HeaderFolder data={nameUrlData}/>
 			</div>
-			)
+		);
 	}
 });
 
@@ -91,16 +91,16 @@ var Header = React.createClass({
 	render: function() {
 		return (
 			<div className="header-inner">
-			<LogoWrapper/>
-			<HeaderNav/>
+			<LogoWrapper />
+			<HeaderNav />
 			</div>
-			)
+		);
 	}
 });
 
 $(document).ready(function() {
-    React.render(
-        <Header />,
-        document.getElementById('header')
-    );
+    React.render(
+        <Header />,
+        document.getElementById('header')
+    );
 });
