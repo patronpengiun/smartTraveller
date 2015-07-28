@@ -19,7 +19,7 @@ var LogoWrapper = React.createClass({displayName: "LogoWrapper",
 var LogoImage = React.createClass({displayName: "LogoImage",
 	render : function() {
 		return (
-			React.createElement("h1", null, React.createElement("a", {href: "/"}, React.createElement("img", {src: 'img/index.png', id: "navLogoImage"})))
+			React.createElement("h1", null, React.createElement("a", {href: "/"}, React.createElement("img", {src: '../../icon/favicon.ico', id: "navLogoImage"})))
 			);
 	}
 });
@@ -98,4 +98,9 @@ var Header = React.createClass({displayName: "Header",
 	}
 });
 
-React.render(React.createElement(Header, null), document.getElementById('header'));
+$(document).ready(function() {
+    React.render(
+        React.createElement(Header, null),
+        document.getElementById('header')
+    );
+});

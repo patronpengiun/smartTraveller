@@ -19,7 +19,7 @@ var LogoWrapper = React.createClass({
 var LogoImage = React.createClass({
 	render : function() {
 		return (
-			<h1><a href="/"><img src={'img/index.png'} id="navLogoImage"></img></a></h1>
+			<h1><a href="/"><img src={'../../icon/favicon.ico'} id="navLogoImage"></img></a></h1>
 			);
 	}
 });
@@ -98,4 +98,9 @@ var Header = React.createClass({
 	}
 });
 
-React.render(<Header/>, document.getElementById('header'));
+$(document).ready(function() {
+    React.render(
+        <Header />,
+        document.getElementById('header')
+    );
+});
