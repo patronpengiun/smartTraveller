@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "jsx /public/js/react/src/ /public/js/react/build/ | MODE=dev node app.js",
+    "dev": "jsx --watch /public/js/react/src/ /public/js/react/build/ | MODE=dev node app.js",
     "prod": "jsx /public/js/react/src/ /public/js/react/build/ | MODE=product node app.js"
   },
   "author": "",
