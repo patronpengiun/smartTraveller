@@ -1,14 +1,41 @@
-var imgs = ['img/icons/drive.png', 'img/icons/people.png', 'img/icons/walk.png'];
+var React = require('react');
+var classSet = require('react-classset');
 
-var ImgIndex = React.createClass({
+module.exports = React.createClass({
+    getInitialState: function() {
+        return {
+            allLoaded: false,
+            loadedCount: 0,
+        };
+    },
+    
+    onImageLoad: function() {
+        this.setState({loadedCount: this.state.loadedCount+1});
+        var imgCount = this.props.urls.length
+        if (this.state.loadedCount == imgCount) {
+            this.setState({allLoaded: true});
+            var currentIdx = 0;
+            setInterval(function(component) {
+                // TODO: get rid of toString
+                component.refs[currentIdx].setState({class: "active"});
+                component.refs[(currentIdx+imgCount-1) % imgCount].setState({class: ""});
+                currentIdx = (currentIdx+1) % imgCount;
+            }, 3000, this);
+        }
+    },
+    
     render: function() {
-        var imgs = this.props.data.map(function (url) {
-            return (
-                <Image src={url} count={this.props.data.length}/>
-            );
+        var classes = classSet({
+            'loaded': this.state.allLoaded 
         });
+        var imgs = this.props.urls.map(function (url,idx) {
+            return (
+                <Image ref={idx.toString()} src={url} callbackParent={this.onImageLoad}/>
+            );
+        }, this);
         return (
-            <div className="imgIndex-wrapper">
+            <div id="img-index-wrapper" className={classes}>
+                <div className="default-backdrop"></div>
                 {imgs}
             </div>
         );
@@ -23,7 +50,7 @@ var Image = React.createClass({
     },
     
     onImageLoad: function() {
-        this.setState({class: "loaded inactive"});
+        this.props.callbackParent();
     },
     
     componentDidMount: function() {
@@ -36,11 +63,4 @@ var Image = React.createClass({
           <img ref="img" src={this.props.src} className={this.state.class} />  
         );
     }
-});
-
-$(document).ready(function() {
-	React.render(
-		<ImgIndex data={imgs} />,
-		document.getElementById('img-index')
-	);
 });

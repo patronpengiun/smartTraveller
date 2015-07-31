@@ -3,6 +3,7 @@ var router = express.Router();
 var multer = require('multer');
 var AWS = require('aws-sdk');
 var mongoose = require('mongoose');
+var React = require('react')
 
 //configuring AWS S3
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
@@ -53,7 +54,10 @@ module.exports = function(passport) {
 	
 	// test react
 	router.get('/test', function(req, res, next) {
-		res.render('lvcheng/index');
+        var ImageIndex = require('../public/js/react/build/imgIndex.js');
+        var urls = ['img/fish.jpg', 'img/mt.jpg'];
+        var imgIndexHTML = React.renderToString(React.createElement(ImageIndex, {urls:urls}));
+		res.render('lvcheng/index', {imgIndexHTML: imgIndexHTML});
 	});
 
     router.post('/login', function(req, res, next) {

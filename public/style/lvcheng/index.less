@@ -6,3 +6,43 @@
 .navigation-item {
 	float: left;
 }
+
+#img-index {
+    clear: both;
+    
+    #img-index-wrapper {
+        position: relative;
+        
+        img {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+        }
+        
+        .default-backdrop {
+            height: 100px;
+            background-color: yellow;
+        }
+        
+        &.loaded {
+            .default-backdrop {
+                display: none;
+            }
+            
+            img.active {
+                opacity: 1;
+                -webkit-transition: opacity 2s ease-in-out;
+                -moz-transition: opacity 2s ease-in-out;
+                -ms-transition: opacity 2s ease-in-out;
+                transition: opacity 2s ease-in-out;
+            }
+            
+            img {
+                -webkit-transition: opacity 2s ease-in-out;
+                -moz-transition: opacity 2s ease-in-out;
+                -ms-transition: opacity 2s ease-in-out;
+                transition: opacity 2s ease-in-out;
+            }
+        }
+    }
+}

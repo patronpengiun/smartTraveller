@@ -3,3 +3,4 @@
 *.log
 .DS_Store
 /public/js/react/build/*
+/public/js/main.js
