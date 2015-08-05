@@ -149,12 +149,10 @@ $(document).ready(function() {
         document.getElementById('header')
     );
 
-    $(".navigation-item").hover(
-    	function(){
-    		$("ul", this).show();
-    	}, function() {
-			$("ul", this).hide();
-    	}
-    );
+	$(".navigation-item").mouseover(function(event) {
+		$("ul", this).show();
+	}).mouseout(function(event) {
+		$("ul", this).hide();
+	});
 
 });

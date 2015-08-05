@@ -1,7 +1,6 @@
 .header-inner{
 	font-size: 16px;
 	color: rgb(219, 146, 10);
-	padding-bottom: 10px;
 	height: 60px;
 
 	#headerNav{
@@ -36,20 +35,41 @@
 			}
 
 			.navigation-item {
+			position: relative;
+
 				.navigation-dropdown{
     				display: none;
+    				background: #F7F7F7;
+    				border: 1px solid rgba( 0, 0, 0, 0.1 );
+    				border-radius: 3px;
+    				position: absolute;
+    				width: 100px;
+    				left:-20px;
+    				margin:0px;
+    				padding:10px;
+
     			
-    				.navigation__dropdown__item{
+    				.navigation-dropdown-item{
     					list-style: none;
-    					padding: 5px 7px;
+    					padding: 5px 10px;
 					}
+				}
+
+				.navigation-link {
+					margin-bottom:20px;
 				}
 			}
 		}
 
 		.navigation, .collection, #logoWrapper{
 			float: left;
-			margin-right:30px;
+			margin-right:15px;
+			margin-left:15px;
+			margin-top:10px;
+		}
+
+		#logoWrapper{
+			margin-top:0px;
 		}
 	}
 }
