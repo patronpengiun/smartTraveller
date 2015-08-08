@@ -1,0 +1,99 @@
+#header {
+    background-color: #1f1f1f;
+    
+    #header-inner {
+        padding: 10px 0;
+        position: relative;
+    
+        #logo-wrapper {
+            position: relative;
+            left: 50%;
+            margin-left: -20px;
+            img {
+                width: 40px;
+                height: 40px;
+                vertical-align: bottom;
+            }
+        }
+    
+        .navbar {
+            //text-align: center;
+            margin-top: -40px;
+            line-height: 40px;
+            position: relative;
+            height: 40px;
+            
+            .navbar-left {
+                position: absolute;
+                right: 50%;
+                margin-right: 40px
+            }
+            
+            .navbar-right {
+                position: absolute;
+                left: 50%;
+                margin-left: 40px;
+            }
+            
+            .navbar-cell {
+                font-size: 16px;
+                text-decoration: none;
+                font-weight: 400;
+                color: #db920a;
+                display: inline-block;
+                position: relative;
+                
+                .navbar-cell-title {
+                    padding: 0 15px;
+                    cursor: pointer;
+                }
+                
+                .navbar-menu {
+                    overflow: hidden;
+                    position: absolute;
+                    left: 0;
+                    z-index: 100;
+                    background-color: #1f1f1f;
+                    max-height: 0;
+                    
+                    .navbar-menu-item {
+                        padding: 0 15px;
+                        cursor: pointer;
+                    }
+                    
+                    -webkit-transition: max-height 0.2s ease-in-out;
+                    -moz-transition: max-height 0.2s ease-in-out;
+                    -ms-transition: max-height 0.2s ease-in-out;
+                    transition: max-height 0.2s ease-in-out;
+                }
+                
+                &:hover .navbar-menu {
+                    max-height: 500px;
+                    
+                    -webkit-transition: max-height 0.6s ease-in-out;
+                    -moz-transition: max-height 0.6s ease-in-out;
+                    -ms-transition: max-height 0.6s ease-in-out;
+                    transition: max-height 0.6s ease-in-out;
+                }
+            }
+            
+            #dest-nav-cell {
+                .navbar-menu {
+                    width: 70px;
+                }
+            }
+            
+            #commute-nav-cell {
+                .navbar-menu {
+                    width: 110px;
+                }
+            }
+            
+            #strategy-nav-cell {
+                .navbar-menu {
+                    width: 80px;
+                }
+            }
+        }
+    }
+}

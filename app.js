@@ -42,6 +42,18 @@ app.use(lessMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'upload')));
 
+// configure browserify middleware
+var browserify_express = require('browserify-express');
+app.use(browserify_express({
+    entry: __dirname + '/public/js/custom/index.js',
+    watch: __dirname + '/public/js/react/src/',
+    mount: '/js/main.js',
+    verbose: true,
+    minify: false,
+    bundle_opts: { debug: true }, // enable inline sourcemap on js files  
+    write_file: __dirname + '/public/js/main.js',
+}));
+
 var initPassport = require('./passport/init');
 initPassport(passport);
 
