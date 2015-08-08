@@ -1,3 +1,8 @@
+@content-width: 1080px;
+
+@display-element-margin: 20px;
+@display-img-wrapper-height: 300px;
+
 #navLogoImage{
 	max-width: 40px;
 	max-height: 40px;
@@ -12,16 +17,22 @@
     
     #img-index-wrapper {
         position: relative;
+        height: 300px;
+        overflow: hidden;
         
         img {
             opacity: 0;
             position: absolute;
             left: 0;
+            width: 100%
         }
         
         .default-backdrop {
-            height: 100px;
+            height: 300px;
             background-color: yellow;
+            width: 100%;
+            position: absolute;
+            left: 0;
         }
         
         &.loaded {
@@ -43,6 +54,124 @@
                 -ms-transition: opacity 2s ease-in-out;
                 transition: opacity 2s ease-in-out;
             }
+        }
+    }
+}
+
+#main-content {
+    width: @content-width;
+    margin: auto;
+    
+    .display-container {
+        
+        .display-wrapper {
+            position: relative;
+            margin-bottom: 60px;
+        
+            .display-header {
+                text-align: center;
+                margin: 20px 0;
+                
+                .display-title {
+                    margin-bottom: 5px;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+                
+                .display-subtitle {
+                    font-size: 17px;
+                }
+            }
+        
+            .display-content {
+                
+                .display-element {
+                    display: inline-block;
+                    margin-bottom: 35px;
+                    
+                    &.large {
+                        width: (@content-width - @display-element-margin) / 2;
+                        
+                        &:not(:nth-child(2n+2)) {
+                            margin-right: @display-element-margin;
+                        }
+                    }
+                    
+                    &.small {
+                        width: (@content-width - @display-element-margin * 3) / 4;
+                        
+                        &:not(:nth-child(4n+4)) {
+                            margin-right: @display-element-margin;
+                        }
+                    }
+                    
+                    &.medium {
+                        width: (@content-width - @display-element-margin * 2) / 3;
+                        
+                        &:not(:nth-child(3n+3)) {
+                            margin-right: @display-element-margin;
+                        }
+                    }
+                    
+                    .display-img-wrapper {
+                        position: relative;
+                        height: @display-img-wrapper-height;
+                        overflow: hidden;
+                        display: block;
+                        
+                        img {
+                            vertical-align: bottom;
+                            position: absolute;
+                            min-width: 100%;
+                        }
+                        
+                        &.adjust {
+                            height: auto;
+                            
+                            img {
+                                position: static;
+                                width: 100%;
+                            }
+                        }
+                    }
+                    
+                    .display-element-description {
+                        margin-top: 10px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+    
+    #guide-container {
+        .dest-link {
+            font-size: 13px;
+            font-weight: 400;
+        }
+        
+        .guide-link {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        a {
+            display: block;
+            text-align: left;
+            
+            &:visited {
+                color: rgba(28,28,28,.5);
+            }
+        }
+    }
+    
+    #strategy-container {
+        .display-element-description {
+            display: none;
+        }
+        
+        .display-element {
+            margin-bottom: 20px;
         }
     }
 }

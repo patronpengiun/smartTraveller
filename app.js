@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'upload')));
 var browserify_express = require('browserify-express');
 app.use(browserify_express({
     entry: __dirname + '/public/js/custom/index.js',
-    watch: __dirname + '/public/js/custom/',
+    watch: __dirname + '/public/js/react/src/',
     mount: '/js/main.js',
     verbose: true,
     minify: false,

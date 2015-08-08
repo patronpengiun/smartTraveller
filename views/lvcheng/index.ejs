@@ -1,14 +1,31 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Lvcheng.us</title>
         <!-- <script src="/js/react/build/navBar.js"></script> -->
         <!-- <script src="/js/react/build/reactHeader.js"></script> -->
         <script src="/js/main.js"></script>
+        <link href="/style/lvcheng/common.css" rel="stylesheet">
+        <link href="/style/lvcheng/header.css" rel="stylesheet">
         <link href="/style/lvcheng/index.css" rel="stylesheet">
     </head>
     <body>
-        <!-- <% include parts/header %> -->
-        <header id="header" role="banner"></header>
+        <% include parts/header %>
+        <!-- <header id="header" role="banner"></header> -->
         <div id="img-index"><%- imgIndexHTML %></div>
+        <div id="main-content">
+            <div id="event-container" class="display-container">
+                <%- eventDisplayHTML %>
+            </div>
+            <div id="dest-container" class="display-container">
+                <%- destDisplayHTML %>
+            </div>
+            <div id="guide-container" class="display-container">
+                <%- guideDisplayHTML %>
+            </div>
+            <div id="strategy-container" class="display-container">
+                <%- strategyDisplayHTML %>
+            </div>
+        </div>
     </body>
 </html>

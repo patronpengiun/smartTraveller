@@ -52,12 +52,27 @@ module.exports = function(passport) {
         });
     });
 	
-	// test react
+	// test lvcheng main page
 	router.get('/test', function(req, res, next) {
         var ImageIndex = require('../public/js/react/build/imgIndex.js');
-        var urls = ['img/fish.jpg', 'img/mt.jpg'];
-        var imgIndexHTML = React.renderToString(React.createElement(ImageIndex, {urls:urls}));
-		res.render('lvcheng/index', {imgIndexHTML: imgIndexHTML});
+        var imgIndexConfig = require('../config/imgIndex.js')
+        var imgIndexHTML = React.renderToString(React.createElement(ImageIndex, imgIndexConfig));
+        
+        var DisplayBlock = require('../public/js/react/build/displayBlock.js');        
+        var displayBlockConfig = require('../config/displayBlock.js');
+        
+        var eventDisplayHTML = React.renderToString(React.createElement(DisplayBlock, displayBlockConfig.events));
+        var destDisplayHTML = React.renderToString(React.createElement(DisplayBlock, displayBlockConfig.dests));
+        var guideDisplayHTML = React.renderToString(React.createElement(DisplayBlock, displayBlockConfig.guides));
+        var strategyDisplayHTML = React.renderToString(React.createElement(DisplayBlock, displayBlockConfig.strategies));
+        
+		res.render('lvcheng/index', {
+            imgIndexHTML: imgIndexHTML,
+            eventDisplayHTML: eventDisplayHTML,
+            destDisplayHTML: destDisplayHTML,
+            guideDisplayHTML: guideDisplayHTML,
+            strategyDisplayHTML: strategyDisplayHTML,
+        });
 	});
 
     router.post('/login', function(req, res, next) {
