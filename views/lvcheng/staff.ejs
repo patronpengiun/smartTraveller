@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lvcheng.us</title>
+        <link href="/style/lvcheng/staff.css" rel="stylesheet">
+        <link href="/style/lvcheng/header.css" rel="stylesheet">
+    </head>
+    <body>
+        <% include parts/header %>
+    	<p class="page-title">旅橙团队</p>
+        <hr>
+        <div class="staffList">
+        <% for(var i=0; i < staff.length; i++) { %>
+            <div class="staff">
+                <div class="profile">
+                    <img src="<%= staff[i].profile %>">
+                </div>
+                <div class="info">
+                    <div class="name">
+                        <p class="name1"> <%= staff[i].name[0] %> </p>
+                        <% if(staff[i].name[1] != undefined) { %>
+                        <p class="name2"> <%= staff[i].name[1] %> </p>
+                        <% } %>
+                    </div>
+                    <div class="role">
+                        <p class="role1"> <%= staff[i].role[0] %> &middot;</p>
+                        <% if(staff[i].role[1] != undefined) { %>
+                        <p class="role2"> <%= staff[i].role[1] %> </p>
+                        <% } %>
+                    </div>
+                    <p class="title"> <%= staff[i].title %> </p>
+                    <p class="description"> <%= staff[i].description[0] %> </p>
+                    <% if(staff[i].description[1] != undefined) { %>
+                    <p class="description"> <%= staff[i].description[1] %> </p>
+                    <% } %>
+                    <% if(staff[i].description[2] != undefined) { %>
+                    <p class="description"> <%= staff[i].description[2] %> </p>
+                    <% } %>
+                </div>
+            </div>
+        <%}%>
+        </div>
+    	
+    </body>
+
+</html>

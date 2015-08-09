@@ -74,6 +74,18 @@ module.exports = function(passport) {
             strategyDisplayHTML: strategyDisplayHTML,
         });
 	});
+    
+    // test lvcheng about page
+    router.get('/about', function(req, res, next){
+        
+        res.render('lvcheng/about');
+    });
+
+    // test lvcheng member page 
+    router.get('/staff', function(req, res, next){
+        var mystaff = require('../config/staff');
+        res.render('lvcheng/staff', mystaff);
+    });
 
     router.post('/login', function(req, res, next) {
         passport.authenticate('login', function(err, user, info) {
