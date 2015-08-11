@@ -76,8 +76,7 @@ module.exports = function(passport) {
 	});
     
     // test lvcheng about page
-    router.get('/about', function(req, res, next){
-        
+    router.get('/about', function(req, res, next){   
         res.render('lvcheng/about');
     });
 
@@ -85,6 +84,11 @@ module.exports = function(passport) {
     router.get('/staff', function(req, res, next){
         var mystaff = require('../config/staff');
         res.render('lvcheng/staff', mystaff);
+    });
+
+    // test lvcheng join page
+    router.get('/join', function(req, res, next){   
+        res.render('lvcheng/join');
     });
 
     router.post('/login', function(req, res, next) {
