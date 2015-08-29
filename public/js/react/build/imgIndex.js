@@ -46,17 +46,17 @@ module.exports = React.createClass({displayName: "exports",
                         React.createElement("div", {className: "img-inner-content"}, 
                             React.createElement("div", {className: "category-wrapper"}, 
                                 React.createElement("a", {href: "/group_tour"}, 
-                                    React.createElement("img", {src: "/img/icon/group_tour.png"})
+                                    React.createElement("img", {src: "/img/icons/group_tour.png"})
                                 )
                             ), 
                             React.createElement("div", {className: "category-wrapper"}, 
                                 React.createElement("a", {href: "/self_tour"}, 
-                                    React.createElement("img", {src: "/img/icon/self_tour.png"})
+                                    React.createElement("img", {src: "/img/icons/self_tour.png"})
                                 )
                             ), 
                             React.createElement("div", {className: "category-wrapper"}, 
                                 React.createElement("a", {href: "guided_tour"}, 
-                                    React.createElement("img", {src: "/img/icon/guided_tour.png"})
+                                    React.createElement("img", {src: "/img/icons/guided_tour.png"})
                                 )
                             )
                         )

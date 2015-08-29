@@ -46,17 +46,17 @@ module.exports = React.createClass({
                         <div className="img-inner-content">
                             <div className="category-wrapper">
                                 <a href="/group_tour">
-                                    <img src="/img/icon/group_tour.png"/>
+                                    <img src="/img/icons/group_tour.png"/>
                                 </a>
                             </div>
                             <div className="category-wrapper">
                                 <a href="/self_tour">
-                                    <img src="/img/icon/self_tour.png"/>
+                                    <img src="/img/icons/self_tour.png"/>
                                 </a>
                             </div>
                             <div className="category-wrapper">
                                 <a href="guided_tour">
-                                    <img src="/img/icon/guided_tour.png"/>
+                                    <img src="/img/icons/guided_tour.png"/>
                                 </a>
                             </div>
                         </div>
