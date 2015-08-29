@@ -60,8 +60,8 @@ initPassport(passport);
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
 
-// var guideList_route = require('./routes/guideList_route')();
-// app.use('/guidelist', guideList_route);
+var lvcheng_route = require('./routes/lvcheng')();
+app.use('/', lvcheng_route);
 
 var api_route = require('./routes/api')();
 app.use('/api', api_route);

@@ -35,8 +35,33 @@ module.exports = React.createClass({
         }, this);
         return (
             <div id="img-index-wrapper" className={classes}>
-                <div className="default-backdrop"></div>
-                {imgs}
+                <div id="img-index-content">
+                    <div className="default-backdrop"></div>
+                    {imgs}
+                    <div id="img-inner-text">
+                        <div className="img-inner-header">
+                            <div className="img-inner-h1">留学生带你游美国</div>
+                            <div className="img-inner-h2">旅橙 —— 我的地盘听你的</div>
+                        </div>
+                        <div className="img-inner-content">
+                            <div className="category-wrapper">
+                                <a href="/group_tour">
+                                    <img src="/img/icon/group_tour.png"/>
+                                </a>
+                            </div>
+                            <div className="category-wrapper">
+                                <a href="/self_tour">
+                                    <img src="/img/icon/self_tour.png"/>
+                                </a>
+                            </div>
+                            <div className="category-wrapper">
+                                <a href="guided_tour">
+                                    <img src="/img/icon/guided_tour.png"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lvcheng.us</title>
+        <script src="/js/main.js"></script>
+        <link href="/style/lvcheng/common.css" rel="stylesheet">
+        <link href="/style/lvcheng/header.css" rel="stylesheet">
+        <link href="/style/lvcheng/index.css" rel="stylesheet"> <!-- TODO: put style of display block in separate file -->
+        <link href="/style/lvcheng/footer.css" rel="stylesheet">
+        <link href="/style/lvcheng/custom/dests.css" rel="stylesheet">
+    </head>
+    <body>
+        <% include parts/header %>
+        <div id="img-title">
+            <img src="<%= titleImg %>" />
+        </div>
+        <div id="main-content">
+            <div id="dests-display-container" class="display-container">
+                <%- displayHTML %>
+            </div>
+        </div>
+        <% include parts/footer %>
+    </body>
+</html>

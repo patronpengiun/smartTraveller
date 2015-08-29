@@ -75,13 +75,10 @@ module.exports = function(passport) {
         });
 	});
     
-    // test lvcheng about page
-    router.get('/about', function(req, res, next){
-        
+    router.get('/about', function(req, res, next){        
         res.render('lvcheng/about');
     });
 
-    // test lvcheng member page 
     router.get('/staff', function(req, res, next){
         var mystaff = require('../config/staff');
         res.render('lvcheng/staff', mystaff);

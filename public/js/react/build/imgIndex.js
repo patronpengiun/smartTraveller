@@ -35,8 +35,33 @@ module.exports = React.createClass({displayName: "exports",
         }, this);
         return (
             React.createElement("div", {id: "img-index-wrapper", className: classes}, 
-                React.createElement("div", {className: "default-backdrop"}), 
-                imgs
+                React.createElement("div", {id: "img-index-content"}, 
+                    React.createElement("div", {className: "default-backdrop"}), 
+                    imgs, 
+                    React.createElement("div", {id: "img-inner-text"}, 
+                        React.createElement("div", {className: "img-inner-header"}, 
+                            React.createElement("div", {className: "img-inner-h1"}, "留学生带你游美国"), 
+                            React.createElement("div", {className: "img-inner-h2"}, "旅橙 —— 我的地盘听你的")
+                        ), 
+                        React.createElement("div", {className: "img-inner-content"}, 
+                            React.createElement("div", {className: "category-wrapper"}, 
+                                React.createElement("a", {href: "/group_tour"}, 
+                                    React.createElement("img", {src: "/img/icon/group_tour.png"})
+                                )
+                            ), 
+                            React.createElement("div", {className: "category-wrapper"}, 
+                                React.createElement("a", {href: "/self_tour"}, 
+                                    React.createElement("img", {src: "/img/icon/self_tour.png"})
+                                )
+                            ), 
+                            React.createElement("div", {className: "category-wrapper"}, 
+                                React.createElement("a", {href: "guided_tour"}, 
+                                    React.createElement("img", {src: "/img/icon/guided_tour.png"})
+                                )
+                            )
+                        )
+                    )
+                )
             )
         );
     }
